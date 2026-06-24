@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", handleScroll);
   handleScroll(); // Trigger on load in case page is refreshed while scrolled down
 
-  // Close mobile navbar on link click (improves mobile UX)
-  const navLinks = document.querySelectorAll("#mainNavbar .nav-link");
+  // Close mobile navbar on link/item click (improves mobile UX)
+  const navLinks = document.querySelectorAll("#mainNavbar .nav-link:not(.dropdown-toggle), #mainNavbar .dropdown-item");
   const navbarCollapse = document.getElementById("navbarContent");
   const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
   
@@ -46,71 +46,73 @@ document.addEventListener("DOMContentLoaded", () => {
   const progressFilled = document.getElementById("videoProgress");
   const fullscreenBtn = document.getElementById("videoFullscreen");
 
-  // Play video on overlay click
-  const playVideo = () => {
-    video.play();
-    videoOverlay.classList.add("fade-out");
-    videoControls.classList.remove("d-none");
-  };
-
-  playBtn.addEventListener("click", playVideo);
-  videoOverlay.addEventListener("click", playVideo);
-
-  // Play/Pause toggle on click of the video screen itself
-  video.addEventListener("click", () => {
-    if (video.paused) {
+  if (video && videoOverlay && playBtn && videoControls && playPauseToggle && progressBar && progressFilled && fullscreenBtn) {
+    // Play video on overlay click
+    const playVideo = () => {
       video.play();
-    } else {
-      video.pause();
-    }
-  });
+      videoOverlay.classList.add("fade-out");
+      videoControls.classList.remove("d-none");
+    };
 
-  // Track play/pause state to update control icons
-  video.addEventListener("play", () => {
-    playPauseToggle.innerHTML = '<i class="fa-solid fa-pause"></i>';
-    videoOverlay.classList.add("fade-out");
-  });
+    playBtn.addEventListener("click", playVideo);
+    videoOverlay.addEventListener("click", playVideo);
 
-  video.addEventListener("pause", () => {
-    playPauseToggle.innerHTML = '<i class="fa-solid fa-play"></i>';
-  });
+    // Play/Pause toggle on click of the video screen itself
+    video.addEventListener("click", () => {
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
 
-  playPauseToggle.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
-  });
+    // Track play/pause state to update control icons
+    video.addEventListener("play", () => {
+      playPauseToggle.innerHTML = '<i class="fa-solid fa-pause"></i>';
+      videoOverlay.classList.add("fade-out");
+    });
 
-  // Update progress bar
-  video.addEventListener("timeupdate", () => {
-    if (video.duration) {
-      const percentage = (video.currentTime / video.duration) * 100;
-      progressFilled.style.width = `${percentage}%`;
-    }
-  });
+    video.addEventListener("pause", () => {
+      playPauseToggle.innerHTML = '<i class="fa-solid fa-play"></i>';
+    });
 
-  // Scrubbing the video on progress bar click
-  progressBar.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const rect = progressBar.getBoundingClientRect();
-    const pos = (e.clientX - rect.left) / rect.width;
-    video.currentTime = pos * video.duration;
-  });
+    playPauseToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
 
-  // Fullscreen support
-  fullscreenBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) { /* Safari */
-      video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) { /* IE11 */
-      video.msRequestFullscreen();
-    }
-  });
+    // Update progress bar
+    video.addEventListener("timeupdate", () => {
+      if (video.duration) {
+        const percentage = (video.currentTime / video.duration) * 100;
+        progressFilled.style.width = `${percentage}%`;
+      }
+    });
+
+    // Scrubbing the video on progress bar click
+    progressBar.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const rect = progressBar.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      video.currentTime = pos * video.duration;
+    });
+
+    // Fullscreen support
+    fullscreenBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) { /* Safari */
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { /* IE11 */
+        video.msRequestFullscreen();
+      }
+    });
+  }
 
   /* ==========================================================================
      3. Events Countdown Timer
@@ -172,59 +174,61 @@ document.addEventListener("DOMContentLoaded", () => {
   const newsletterForm = document.getElementById("newsletterForm");
   const newsletterSuccess = document.getElementById("newsletterSuccess");
   
-  newsletterForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    
-    const nameInput = document.getElementById("newsletterName");
-    const emailInput = document.getElementById("newsletterEmail");
-    
-    let isValid = true;
-    
-    // Validate Name
-    if (nameInput.value.trim() === "") {
-      nameInput.classList.add("is-invalid");
-      isValid = false;
-    } else {
-      nameInput.classList.remove("is-invalid");
-      nameInput.classList.add("is-valid");
-    }
-    
-    // Validate Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailInput.value.trim())) {
-      emailInput.classList.add("is-invalid");
-      isValid = false;
-    } else {
-      emailInput.classList.remove("is-invalid");
-      emailInput.classList.add("is-valid");
-    }
-    
-    if (isValid) {
-      // Clear form inputs
-      nameInput.value = "";
-      emailInput.value = "";
-      nameInput.classList.remove("is-valid");
-      emailInput.classList.remove("is-valid");
+  if (newsletterForm && newsletterSuccess) {
+    newsletterForm.addEventListener("submit", (e) => {
+      e.preventDefault();
       
-      // Hide form & show notification
-      newsletterForm.classList.add("d-none");
-      newsletterSuccess.classList.remove("d-none");
+      const nameInput = document.getElementById("newsletterName");
+      const emailInput = document.getElementById("newsletterEmail");
       
-      // Reset back to show form after 6 seconds
-      setTimeout(() => {
-        newsletterSuccess.classList.add("d-none");
-        newsletterForm.classList.remove("d-none");
-      }, 6000);
-    }
-  });
+      let isValid = true;
+      
+      // Validate Name
+      if (nameInput.value.trim() === "") {
+        nameInput.classList.add("is-invalid");
+        isValid = false;
+      } else {
+        nameInput.classList.remove("is-invalid");
+        nameInput.classList.add("is-valid");
+      }
+      
+      // Validate Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value.trim())) {
+        emailInput.classList.add("is-invalid");
+        isValid = false;
+      } else {
+        emailInput.classList.remove("is-invalid");
+        emailInput.classList.add("is-valid");
+      }
+      
+      if (isValid) {
+        // Clear form inputs
+        nameInput.value = "";
+        emailInput.value = "";
+        nameInput.classList.remove("is-valid");
+        emailInput.classList.remove("is-valid");
+        
+        // Hide form & show notification
+        newsletterForm.classList.add("d-none");
+        newsletterSuccess.classList.remove("d-none");
+        
+        // Reset back to show form after 6 seconds
+        setTimeout(() => {
+          newsletterSuccess.classList.add("d-none");
+          newsletterForm.classList.remove("d-none");
+        }, 6000);
+      }
+    });
 
-  // Remove invalid state classes on input change
-  document.getElementById("newsletterName").addEventListener("input", function() {
-    this.classList.remove("is-invalid");
-  });
-  document.getElementById("newsletterEmail").addEventListener("input", function() {
-    this.classList.remove("is-invalid");
-  });
+    // Remove invalid state classes on input change
+    document.getElementById("newsletterName").addEventListener("input", function() {
+      this.classList.remove("is-invalid");
+    });
+    document.getElementById("newsletterEmail").addEventListener("input", function() {
+      this.classList.remove("is-invalid");
+    });
+  }
 
   /* ==========================================================================
      5. Scroll-to-Top Button
