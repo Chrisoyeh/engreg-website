@@ -1,0 +1,751 @@
+/* ==========================================================================
+   ENGREG SCHOOLS LANDING PAGE STYLESHEET
+   Author: HLTS Limited
+   Theme: Oxford Blue (#0B2545), Pure White (#FFFFFF), Metallic Gold (#D4AF37)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens & Root Variables
+   -------------------------------------------------------------------------- */
+:root {
+  --primary-dark: #0B2545;
+  --secondary-dark: #134074;
+  --primary-darkest: #081B33;
+  --accent: #D4AF37;
+  --accent-hover: #C5A028;
+  --bg-light: #EEF4F8;
+  --bg-white: #FFFFFF;
+  --text-dark: #1F2421;
+  --text-muted: #6C757D;
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --font-headers: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. Global Reset & Base Styles
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background-color: var(--bg-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headers);
+}
+
+.heading-border {
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.heading-border::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 4px;
+  background-color: var(--accent);
+  border-radius: 2px;
+}
+
+.text-accent {
+  color: var(--accent) !important;
+}
+
+.bg-primary-dark {
+  background-color: var(--primary-dark) !important;
+}
+
+.bg-primary-darkest {
+  background-color: var(--primary-darkest) !important;
+}
+
+.bg-accent {
+  background-color: var(--accent) !important;
+}
+
+.max-w-700 {
+  max-width: 700px;
+}
+
+.max-w-600 {
+  max-width: 600px;
+}
+
+/* Premium Button Styling */
+.btn-premium {
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: var(--transition-smooth);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  color: var(--primary-dark) !important;
+  border: 2px solid var(--accent);
+}
+
+.btn-accent:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--bg-white);
+  color: var(--primary-dark) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline-primary {
+  border-color: var(--primary-dark);
+  color: var(--primary-dark);
+  border-radius: 30px;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-dark);
+  color: var(--bg-white);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   3. Top Information Bar
+   -------------------------------------------------------------------------- */
+.top-info-bar {
+  background-color: var(--primary-darkest);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  font-size: 0.85rem;
+}
+
+.top-info-bar a {
+  transition: var(--transition-smooth);
+}
+
+.top-info-bar a:hover {
+  color: var(--accent) !important;
+}
+
+.portal-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.portal-link:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   4. Admission Marquee
+   -------------------------------------------------------------------------- */
+.admission-marquee {
+  border-bottom: 2px solid var(--primary-dark);
+  font-size: 0.9rem;
+}
+
+.marquee-content {
+  display: flex;
+  width: 200%;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+.marquee-content span {
+  width: 50%;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --------------------------------------------------------------------------
+   5. Main Navigation Bar (Sticky with blur)
+   -------------------------------------------------------------------------- */
+#mainNavbar {
+  background-color: var(--primary-dark);
+  padding: 15px 0;
+  border-bottom: 3px solid transparent;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: var(--transition-smooth);
+}
+
+/* Scrolled Nav styling */
+#mainNavbar.scrolled {
+  background-color: rgba(11, 37, 69, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 10px 0;
+  border-bottom: 3px solid var(--accent);
+}
+
+.brand-logo {
+  max-height: 50px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-family: var(--font-headers);
+  color: var(--bg-white);
+}
+
+.brand-tagline {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+}
+
+#mainNavbar .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 0.95rem;
+  position: relative;
+  padding: 8px 12px;
+  transition: var(--transition-smooth);
+}
+
+#mainNavbar .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 12px;
+  background-color: var(--accent);
+  transition: var(--transition-smooth);
+}
+
+#mainNavbar .nav-link:hover::after,
+#mainNavbar .nav-link.active::after {
+  width: calc(100% - 24px);
+}
+
+#mainNavbar .nav-link:hover,
+#mainNavbar .nav-link.active {
+  color: var(--accent) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Hero Slider Section (Bootstrap Carousel Customization)
+   -------------------------------------------------------------------------- */
+.hero-slider-section .carousel-item {
+  height: 85vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-slider-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(11, 37, 69, 0.85) 0%, rgba(8, 27, 51, 0.6) 100%);
+}
+
+.hero-slider-section .carousel-caption {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 10;
+}
+
+.hero-slider-section h1 {
+  font-family: var(--font-headers);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-slider-section p {
+  font-size: 1.25rem;
+  font-weight: 300;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Carousel Control Customization */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 60px;
+  opacity: 0.7;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: var(--primary-dark);
+  padding: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background-size: 50%;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0 6px;
+}
+
+.carousel-indicators .active {
+  background-color: var(--accent);
+  width: 28px;
+  border-radius: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   7. Admission & Enrol Section
+   -------------------------------------------------------------------------- */
+.admission-section {
+  position: relative;
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+  border: 2px solid rgba(212, 175, 55, 0.15);
+}
+
+.decorative-blob {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0) 70%);
+  top: -50px;
+  right: -50px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   8. Welcome & Anthem Section
+   -------------------------------------------------------------------------- */
+.border-left-accent {
+  border-left: 4px solid var(--accent) !important;
+}
+
+.proprietress-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+.anthem-card {
+  height: 100%;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.video-container {
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.video-overlay {
+  background-color: rgba(11, 37, 69, 0.85);
+  color: var(--bg-white);
+  z-index: 5;
+  transition: opacity 0.5s ease;
+}
+
+.video-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.play-btn-wrapper {
+  width: 70px;
+  height: 70px;
+  background-color: var(--accent);
+  color: var(--primary-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  animation: pulsePlay 2s infinite;
+  transition: var(--transition-smooth);
+}
+
+.play-btn-wrapper:hover {
+  background-color: var(--accent-hover);
+  transform: scale(1.1);
+}
+
+@keyframes pulsePlay {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+.video-container:hover .video-custom-controls {
+  display: flex !important;
+}
+
+.bg-gradient-top {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.z-index-2 {
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   9. Our School Section (Cards Customization)
+   -------------------------------------------------------------------------- */
+.school-card {
+  background: var(--bg-white);
+  border-left: 5px solid var(--accent);
+  transition: var(--transition-smooth);
+}
+
+.school-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.school-card-img-wrapper {
+  overflow: hidden;
+  height: 250px;
+}
+
+.school-card img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.school-card:hover img {
+  transform: scale(1.08);
+}
+
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* --------------------------------------------------------------------------
+   10. Upcoming Events
+   -------------------------------------------------------------------------- */
+.event-card {
+  transition: var(--transition-smooth);
+  background-color: var(--bg-white);
+  border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.event-img-wrapper {
+  height: 160px;
+  overflow: hidden;
+}
+
+.event-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.event-date-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-dark);
+  border-top-right-radius: 8px;
+  color: var(--bg-white);
+  padding: 8px 12px;
+  text-align: center;
+  font-weight: 700;
+  min-width: 60px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+.event-date-badge .day {
+  display: block;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.event-date-badge .month {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.event-title {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.event-countdown {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-darkest) 100%);
+  border-left: 3px solid var(--accent);
+  font-size: 0.75rem !important;
+  letter-spacing: 0.5px;
+}
+
+/* --------------------------------------------------------------------------
+   11. Newsletter Section
+   -------------------------------------------------------------------------- */
+.newsletter-section {
+  background: linear-gradient(rgba(11, 37, 69, 0.9), rgba(11, 37, 69, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-top: 4px solid var(--accent);
+}
+
+.newsletter-section .form-control {
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--bg-white);
+  padding-left: 20px;
+}
+
+.newsletter-section .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter-section .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent);
+  box-shadow: none;
+  color: var(--bg-white);
+}
+
+/* --------------------------------------------------------------------------
+   12. Footer Section
+   -------------------------------------------------------------------------- */
+.main-footer {
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.border-bottom-accent {
+  position: relative;
+}
+
+.border-bottom-accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--accent);
+}
+
+.footer-links li a {
+  transition: var(--transition-smooth);
+}
+
+.footer-links li a:hover {
+  color: var(--accent) !important;
+  padding-left: 5px;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255,255,255,0.05);
+  color: var(--bg-white);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.social-icon:hover {
+  background-color: var(--accent);
+  color: var(--primary-dark);
+  transform: translateY(-3px);
+}
+
+.map-wrapper {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  height: 150px;
+}
+
+.map-wrapper iframe {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.border-secondary-dark {
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. Back to Top Button
+   -------------------------------------------------------------------------- */
+#scrollToTop {
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  width: 50px;
+  height: 50px;
+  z-index: 1050 !important;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: var(--transition-smooth);
+}
+
+#scrollToTop:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   14. Animations & Scroll Reveal
+   -------------------------------------------------------------------------- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.scroll-reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Carousel Animations */
+.carousel-item-next.carousel-item-start, 
+.carousel-item-prev.carousel-item-end {
+  transform: none;
+}
+
+.carousel-item.active .animate-fade-down {
+  animation: fadeDown 1s forwards cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.carousel-item.active .animate-fade-up {
+  animation: fadeUp 1s forwards cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. Responsive Styling Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .hero-slider-section .carousel-item {
+    height: 70vh;
+  }
+  
+  .hero-slider-section h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-slider-section p {
+    font-size: 1rem;
+  }
+  
+  #mainNavbar {
+    padding: 10px 0;
+  }
+  
+  #mainNavbar .nav-link::after {
+    display: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .top-contacts {
+    flex-direction: column;
+    align-items: center;
+    gap: 1px !important;
+  }
+  
+  .top-portal-nav {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-slider-section .carousel-item {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .hero-slider-section h1 {
+    font-size: 1.8rem;
+  }
+}

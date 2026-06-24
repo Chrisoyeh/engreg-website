@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engreg Schools | Nurturing Future Leaders</title>
+  <!-- Meta Descriptions for SEO -->
+  <meta name="description" content="Engreg Schools is a prestigious educational institution dedicated to nurturing future leaders through academic excellence, character development, and modern learning facilities.">
+  <meta name="keywords" content="Engreg Schools, school website, nursery, primary, high school, education, enrollment, admission 2026, academic excellence">
+  <meta name="author" content="HLTS Limited">
+
+  <!-- Google Fonts: Playfair Display & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome 6.4.0 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="100">
+
+  <!-- 1. Top Information Bar -->
+  <div class="top-info-bar py-2 text-white">
+    <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center">
+      <!-- Left Side Contacts -->
+      <div class="top-contacts d-flex gap-3 mb-2 mb-sm-0">
+        <a href="tel:+2348000000000" class="text-white text-decoration-none d-flex align-items-center gap-2">
+          <i class="fa-solid fa-phone text-accent"></i>
+          <span>+234 800 000 0000</span>
+        </a>
+        <a href="mailto:info@engregschools.edu.ng" class="text-white text-decoration-none d-flex align-items-center gap-2">
+          <i class="fa-solid fa-envelope text-accent"></i>
+          <span>info@engregschools.edu.ng</span>
+        </a>
+      </div>
+      <!-- Right Side Portal Navigation -->
+      <div class="top-portal-nav d-flex gap-3">
+        <a href="#portal" class="portal-link">Portal</a>
+        <a href="#alumni" class="portal-link">Alumni</a>
+        <a href="#news" class="portal-link">News</a>
+        <a href="#admin" class="portal-link">Admin</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Admission Marquee -->
+  <div class="admission-marquee bg-accent py-2 text-dark font-weight-bold">
+    <div class="container-fluid overflow-hidden p-0">
+      <div class="marquee-content d-flex">
+        <span>📢 Admission is On! Apply Now for the New Academic Session. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📢 Admission is On! Apply Now for the New Academic Session. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📢 Admission is On! Apply Now for the New Academic Session.</span>
+        <span>📢 Admission is On! Apply Now for the New Academic Session. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📢 Admission is On! Apply Now for the New Academic Session. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📢 Admission is On! Apply Now for the New Academic Session.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Main Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary-dark sticky-top transition-all" id="mainNavbar">
+    <div class="container">
+      <!-- School Logo & Name -->
+      <a class="navbar-brand d-flex align-items-center gap-3" href="#home">
+        <img src="assets/images/logo.png" alt="Engreg Schools Logo" class="brand-logo" onerror="this.src='https://placehold.co/50x50/0b2545/d4af37?text=ES'">
+        <div class="brand-text d-flex flex-column leading-none">
+          <span class="brand-name h4 mb-0 fw-bold tracking-wide">ENGREG SCHOOLS</span>
+          <span class="brand-tagline small text-accent">Nurturing Future Leaders</span>
+        </div>
+      </a>
+      
+      <!-- Mobile Hamburger Button -->
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu Items -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1 gap-lg-3">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#schools">Schools</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#admission">Admission</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#gallery">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 4. Hero Slider Section -->
+  <section id="home" class="hero-slider-section">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+      
+      <!-- Indicators -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+      </div>
+
+      <!-- Slides -->
+      <div class="carousel-inner">
+        <!-- Slide 1: Welcome -->
+        <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1920');">
+          <div class="overlay"></div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100 px-3">
+            <h1 class="display-3 fw-bold text-white mb-3 animate-fade-down">Welcome to <span class="text-accent">Engreg Schools</span></h1>
+            <p class="lead text-light mb-4 max-w-700 animate-fade-up">Nurturing future leaders through quality education and character development.</p>
+            <div class="d-flex gap-3 animate-fade-up">
+              <a href="#about" class="btn btn-accent px-4 py-3 btn-premium">Learn More</a>
+              <a href="#admission" class="btn btn-outline-light px-4 py-3 btn-premium">Apply Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Excellence -->
+        <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1920');">
+          <div class="overlay"></div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100 px-3">
+            <h1 class="display-3 fw-bold text-white mb-3">Academic Excellence</h1>
+            <p class="lead text-light mb-4 max-w-700">Providing world-class education with outstanding academic performance.</p>
+            <div class="d-flex gap-3">
+              <a href="#schools" class="btn btn-accent px-4 py-3 btn-premium">Our Curriculum</a>
+              <a href="#admission" class="btn btn-outline-light px-4 py-3 btn-premium">Enrol Today</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Facilities -->
+        <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920');">
+          <div class="overlay"></div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100 px-3">
+            <h1 class="display-3 fw-bold text-white mb-3">Modern Learning Facilities</h1>
+            <p class="lead text-light mb-4 max-w-700">Equipped classrooms, science laboratories, ICT centers, and libraries.</p>
+            <div class="d-flex gap-3">
+              <a href="#gallery" class="btn btn-accent px-4 py-3 btn-premium">Take a Tour</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Admission -->
+        <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=1920');">
+          <div class="overlay"></div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100 px-3">
+            <h1 class="display-3 fw-bold text-white mb-3">Admissions Open</h1>
+            <p class="lead text-light mb-4 max-w-700">Join a community committed to educational excellence and innovation.</p>
+            <div class="d-flex gap-3">
+              <a href="#admission" class="btn btn-accent px-4 py-3 btn-premium">Apply Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: Legacy -->
+        <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920');">
+          <div class="overlay"></div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100 px-3">
+            <h1 class="display-3 fw-bold text-white mb-3">A Legacy of Success</h1>
+            <p class="lead text-light mb-4 max-w-700">Building future leaders for generations through excellence and discipline.</p>
+            <div class="d-flex gap-3">
+              <a href="#about" class="btn btn-accent px-4 py-3 btn-premium">Our History</a>
+              <a href="#admission" class="btn btn-outline-light px-4 py-3 btn-premium">Join Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 5. Admission Section -->
+  <section id="admission" class="admission-section py-5 text-white scroll-reveal">
+    <div class="container bg-primary-gradient rounded-4 shadow-lg p-4 p-md-5 position-relative overflow-hidden">
+      <!-- Decorative background blur -->
+      <div class="decorative-blob"></div>
+      <div class="row align-items-center position-relative z-index-2">
+        <div class="col-lg-8 mb-4 mb-lg-0 text-center text-lg-start">
+          <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-2 mb-3">
+            <span class="badge bg-accent text-dark px-3 py-2 fs-6 fw-bold">Session 2026/2027</span>
+            <i class="fa-solid fa-graduation-cap text-accent fs-4"></i>
+          </div>
+          <h2 class="display-5 fw-bold text-white mb-3">Admission in Progress</h2>
+          <p class="lead text-white-80 mb-0">Our admissions are now open for nursery, primary, and secondary education. Take the first step in providing your child with a premium, values-based global education that breeds leaders.</p>
+        </div>
+        <div class="col-lg-4 text-center text-lg-end">
+          <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-end gap-3">
+            <a href="#contact" class="btn btn-accent px-4 py-3 btn-premium">Enrol Now</a>
+            <a href="#about" class="btn btn-outline-light px-4 py-3 btn-premium">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Welcome Message & School Anthem Section -->
+  <section id="about" class="welcome-anthem-section py-5 bg-light scroll-reveal">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Left Column: Welcome Message -->
+        <div class="col-lg-6 d-flex flex-column justify-content-between">
+          <div>
+            <span class="text-accent fw-bold text-uppercase tracking-wide small d-block mb-2">Message from the Leadership</span>
+            <h2 class="display-6 fw-bold text-primary-dark mb-4 heading-border">Welcome Message</h2>
+            <p class="lead text-muted">It is my absolute pleasure to welcome you to Engreg Schools, where excellence is not just a goal, but our standard.</p>
+            <p class="text-muted">At Engreg Schools, we recognize that every child has a unique set of potentials waiting to be unlocked. Through our rich, integrated curriculum, state-of-the-art facilities, and highly motivated educators, we provide a holistic experience that promotes critical thinking, ethical leadership, and creative academic exploration. We prepare our students not just to pass examinations, but to dominate their fields globally while exhibiting unquestionable integrity.</p>
+          </div>
+          
+          <div class="mt-4">
+            <div class="d-flex align-items-center gap-3 mb-3 p-3 bg-white rounded-3 shadow-sm border-left-accent">
+              <img src="assets/images/proprietress.png" alt="Proprietress Portrait" class="proprietress-img shadow-sm" onerror="this.src='https://placehold.co/80x80/0b2545/d4af37?text=Proprietress'">
+              <div>
+                <h5 class="mb-0 fw-bold text-primary-dark">Dr. (Mrs.) Helen J. Gregory</h5>
+                <small class="text-accent fw-medium">Proprietress & Founder</small>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary px-4 py-2" data-bs-toggle="modal" data-bs-target="#welcomeModal">Read More</button>
+          </div>
+        </div>
+
+        <!-- Right Column: School Anthem Video -->
+        <div class="col-lg-6">
+          <div class="anthem-card bg-primary-dark text-white rounded-4 shadow-lg overflow-hidden h-100 d-flex flex-column justify-content-between position-relative">
+            <div class="p-4 border-bottom border-secondary-dark d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-3">
+                <i class="fa-solid fa-music text-accent fs-4"></i>
+                <h4 class="mb-0 fw-bold">School Anthem</h4>
+              </div>
+              <span class="badge bg-secondary-dark text-accent">ENGREG ANTHEM</span>
+            </div>
+            
+            <!-- Custom Styled Video Container -->
+            <div class="video-container position-relative bg-black flex-grow-1 d-flex align-items-center justify-content-center">
+              <video id="anthemVideo" class="w-100 h-100" style="object-fit: cover;" preload="metadata" playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-children-in-school-uniform-playing-together-in-the-schoolyard-41584-large.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <!-- Video Overlay with Play Button -->
+              <div class="video-overlay position-absolute w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-3" id="videoOverlay">
+                <div class="play-btn-wrapper mb-3" id="playBtn">
+                  <i class="fa-solid fa-play"></i>
+                </div>
+                <h5 class="fw-bold mb-1">Listen to the Voices of Excellence</h5>
+                <p class="small text-white-50">Click to play school anthem video</p>
+              </div>
+              
+              <!-- Video Custom Controls (appears on hover when playing) -->
+              <div class="video-custom-controls position-absolute bottom-0 start-0 w-100 p-3 d-flex align-items-center justify-content-between bg-gradient-top d-none" id="videoControls">
+                <button class="btn btn-link text-white p-0" id="videoPlayPause">
+                  <i class="fa-solid fa-pause"></i>
+                </button>
+                <div class="progress mx-3 flex-grow-1" id="videoProgressBar" style="height: 6px; cursor: pointer; background: rgba(255,255,255,0.2);">
+                  <div class="progress-bar bg-accent" role="progressbar" style="width: 0%" id="videoProgress"></div>
+                </div>
+                <button class="btn btn-link text-white p-0" id="videoFullscreen">
+                  <i class="fa-solid fa-expand"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Anthem Text Footer -->
+            <div class="p-4 bg-primary-darkest text-center text-white-50 small">
+              "Rise up, Oh Engreg, shine the light..."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Our School Section -->
+  <section id="schools" class="our-schools-section py-5 scroll-reveal">
+    <div class="container text-center">
+      <span class="text-accent fw-bold text-uppercase tracking-wide small d-block mb-2">Our Programs</span>
+      <h2 class="display-6 fw-bold text-primary-dark mb-5">Our School</h2>
+      
+      <div class="row g-4 justify-content-center">
+        <!-- Card 1: Nursery & Primary -->
+        <div class="col-md-6 col-lg-5 text-start">
+          <div class="card school-card h-100 border-0 shadow-lg overflow-hidden rounded-4">
+            <div class="school-card-img-wrapper position-relative">
+              <img src="assets/images/nursery_primary.png" class="card-img-top" alt="Nursery & Primary School Kids" onerror="this.src='https://placehold.co/600x400/0b2545/d4af37?text=Nursery+%26+Primary'">
+              <div class="card-badge bg-accent text-dark fw-bold">Ages 2 - 10</div>
+            </div>
+            <div class="card-body p-4 d-flex flex-column justify-content-between">
+              <div>
+                <h3 class="card-title fw-bold text-primary-dark mb-3">Nursery & Primary School</h3>
+                <p class="card-text text-muted">Building the foundation of life-long learning. Our early education programs highlight creative expression, moral development, basic numeracy, literacy, and active coordination within a warm, stimulating environment.</p>
+              </div>
+              <div class="mt-4">
+                <button class="btn btn-outline-primary px-4 py-2" data-bs-toggle="modal" data-bs-target="#nurseryModal">Read More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: High School -->
+        <div class="col-md-6 col-lg-5 text-start">
+          <div class="card school-card h-100 border-0 shadow-lg overflow-hidden rounded-4">
+            <div class="school-card-img-wrapper position-relative">
+              <img src="assets/images/high_school.png" class="card-img-top" alt="High School Students" onerror="this.src='https://placehold.co/600x400/0b2545/d4af37?text=High+School'">
+              <div class="card-badge bg-accent text-dark fw-bold">Ages 11 - 17</div>
+            </div>
+            <div class="card-body p-4 d-flex flex-column justify-content-between">
+              <div>
+                <h3 class="card-title fw-bold text-primary-dark mb-3">High School</h3>
+                <p class="card-text text-muted">Shaping the global leaders of tomorrow. Our secondary education offers a rich STEAM-focused and leadership curriculum designed to stimulate high critical thinking, research competencies, and college preparation.</p>
+              </div>
+              <div class="mt-4">
+                <button class="btn btn-outline-primary px-4 py-2" data-bs-toggle="modal" data-bs-target="#highSchoolModal">Read More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Upcoming Events Section -->
+  <section id="gallery" class="upcoming-events-section py-5 bg-light scroll-reveal">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="text-accent fw-bold text-uppercase tracking-wide small d-block mb-2">Activities & Highlights</span>
+        <h2 class="display-6 fw-bold text-primary-dark">Upcoming Events</h2>
+      </div>
+
+      <div class="row g-4" id="eventsContainer">
+        <!-- Event 1: Inter-House Sports -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card event-card h-100 border-0 shadow-sm rounded-3 overflow-hidden" data-event-days="9">
+            <div class="event-img-wrapper position-relative">
+              <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=600" class="card-img-top event-img" alt="Inter-House Sports">
+              <div class="event-date-badge">
+                <span class="day">12</span>
+                <span class="month">MAR</span>
+              </div>
+            </div>
+            <div class="card-body p-3 d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="fw-bold text-primary-dark event-title">Inter-House Sports</h5>
+                <p class="small text-muted mb-2"><i class="fa-solid fa-location-dot text-accent me-1"></i> Main Sports Ground</p>
+                <p class="card-text small text-muted">A day filled with athleticism, school spirit, track events, football tournaments, and physical fitness displays.</p>
+              </div>
+              <!-- Countdown Display -->
+              <div class="event-countdown mt-3 py-2 px-2 bg-primary-dark text-white rounded text-center small fw-semibold">
+                <span class="countdown-text">Calculating...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 2: Cultural Day -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card event-card h-100 border-0 shadow-sm rounded-3 overflow-hidden" data-event-days="8">
+            <div class="event-img-wrapper position-relative">
+              <img src="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?q=80&w=600" class="card-img-top event-img" alt="Cultural Day">
+              <div class="event-date-badge">
+                <span class="day">20</span>
+                <span class="month">APR</span>
+              </div>
+            </div>
+            <div class="card-body p-3 d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="fw-bold text-primary-dark event-title">Cultural Day</h5>
+                <p class="small text-muted mb-2"><i class="fa-solid fa-location-dot text-accent me-1"></i> School Assembly Hall</p>
+                <p class="card-text small text-muted">Celebrating heritage, traditions, and arts with vibrant student costumes, regional dishes, and dramatic theater.</p>
+              </div>
+              <!-- Countdown Display -->
+              <div class="event-countdown mt-3 py-2 px-2 bg-primary-dark text-white rounded text-center small fw-semibold">
+                <span class="countdown-text">Calculating...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 3: Graduation Ceremony -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card event-card h-100 border-0 shadow-sm rounded-3 overflow-hidden" data-event-days="15">
+            <div class="event-img-wrapper position-relative">
+              <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=600" class="card-img-top event-img" alt="Graduation Ceremony">
+              <div class="event-date-badge">
+                <span class="day">10</span>
+                <span class="month">JUL</span>
+              </div>
+            </div>
+            <div class="card-body p-3 d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="fw-bold text-primary-dark event-title">Graduation Ceremony</h5>
+                <p class="small text-muted mb-2"><i class="fa-solid fa-location-dot text-accent me-1"></i> Grand Banquet Arena</p>
+                <p class="card-text small text-muted">Celebrating academic honors, class valedictorians, and stepping up our outstanding senior students to the next stage.</p>
+              </div>
+              <!-- Countdown Display -->
+              <div class="event-countdown mt-3 py-2 px-2 bg-primary-dark text-white rounded text-center small fw-semibold">
+                <span class="countdown-text">Calculating...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 4: Science Fair -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card event-card h-100 border-0 shadow-sm rounded-3 overflow-hidden" data-event-days="9">
+            <div class="event-img-wrapper position-relative">
+              <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=600" class="card-img-top event-img" alt="Science Fair">
+              <div class="event-date-badge">
+                <span class="day">15</span>
+                <span class="month">NOV</span>
+              </div>
+            </div>
+            <div class="card-body p-3 d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="fw-bold text-primary-dark event-title">Science Fair</h5>
+                <p class="small text-muted mb-2"><i class="fa-solid fa-location-dot text-accent me-1"></i> STEM Laboratories</p>
+                <p class="card-text small text-muted">A showcase of pioneering student research, robotics, renewable energy builds, and innovative chemistry models.</p>
+              </div>
+              <!-- Countdown Display -->
+              <div class="event-countdown mt-3 py-2 px-2 bg-primary-dark text-white rounded text-center small fw-semibold">
+                <span class="countdown-text">Calculating...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Newsletter Section -->
+  <section class="newsletter-section py-5 text-white scroll-reveal">
+    <div class="container py-4 text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <i class="fa-regular fa-paper-plane fs-1 text-accent mb-3"></i>
+          <h2 class="fw-bold mb-3">Subscribe to our Newsletter</h2>
+          <p class="text-white-80 mb-4 px-md-5">Subscribe to our newsletter for school updates, admissions, upcoming events, and educational tips delivered straight to your inbox.</p>
+          
+          <form id="newsletterForm" class="row g-2 max-w-600 mx-auto text-start" novalidate>
+            <div class="col-sm-5">
+              <input type="text" class="form-control py-3" id="newsletterName" placeholder="Full Name" required>
+              <div class="invalid-feedback text-white small mt-1">Please enter your name.</div>
+            </div>
+            <div class="col-sm-5">
+              <input type="email" class="form-control py-3" id="newsletterEmail" placeholder="Email Address" required>
+              <div class="invalid-feedback text-white small mt-1">Please enter a valid email.</div>
+            </div>
+            <div class="col-sm-2 d-grid">
+              <button type="submit" class="btn btn-accent btn-premium py-3">Subscribe</button>
+            </div>
+          </form>
+          
+          <div id="newsletterSuccess" class="alert alert-success mt-3 d-none" role="alert">
+            <i class="fa-solid fa-circle-check me-2"></i> Thank you! You have successfully subscribed to the Engreg Schools Newsletter.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Footer Section -->
+  <footer id="contact" class="main-footer bg-primary-darkest text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4 mb-5">
+        <!-- Column 1: About -->
+        <div class="col-lg-3 col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <img src="assets/images/logo.png" alt="Engreg Schools Logo" style="width: 40px; height: 40px;" onerror="this.src='https://placehold.co/40x40/0b2545/d4af37?text=ES'">
+            <h5 class="fw-bold text-accent mb-0">ENGREG SCHOOLS</h5>
+          </div>
+          <p class="small text-white-50 lh-base mb-4">Engreg Schools is a prestigious learning community dedicated to shaping outstanding students with ethical values, stellar academics, and modern technological readiness.</p>
+          <div class="social-icons d-flex gap-2">
+            <a href="https://facebook.com" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://linkedin.com" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://youtube.com" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Our School -->
+        <div class="col-lg-2 col-md-6">
+          <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Our School</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="#schools" class="text-white-50 text-decoration-none">Nursery & Primary School</a></li>
+            <li class="mb-2"><a href="#schools" class="text-white-50 text-decoration-none">High School</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Quick Links -->
+        <div class="col-lg-2 col-md-6">
+          <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Quick Links</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="#home" class="text-white-50 text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="#about" class="text-white-50 text-decoration-none">About</a></li>
+            <li class="mb-2"><a href="#schools" class="text-white-50 text-decoration-none">Schools</a></li>
+            <li class="mb-2"><a href="#admission" class="text-white-50 text-decoration-none">Admission</a></li>
+            <li class="mb-2"><a href="#gallery" class="text-white-50 text-decoration-none">Gallery</a></li>
+            <li class="mb-2"><a href="#contact" class="text-white-50 text-decoration-none">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact Details -->
+        <div class="col-lg-2 col-md-6">
+          <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Contact Details</h5>
+          <ul class="list-unstyled footer-contacts small text-white-50">
+            <li class="mb-3 d-flex align-items-start gap-2">
+              <i class="fa-solid fa-location-dot text-accent mt-1"></i>
+              <span>12, Engreg Avenue, Lekki Phase 1, Lagos, Nigeria.</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center gap-2">
+              <i class="fa-solid fa-phone text-accent"></i>
+              <span>+234 800 000 0000</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center gap-2">
+              <i class="fa-solid fa-envelope text-accent"></i>
+              <a href="mailto:info@engregschools.edu.ng" class="text-white-50 text-decoration-none">info@engregschools.edu.ng</a>
+            </li>
+            <li class="mb-2 d-flex align-items-start gap-2">
+              <i class="fa-solid fa-clock text-accent mt-1"></i>
+              <span>Mon - Fri: 7:30 AM - 4:00 PM</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 5: Location Map -->
+        <div class="col-lg-3 col-md-12">
+          <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Location Map</h5>
+          <div class="map-wrapper rounded overflow-hidden shadow-sm">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.71701386121!2d3.4849182!3d6.4309322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf45c61315dfd%3A0xcb1b59c7333a598a!2sLekki%20Phase%201%2C%20Lekki!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng" 
+              width="100%" 
+              height="150" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Copyright Section -->
+      <div class="border-top border-secondary-dark pt-3 mt-4 text-center text-white-50 small">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-md-start mb-2 mb-md-0">
+            <p class="mb-0">&copy; 2026 Engreg Schools. All Rights Reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0">Designed and Developed by <a href="https://hlts.com" class="text-accent text-decoration-none fw-semibold">HLTS Limited</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-Top Button -->
+  <button id="scrollToTop" class="btn btn-accent rounded-circle shadow-lg" aria-label="Scroll to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Modals for Read More Actions -->
+  <!-- Welcome Modal -->
+  <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content text-dark">
+        <div class="modal-header bg-primary-dark text-white">
+          <h5 class="modal-title fw-bold text-accent" id="welcomeModalLabel">A Welcome Message from the Proprietress</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-4">
+            <div class="col-md-4 text-center">
+              <img src="assets/images/proprietress.png" alt="Dr. Helen J. Gregory" class="img-fluid rounded shadow" onerror="this.src='https://placehold.co/200x250/0b2545/d4af37?text=Proprietress'">
+              <h6 class="mt-3 fw-bold text-primary-dark mb-0">Dr. (Mrs.) Helen J. Gregory</h6>
+              <small class="text-muted">Proprietress & Founder</small>
+            </div>
+            <div class="col-md-8">
+              <p>Welcome and thank you for taking the time to learn about Engreg Schools.</p>
+              <p>Since our inception, our focus has remained steadfast: to create a stimulating environment where academic prowess marries impeccable character. We believe in providing children with rich, multifaceted learning tools that build critical logic, global civic consciousness, and high moral standpoints.</p>
+              <p>Our dedicated staff are hand-picked professionals who are continually trained in advanced learning pedagogies. We operate on a customized integrated curriculum that combines the rigors of local educational frameworks with global standard achievements, ensuring that Engreg graduates are fully prepared to compete with peers anywhere globally.</p>
+              <p>We invite you to partner with us to shape a bright, structured path for your children. Let us build their futures together.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="#contact" class="btn btn-accent btn-premium" data-bs-dismiss="modal">Enrol Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nursery Modal -->
+  <div class="modal fade" id="nurseryModal" tabindex="-1" aria-labelledby="nurseryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-dark">
+        <div class="modal-header bg-primary-dark text-white">
+          <h5 class="modal-title fw-bold text-accent" id="nurseryModalLabel">Nursery & Primary School Curriculum</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <h5 class="fw-bold text-primary-dark mb-3">Nurturing Young Minds (Ages 2 - 10)</h5>
+          <p>Our early childhood curriculum uses cognitive play and visual tools to prompt quick discovery. We cover:</p>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> Early literacy, writing, and phonics programs.</li>
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> Practical life exercises and sensory motor integration.</li>
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> Elementary mathematics, science experiments, and nature studies.</li>
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> Cultural arts, music, foreign language foundation, and physical education.</li>
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> Moral instruction, empathy building, and values integration.</li>
+          </ul>
+          <p class="small text-muted">We ensure a low student-to-teacher ratio for dedicated focus on each child.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="#contact" class="btn btn-accent btn-premium" data-bs-dismiss="modal">Request Brochure</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- High School Modal -->
+  <div class="modal fade" id="highSchoolModal" tabindex="-1" aria-labelledby="highSchoolModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-dark">
+        <div class="modal-header bg-primary-dark text-white">
+          <h5 class="modal-title fw-bold text-accent" id="highSchoolModalLabel">High School Program</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <h5 class="fw-bold text-primary-dark mb-3">Building Future Leaders (Ages 11 - 17)</h5>
+          <p>Our secondary curriculum is structured to prepare students for college and technical leadership. Key subjects & streams include:</p>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> <strong>Sciences:</strong> Physics, Chemistry, Biology, Further Mathematics.</li>
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> <strong>Arts & Humanities:</strong> Literature, History, Government, Civic Education.</li>
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> <strong>ICT & STEAM:</strong> Coding (Python/HTML), Robotics, Digital Design, and AI introductions.</li>
+            <li class="list-group-item"><i class="fa-solid fa-check text-accent me-2"></i> <strong>Leadership & College Prep:</strong> SAT/ACT coaching, public speaking, entrepreneurship.</li>
+          </ul>
+          <p class="small text-muted">Students have access to standard research labs, coding workshops, and dynamic sports clubs.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="#contact" class="btn btn-accent btn-premium" data-bs-dismiss="modal">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS (Contains Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom Javascript -->
+  <script src="script.js"></script>
+</body>
+</html>
