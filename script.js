@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ==========================================================================
-     3. Events Countdown Timer
+     3. Events Countdown Timer & Floating Wristwatch
      ========================================================================== */
   const eventCards = document.querySelectorAll(".event-card");
 
@@ -123,22 +123,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const events = [];
   eventCards.forEach((card, index) => {
     const offsetDays = parseFloat(card.getAttribute("data-event-days"));
+    const titleEl = card.querySelector(".event-title");
+    const title = titleEl ? titleEl.textContent.trim() : "Upcoming Event";
     
     // We compute target date dynamically: current time + offsetDays (expressed in decimal e.g. 9 days, 8.5 days)
     const targetDate = new Date();
-    // Setting hours to demonstrate countdown properly. Let's make it tick down from 9 days 12 hours etc.
     targetDate.setTime(targetDate.getTime() + (offsetDays * 24 * 60 * 60 * 1000));
     
     const countdownEl = card.querySelector(".countdown-text");
     events.push({
+      title: title,
       target: targetDate,
       element: countdownEl
     });
   });
 
+  const watchEl = document.getElementById("eventWatch");
+  const watchEventNameEl = document.getElementById("watchEventName");
+  const watchDaysEl = document.getElementById("watchDays");
+  const watchHoursEl = document.getElementById("watchHours");
+  const watchMinutesEl = document.getElementById("watchMinutes");
+  const watchSecondsEl = document.getElementById("watchSeconds");
+
   const updateCountdowns = () => {
     const now = new Date().getTime();
     
+    // Update main page event cards countdowns
     events.forEach(eventObj => {
       const distance = eventObj.target.getTime() - now;
       
@@ -152,16 +162,47 @@ document.addEventListener("DOMContentLoaded", () => {
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       
-      // Pad single digits with leading zero
       const pad = (num) => String(num).padStart(2, "0");
       
-      // Rule: Start the countdown exactly 10 days before the event
       if (days < 10) {
         eventObj.element.innerHTML = `Event Starts In: <span class="text-accent">${pad(days)}</span> Days <span class="text-accent">${pad(hours)}</span> Hours <span class="text-accent">${pad(minutes)}</span> Minutes <span class="text-accent">${pad(seconds)}</span> Seconds`;
       } else {
         eventObj.element.innerHTML = `Starts In: <span class="text-accent">${days}</span> Days`;
       }
     });
+
+    // Update Floating Wristwatch Countdown
+    if (watchEl) {
+      // Find the nearest upcoming future event
+      const futureEvents = events
+        .filter(eventObj => eventObj.target.getTime() > now)
+        .sort((a, b) => a.target.getTime() - b.target.getTime());
+
+      if (futureEvents.length === 0) {
+        watchEl.style.display = "none";
+        return;
+      }
+
+      watchEl.style.display = "flex";
+      const nearestEvent = futureEvents[0];
+      
+      if (watchEventNameEl) {
+        watchEventNameEl.textContent = nearestEvent.title;
+      }
+
+      const distance = nearestEvent.target.getTime() - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      const pad = (num) => String(num).padStart(2, "0");
+
+      if (watchDaysEl) watchDaysEl.textContent = pad(days);
+      if (watchHoursEl) watchHoursEl.textContent = pad(hours);
+      if (watchMinutesEl) watchMinutesEl.textContent = pad(minutes);
+      if (watchSecondsEl) watchSecondsEl.textContent = pad(seconds);
+    }
   };
 
   // Run countdown updates immediately and then every second

@@ -327,6 +327,10 @@ h1, h2, h3, h4, h5, h6 {
 /* ------------------------------------------------------------------------------------------
    6. Hero Slider Section (Bootstrap Carousel Customization)
    -------------------------------------------------------------------------- */
+.hero-slider-section {
+  position: relative;
+}
+
 .hero-slider-section .carousel-item {
   height: 85vh;
   min-height: 500px;
@@ -1093,4 +1097,290 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
   }
 }
+
+/* ==========================================================================
+   17. Floating Wristwatch Countdown Timer
+   ========================================================================== */
+.watch-container {
+  position: absolute;
+  top: -30px; /* Overlap the second menubar */
+  left: 3%;
+  z-index: 1030; /* Over the navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  transform-origin: top center;
+  animation: watchSwing 4s ease-in-out infinite alternate, watchFloat 3s ease-in-out infinite alternate;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.watch-container:hover {
+  transform: scale(1.08) rotate(0deg);
+  animation-play-state: paused;
+}
+
+/* Hanging strap */
+.watch-strap {
+  width: 14px;
+  height: 45px;
+  background: linear-gradient(to right, #8a6d3b, #d4af37, #8a6d3b);
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5), 2px 2px 5px rgba(0,0,0,0.3);
+  position: relative;
+  border-bottom: 2px solid #5a4522;
+}
+
+/* Watch Body */
+.watch-face {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--secondary-dark) 0%, var(--primary-dark) 100%);
+  border: 5px solid var(--accent);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 
+              inset 0 0 12px rgba(212, 175, 55, 0.4);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 8px;
+  text-align: center;
+}
+
+/* Glass Reflection Effect */
+.watch-reflection {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.watch-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: var(--bg-white);
+}
+
+.watch-label {
+  font-size: 7.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 1px;
+}
+
+.watch-event-name {
+  font-size: 9px;
+  font-weight: 600;
+  max-width: 110px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.watch-divider {
+  width: 35px;
+  height: 1px;
+  background-color: rgba(212, 175, 55, 0.35);
+  margin: 1px 0 4px 0;
+}
+
+.watch-time-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5px;
+  margin-bottom: 3px;
+}
+
+.watch-time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.watch-time-block span:first-child {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: var(--bg-white);
+  background: rgba(0, 0, 0, 0.45);
+  padding: 1.5px 3px;
+  border-radius: 3px;
+  min-width: 20px;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.watch-time-label {
+  font-size: 5.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 1px;
+  font-weight: bold;
+}
+
+.watch-colon {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--accent);
+  margin-top: -6px;
+}
+
+.watch-status {
+  font-size: 7.5px;
+  color: #a0c4ff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Animations */
+@keyframes watchSwing {
+  0% { transform: rotate(-4deg); }
+  100% { transform: rotate(4deg); }
+}
+
+@keyframes watchFloat {
+  0% { margin-top: 0px; }
+  100% { margin-top: 8px; }
+}
+
+/* Responsive adjustment for watch */
+@media (max-width: 991.98px) {
+  .watch-container {
+    left: 4%;
+    top: -22px;
+    z-index: 1030;
+  }
+  .watch-strap {
+    height: 35px;
+    width: 10px;
+  }
+  .watch-face {
+    width: 115px;
+    height: 115px;
+    border-width: 4px;
+  }
+  .watch-label { font-size: 7px; }
+  .watch-event-name { font-size: 8px; max-width: 90px; }
+  .watch-time-block span:first-child { font-size: 11px; min-width: 16px; }
+  .watch-time-label { font-size: 5px; }
+  .watch-status { font-size: 7px; }
+}
+
+@media (max-width: 576px) {
+  .watch-container {
+    left: 2%;
+    top: -15px;
+    z-index: 1030;
+  }
+  .watch-strap {
+    height: 25px;
+    width: 8px;
+  }
+  .watch-face {
+    width: 100px;
+    height: 100px;
+    border-width: 3px;
+  }
+  .watch-label { font-size: 6px; }
+  .watch-event-name { font-size: 7.5px; max-width: 75px; }
+  .watch-time-block span:first-child { font-size: 10px; min-width: 14px; padding: 1px 2px; }
+  .watch-time-label { font-size: 4px; }
+  .watch-status { font-size: 6.5px; }
+}
+
+/* --------------------------------------------------------------------------
+   18. School Page Curriculums, Icons & Layout Extensions
+   -------------------------------------------------------------------------- */
+.curriculum-section {
+  background-color: var(--bg-light);
+}
+
+.curriculum-card {
+  transition: var(--transition-smooth);
+  border-top: 5px solid var(--primary-dark) !important;
+}
+
+.curriculum-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+.primary-curriculum-card {
+  border-top: 5px solid var(--accent) !important;
+}
+
+.curriculum-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(11, 37, 69, 0.08);
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  margin-bottom: 15px;
+  transition: var(--transition-smooth);
+}
+
+.curriculum-card:hover .curriculum-icon-box {
+  background-color: var(--primary-dark);
+  color: var(--bg-white);
+}
+
+.primary-curriculum-card:hover .curriculum-icon-box {
+  background-color: var(--accent);
+  color: var(--primary-dark);
+}
+
+.curriculum-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.curriculum-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.curriculum-list li i {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  color: var(--accent);
+}
+
+.high-school-card {
+  border-top: 5px solid var(--primary-dark) !important;
+  height: 100%;
+}
+
+.senior-school-card {
+  border-top: 5px solid var(--accent) !important;
+}
+
+/* Specific overlay variant for school pages hero */
+.school-hero-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
 

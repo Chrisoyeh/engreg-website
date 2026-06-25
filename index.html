@@ -64,13 +64,11 @@
         <span>📢 Admission is On! Apply Now for the New Academic Session.
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📢 Admission for the 2026/2027 Accademic session is now
           open!- Apply online today!!!
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📢 Admission is On! Apply Now for the New Academic
-          Session.</span>
+        </span>
         <span>📢 Admission is On! Apply Now for the New Academic Session.
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📢 High school registration is ongoing -- limited slots
           available.
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📢 Admission is On! Apply Now for the New Academic
-          Session.</span>
+        </span>
       </div>
     </div>
   </div>
@@ -113,13 +111,13 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#schools" id="schoolsDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="schoolsDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               Schools
             </a>
             <ul class="dropdown-menu" aria-labelledby="schoolsDropdown">
-              <li><a class="dropdown-item" href="#schools">Nursery & Primary School</a></li>
-              <li><a class="dropdown-item" href="#schools">High School</a></li>
+              <li><a class="dropdown-item" href="nursery-primary-school.html">Nursery & Primary School</a></li>
+              <li><a class="dropdown-item" href="high-school.html">High School</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -149,6 +147,41 @@
 
   <!-- 4. Hero Slider Section -->
   <section id="home" class="hero-slider-section">
+    <!-- Floating Event Countdown Wristwatch -->
+    <div class="watch-container animate-fade-down" id="eventWatch">
+      <div class="watch-strap"></div>
+      <div class="watch-face">
+        <div class="watch-reflection"></div>
+        <div class="watch-content">
+          <div class="watch-label">Upcoming Event</div>
+          <div class="watch-event-name" id="watchEventName">Loading...</div>
+          <div class="watch-divider"></div>
+          <div class="watch-time-container">
+            <div class="watch-time-block">
+              <span id="watchDays">00</span>
+              <span class="watch-time-label">Days</span>
+            </div>
+            <span class="watch-colon">:</span>
+            <div class="watch-time-block">
+              <span id="watchHours">00</span>
+              <span class="watch-time-label">Hours</span>
+            </div>
+            <span class="watch-colon">:</span>
+            <div class="watch-time-block">
+              <span id="watchMinutes">00</span>
+              <span class="watch-time-label">Mins</span>
+            </div>
+            <span class="watch-colon">:</span>
+            <div class="watch-time-block">
+              <span id="watchSeconds">00</span>
+              <span class="watch-time-label">Secs</span>
+            </div>
+          </div>
+          <div class="watch-status">Event Starts In</div>
+        </div>
+      </div>
+    </div>
+
     <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
       <!-- Indicators -->
@@ -164,8 +197,7 @@
       <!-- Slides -->
       <div class="carousel-inner">
         <!-- Slide 1: Welcome -->
-        <div class="carousel-item active"
-          style="background-image: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1920');">
+        <div class="carousel-item active" style="background-image: url('img/building2.png');">
           <div class="overlay"></div>
           <div
             class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100 px-3">
@@ -197,9 +229,8 @@
         </div>
 
         <!-- Slide 3: Facilities -->
-        <div class="carousel-item"
-          style="background-image: url('https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920');">
-          <div class="overlay"></div>
+        <div class="carousel-item" style="background-image: url('img/img5.png');">
+          <!-- <div class="overlay"></div> -->
           <div
             class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100 px-3">
             <h1 class="display-3 fw-bold text-white mb-3">Modern Learning Facilities</h1>
@@ -227,8 +258,7 @@
         </div>
 
         <!-- Slide 5: Legacy -->
-        <div class="carousel-item"
-          style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920');">
+        <div class="carousel-item" style="background-image: url('img/img13.jpeg');">
           <div class="overlay"></div>
           <div
             class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center h-100 px-3">
@@ -302,7 +332,7 @@
 
           <div class="mt-4">
             <div class="d-flex align-items-center gap-3 mb-3 p-3 bg-white rounded-3 shadow-sm border-left-accent">
-              <img src="assets/images/proprietress.png" alt="Proprietress Portrait" class="proprietress-img shadow-sm"
+              <img src="img/en.jpeg" alt="Proprietress Portrait" class="proprietress-img shadow-sm"
                 onerror="this.src='https://placehold.co/80x80/0b2545/d4af37?text=Proprietress'">
               <div>
                 <h5 class="mb-0 fw-bold text-primary-dark">Mrs. E.N. Orekie</h5>
@@ -396,8 +426,7 @@
                   coordination within a warm, stimulating environment.</p>
               </div>
               <div class="mt-4">
-                <button class="btn btn-outline-primary px-4 py-2" data-bs-toggle="modal"
-                  data-bs-target="#nurseryModal">Read More</button>
+                <a href="nursery-primary-school.html" class="btn btn-outline-primary px-4 py-2">Read More</a>
               </div>
             </div>
           </div>
@@ -407,7 +436,7 @@
         <div class="col-md-6 col-lg-5 text-start">
           <div class="card school-card h-100 border-0 shadow-lg overflow-hidden rounded-4">
             <div class="school-card-img-wrapper position-relative">
-              <img src="assets/images/high_school.png" class="card-img-top" alt="High School Students"
+              <img src="img/img18.png" class="card-img-top" alt="High School Students"
                 onerror="this.src='https://placehold.co/600x400/0b2545/d4af37?text=High+School'">
               <div class="card-badge bg-accent text-dark fw-bold">Ages 11 - 17</div>
             </div>
@@ -419,8 +448,7 @@
                   competencies, and college preparation.</p>
               </div>
               <div class="mt-4">
-                <button class="btn btn-outline-primary px-4 py-2" data-bs-toggle="modal"
-                  data-bs-target="#highSchoolModal">Read More</button>
+                <a href="high-school.html" class="btn btn-outline-primary px-4 py-2">Read More</a>
               </div>
             </div>
           </div>
@@ -617,9 +645,10 @@
         <div class="col-lg-2 col-md-6">
           <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Our School</h5>
           <ul class="list-unstyled footer-links">
-            <li class="mb-2"><a href="#schools" class="text-white-50 text-decoration-none">Nursery & Primary School</a>
+            <li class="mb-2"><a href="nursery-primary-school.html" class="text-white-50 text-decoration-none">Nursery &
+                Primary School</a>
             </li>
-            <li class="mb-2"><a href="#schools" class="text-white-50 text-decoration-none">High School</a></li>
+            <li class="mb-2"><a href="high-school.html" class="text-white-50 text-decoration-none">High School</a></li>
           </ul>
         </div>
 
@@ -706,7 +735,7 @@
         <div class="modal-body p-4">
           <div class="row g-4">
             <div class="col-md-4 text-center">
-              <img src="assets/images/proprietress.png" alt="Dr. Helen J. Gregory" class="img-fluid rounded shadow"
+              <img src="img/en2.png" alt="Dr. Helen J. Gregory" class="img-fluid rounded shadow"
                 onerror="this.src='https://placehold.co/200x250/0b2545/d4af37?text=Proprietress'">
               <h6 class="mt-3 fw-bold text-primary-dark mb-0">Mrs. E.N. Orekie</h6>
               <small class="text-muted">Proprietress & Founder</small>
