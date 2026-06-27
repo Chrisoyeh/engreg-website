@@ -312,4 +312,125 @@ document.addEventListener("DOMContentLoaded", () => {
   revealElements.forEach(el => {
     revealObserver.observe(el);
   });
+
+  /* ==========================================================================
+     7. Curriculum Page ScrollSpy for Sticky Sidebar Menu
+     ========================================================================== */
+  const scrollSpyLinks = document.querySelectorAll(".jump-link");
+  const scrollSpySections = document.querySelectorAll(".curriculum-section-block");
+
+  if (scrollSpyLinks.length > 0 && scrollSpySections.length > 0) {
+    const handleScrollSpy = () => {
+      let activeSectionId = "";
+      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      // Add navbar height and some buffer offset to activate early
+      const offset = 180; 
+
+      scrollSpySections.forEach(section => {
+        const top = section.offsetTop - offset;
+        const bottom = top + section.offsetHeight;
+        if (scrollPos >= top && scrollPos < bottom) {
+          activeSectionId = section.getAttribute("id");
+        }
+      });
+
+      scrollSpyLinks.forEach(link => {
+        const targetId = link.getAttribute("href").substring(1);
+        
+        // Remove all possible active classes
+        link.classList.remove("active-preschool", "active-primary", "active-secondary");
+
+        if (targetId === activeSectionId) {
+          if (targetId === "preschool") {
+            link.classList.add("active-preschool");
+          } else if (targetId === "primary") {
+            link.classList.add("active-primary");
+          } else if (targetId === "secondary") {
+            link.classList.add("active-secondary");
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScrollSpy);
+    handleScrollSpy(); // Trigger immediately to highlight correct active item on reload
+  }
+
+  /* ==========================================================================
+     8. Contact Page Form Validation & Notifications
+     ========================================================================== */
+  const contactForm = document.getElementById("contactForm");
+  const contactSuccess = document.getElementById("contactSuccess");
+
+  if (contactForm && contactSuccess) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById("contactName");
+      const emailInput = document.getElementById("contactEmail");
+      const phoneInput = document.getElementById("contactPhone");
+      const subjectInput = document.getElementById("contactSubject");
+      const messageInput = document.getElementById("contactMessage");
+
+      let isValid = true;
+
+      // Helper function to validate field
+      const validateField = (input, condition) => {
+        if (condition) {
+          input.classList.remove("is-invalid");
+          input.classList.add("is-valid");
+        } else {
+          input.classList.remove("is-valid");
+          input.classList.add("is-invalid");
+          isValid = false;
+        }
+      };
+
+      // Validate Name
+      validateField(nameInput, nameInput.value.trim() !== "");
+
+      // Validate Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      validateField(emailInput, emailRegex.test(emailInput.value.trim()));
+
+      // Validate Phone (at least 8 chars check)
+      validateField(phoneInput, phoneInput.value.trim().length >= 8);
+
+      // Validate Subject
+      validateField(subjectInput, subjectInput.value.trim() !== "");
+
+      // Validate Message (at least 10 chars)
+      validateField(messageInput, messageInput.value.trim().length >= 10);
+
+      if (isValid) {
+        // Reset inputs
+        const inputs = [nameInput, emailInput, phoneInput, subjectInput, messageInput];
+        inputs.forEach(input => {
+          input.value = "";
+          input.classList.remove("is-valid");
+        });
+
+        // Hide form, show success
+        contactForm.classList.add("d-none");
+        contactSuccess.classList.remove("d-none");
+
+        // Scroll to success message
+        contactSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        // Show form again after 7 seconds
+        setTimeout(() => {
+          contactSuccess.classList.add("d-none");
+          contactForm.classList.remove("d-none");
+        }, 7000);
+      }
+    });
+
+    // Remove validation classes on input
+    const formControls = contactForm.querySelectorAll(".form-control");
+    formControls.forEach(control => {
+      control.addEventListener("input", function() {
+        this.classList.remove("is-invalid");
+      });
+    });
+  }
 });

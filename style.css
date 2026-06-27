@@ -1383,4 +1383,425 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
+/* ==========================================================================
+   19. Curriculum Page Specific Styles
+   ========================================================================== */
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0) 70%);
+  pointer-events: none;
+  animation: floatShape 8s ease-in-out infinite alternate;
+  z-index: 1;
+}
+.hero-shape.shape-1 {
+  width: 150px;
+  height: 150px;
+  top: 10%;
+  left: 15%;
+  animation-duration: 6s;
+}
+.hero-shape.shape-2 {
+  width: 250px;
+  height: 250px;
+  bottom: -50px;
+  right: 25%;
+  animation-duration: 10s;
+}
+.hero-shape.shape-3 {
+  width: 100px;
+  height: 100px;
+  top: 40%;
+  right: 10%;
+  background: radial-gradient(circle, rgba(13, 110, 253, 0.12) 0%, rgba(13, 110, 253, 0) 70%);
+  animation-duration: 8s;
+}
+@keyframes floatShape {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-25px) scale(1.08) rotate(15deg);
+  }
+}
+
+@media (min-width: 992px) {
+  .sticky-sidebar {
+    position: sticky;
+    top: 100px;
+    z-index: 10;
+  }
+}
+.jump-card {
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transition-smooth);
+}
+.jump-card:hover {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08) !important;
+}
+.jump-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.jump-link-item {
+  margin-bottom: 12px;
+}
+.jump-link-item:last-child {
+  margin-bottom: 0;
+}
+.jump-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  border-left: 4px solid transparent;
+}
+.jump-link:hover {
+  background-color: var(--bg-light);
+  color: var(--primary-dark);
+  padding-left: 20px;
+}
+/* Scrollspy dynamic active styles */
+.jump-link.active-preschool {
+  border-left-color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.06);
+  color: #0d6efd !important;
+}
+.jump-link.active-primary {
+  border-left-color: #198754;
+  background-color: rgba(25, 135, 84, 0.06);
+  color: #198754 !important;
+}
+.jump-link.active-secondary {
+  border-left-color: #fd7e14;
+  background-color: rgba(253, 126, 20, 0.06);
+  color: #fd7e14 !important;
+}
+.jump-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.jump-bullet.preschool-bullet {
+  background-color: #0d6efd;
+  box-shadow: 0 0 6px rgba(13, 110, 253, 0.5);
+}
+.jump-bullet.primary-bullet {
+  background-color: #198754;
+  box-shadow: 0 0 6px rgba(25, 135, 84, 0.5);
+}
+.jump-bullet.secondary-bullet {
+  background-color: #fd7e14;
+  box-shadow: 0 0 6px rgba(253, 126, 20, 0.5);
+}
+
+.curriculum-section-block {
+  padding: 70px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transition-smooth);
+}
+.curriculum-section-block:last-of-type {
+  border-bottom: none;
+}
+.curriculum-title-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+.preschool-badge {
+  background-color: rgba(13, 110, 253, 0.12);
+  color: #0d6efd;
+}
+.primary-badge {
+  background-color: rgba(25, 135, 84, 0.12);
+  color: #198754;
+}
+.secondary-badge {
+  background-color: rgba(253, 126, 20, 0.12);
+  color: #fd7e14;
+}
+
+.program-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: var(--transition-smooth);
+  background-color: var(--bg-white);
+  height: 100%;
+}
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+.preschool-card {
+  border-top: 5px solid #0d6efd !important;
+}
+.primary-card {
+  border-top: 5px solid #198754 !important;
+}
+.secondary-card {
+  border-top: 5px solid #fd7e14 !important;
+}
+
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.subject-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: var(--bg-light);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: var(--transition-smooth);
+}
+.subject-item:hover {
+  background-color: var(--bg-white);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+.subject-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+  flex-shrink: 0;
+}
+.preschool-icon {
+  background-color: rgba(13, 110, 253, 0.1);
+  color: #0d6efd;
+}
+.primary-icon {
+  background-color: rgba(25, 135, 84, 0.1);
+  color: #198754;
+}
+.secondary-icon {
+  background-color: rgba(253, 126, 20, 0.1);
+  color: #fd7e14;
+}
+.subject-item:hover .preschool-icon {
+  background-color: #0d6efd;
+  color: var(--bg-white);
+}
+.subject-item:hover .primary-icon {
+  background-color: #198754;
+  color: var(--bg-white);
+}
+.subject-item:hover .secondary-icon {
+  background-color: #fd7e14;
+  color: var(--bg-white);
+}
+.subject-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.curriculum-cta {
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%) !important;
+  border-top: 4px solid var(--accent);
+  box-shadow: 0 10px 30px rgba(13, 110, 253, 0.2);
+}
+.btn-cta-apply {
+  background-color: var(--bg-white);
+  color: #0d6efd !important;
+  border: 2px solid var(--bg-white);
+  font-weight: 700;
+  padding: 12px 35px;
+  border-radius: 30px;
+  transition: var(--transition-smooth);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+.btn-cta-apply:hover {
+  background-color: transparent;
+  color: var(--bg-white) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
+}
+
+/* ==========================================================================
+   20. Co-Curricular Page Specific Styles
+   ========================================================================== */
+.club-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: var(--transition-smooth);
+  background-color: var(--bg-white);
+  height: 100%;
+  border-top: 5px solid var(--primary-dark) !important;
+}
+.club-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+}
+.club-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(11, 37, 69, 0.08);
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  margin-bottom: 18px;
+  transition: var(--transition-smooth);
+}
+.club-card:hover .club-icon-box {
+  background-color: var(--primary-dark);
+  color: var(--bg-white);
+}
+
+.sports-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+  transition: var(--transition-smooth);
+  background-color: var(--bg-white);
+  height: 100%;
+  border-bottom: 4px solid transparent;
+}
+.sports-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
+  border-bottom: 4px solid var(--accent);
+}
+.sports-icon-box {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(212, 175, 55, 0.12);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  transition: var(--transition-smooth);
+}
+.sports-card:hover .sports-icon-box {
+  background-color: var(--accent);
+  color: var(--primary-dark);
+}
+
+.summer-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: var(--transition-smooth);
+  background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+  border-left: 5px solid var(--accent) !important;
+  height: 100%;
+}
+.summer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+}
+.summer-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary-dark);
+  color: var(--bg-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+  transition: var(--transition-smooth);
+}
+.summer-card:hover .summer-icon-box {
+  background-color: var(--accent);
+  color: var(--primary-dark);
+}
+
+/* ==========================================================================
+   21. Contact Page Specific Styles
+   ========================================================================== */
+.contact-form .form-control {
+  border-radius: 8px;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  padding: 12px 18px;
+  transition: var(--transition-smooth);
+}
+.contact-form .form-control:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.15) !important;
+}
+.contact-detail-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  background-color: var(--bg-white);
+  transition: var(--transition-smooth);
+  border-left: 5px solid var(--accent) !important;
+  height: 100%;
+}
+.contact-detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important;
+}
+.contact-icon-wrapper {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(212, 175, 55, 0.12);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+.direction-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  background-color: var(--bg-white);
+  transition: var(--transition-smooth);
+  border-top: 5px solid var(--secondary-dark) !important;
+  height: 100%;
+}
+.direction-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important;
+}
+.direction-icon-wrapper {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(19, 64, 116, 0.12);
+  color: var(--secondary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+
+
 
