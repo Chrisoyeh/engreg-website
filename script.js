@@ -433,4 +433,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  /* ==========================================================================
+     9. Reasons Card Mobile Tap Flip Toggle
+     ========================================================================== */
+  const reasonCards = document.querySelectorAll(".reason-card-inner");
+  reasonCards.forEach(card => {
+    card.addEventListener("click", function(e) {
+      this.classList.toggle("flipped");
+    });
+  });
 });
