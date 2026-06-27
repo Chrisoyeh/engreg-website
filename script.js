@@ -119,16 +119,44 @@ document.addEventListener("DOMContentLoaded", () => {
      ========================================================================== */
   const eventCards = document.querySelectorAll(".event-card");
 
-  // Initialize targets dynamically to keep demo active and showcase countdown instantly
+  // Month string mapping to zero-indexed month integers
+  const monthMap = {
+    'JAN': 0, 'FEB': 1, 'MAR': 2, 'APR': 3, 'MAY': 4, 'JUN': 5,
+    'JUL': 6, 'AUG': 7, 'SEP': 8, 'OCT': 9, 'NOV': 10, 'DEC': 11
+  };
+
+  // Initialize targets based on the actual static dates displayed on the cards
   const events = [];
   eventCards.forEach((card, index) => {
-    const offsetDays = parseFloat(card.getAttribute("data-event-days"));
     const titleEl = card.querySelector(".event-title");
     const title = titleEl ? titleEl.textContent.trim() : "Upcoming Event";
     
-    // We compute target date dynamically: current time + offsetDays (expressed in decimal e.g. 9 days, 8.5 days)
-    const targetDate = new Date();
-    targetDate.setTime(targetDate.getTime() + (offsetDays * 24 * 60 * 60 * 1000));
+    // Extract day and month from the HTML layout to sync countdown with display
+    const dayEl = card.querySelector(".day");
+    const monthEl = card.querySelector(".month");
+    
+    let targetDate;
+    if (dayEl && monthEl) {
+      const day = parseInt(dayEl.textContent.trim(), 10);
+      const monthStr = monthEl.textContent.trim().toUpperCase();
+      const month = monthMap[monthStr];
+      
+      const now = new Date();
+      let year = now.getFullYear();
+      
+      // Assume event starts at 9:00 AM on the specified date
+      targetDate = new Date(year, month, day, 9, 0, 0);
+      
+      // If target date in the current calendar year has already passed, use the next year
+      if (targetDate.getTime() < now.getTime()) {
+        targetDate.setFullYear(year + 1);
+      }
+    } else {
+      // Fallback to offset data attribute if elements are missing
+      const offsetDays = parseFloat(card.getAttribute("data-event-days")) || 0;
+      targetDate = new Date();
+      targetDate.setTime(targetDate.getTime() + (offsetDays * 24 * 60 * 60 * 1000));
+    }
     
     const countdownEl = card.querySelector(".countdown-text");
     events.push({
