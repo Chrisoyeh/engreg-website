@@ -471,4 +471,56 @@ document.addEventListener("DOMContentLoaded", () => {
       this.classList.toggle("flipped");
     });
   });
+
+  /* ==========================================================================
+     10. Milestone Cards Mobile Tap Flip Toggle
+     ========================================================================== */
+  const milestoneCards = document.querySelectorAll(".milestone-card-inner");
+  milestoneCards.forEach(card => {
+    card.addEventListener("click", function(e) {
+      this.classList.toggle("flipped");
+    });
+  });
+
+  /* ==========================================================================
+     11. Animated Counter Effect for Achievement Cards
+     ========================================================================== */
+  const counters = document.querySelectorAll(".counter-number");
+  
+  const countUp = (counter) => {
+    const target = +counter.getAttribute("data-target");
+    const duration = 2000; // 2 seconds total animation time
+    const frameRate = 1000 / 60; // 60 FPS
+    const totalFrames = Math.round(duration / frameRate);
+    let frame = 0;
+    
+    const countAnimation = () => {
+      frame++;
+      const progress = frame / totalFrames;
+      // Easing out quadratic
+      const currentVal = Math.round(target * progress * (2 - progress));
+      
+      if (frame < totalFrames) {
+        counter.innerText = currentVal;
+        requestAnimationFrame(countAnimation);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    
+    countAnimation();
+  };
+  
+  const counterObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countUp(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  counters.forEach(counter => {
+    counterObserver.observe(counter);
+  });
 });

@@ -1975,3 +1975,154 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(11, 37, 69, 0.25);
 }
+
+/* ==========================================================================
+   24. History Page & Milestones Custom Styles
+   ========================================================================== */
+.sticky-sidebar {
+  position: sticky;
+  top: 100px;
+  z-index: 10;
+}
+
+.achievement-card {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+  color: var(--bg-white);
+  border: 3px solid var(--accent);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(11, 37, 69, 0.15);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+  padding: 30px;
+}
+.achievement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(11, 37, 69, 0.25);
+}
+.achievement-card .card-emblem {
+  font-size: 3rem;
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+.achievement-card h3 {
+  font-family: var(--font-headers);
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.achievement-card h4 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-bottom: 25px;
+}
+
+/* Timeline inside Achievement Card */
+.achievement-timeline {
+  position: relative;
+  padding-left: 20px;
+  border-left: 2px dashed rgba(255, 255, 255, 0.2);
+  margin-left: 10px;
+  text-align: left;
+}
+.achievement-timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+.achievement-timeline-item:last-child {
+  margin-bottom: 0;
+}
+.achievement-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3);
+}
+.timeline-year {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+  display: block;
+}
+.timeline-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Milestone cards */
+.milestone-card {
+  perspective: 1000px;
+  height: 240px;
+  margin-bottom: 24px;
+}
+.milestone-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  cursor: pointer;
+}
+.milestone-card:hover .milestone-card-inner,
+.milestone-card-inner.flipped {
+  transform: rotateY(180deg);
+  box-shadow: 0 15px 35px rgba(11, 37, 69, 0.15);
+}
+.milestone-card-front, .milestone-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+.milestone-card-front {
+  background-color: var(--bg-white);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 4px solid var(--accent);
+  color: var(--primary-dark);
+}
+.milestone-card-front .milestone-icon {
+  font-size: 2.8rem;
+  color: var(--accent);
+  margin-bottom: 18px;
+  transition: var(--transition-smooth);
+}
+.milestone-card:hover .milestone-icon {
+  transform: scale(1.1);
+}
+.milestone-card-front h4 {
+  font-family: var(--font-headers);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 0;
+}
+.milestone-card-back {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+  color: var(--bg-white);
+  transform: rotateY(180deg);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: 24px;
+}
+.milestone-card-back p {
+  margin-bottom: 0;
+}
