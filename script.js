@@ -4,7 +4,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  
+
   /* ==========================================================================
      1. Sticky Navbar Scroll Effect & Active Highlight
      ========================================================================== */
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar.classList.remove("scrolled");
     }
   };
-  
+
   window.addEventListener("scroll", handleScroll);
   handleScroll(); // Trigger on load in case page is refreshed while scrolled down
 
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll("#mainNavbar .nav-link:not(.dropdown-toggle), #mainNavbar .dropdown-item");
   const navbarCollapse = document.getElementById("navbarContent");
   const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
-  
+
   navLinks.forEach(link => {
     link.addEventListener("click", () => {
       // Check if hamburger menu is open
@@ -130,23 +130,23 @@ document.addEventListener("DOMContentLoaded", () => {
   eventCards.forEach((card, index) => {
     const titleEl = card.querySelector(".event-title");
     const title = titleEl ? titleEl.textContent.trim() : "Upcoming Event";
-    
+
     // Extract day and month from the HTML layout to sync countdown with display
     const dayEl = card.querySelector(".day");
     const monthEl = card.querySelector(".month");
-    
+
     let targetDate;
     if (dayEl && monthEl) {
       const day = parseInt(dayEl.textContent.trim(), 10);
       const monthStr = monthEl.textContent.trim().toUpperCase();
       const month = monthMap[monthStr];
-      
+
       const now = new Date();
       let year = now.getFullYear();
-      
+
       // Assume event starts at 9:00 AM on the specified date
       targetDate = new Date(year, month, day, 9, 0, 0);
-      
+
       // If target date in the current calendar year has already passed, use the next year
       if (targetDate.getTime() < now.getTime()) {
         targetDate.setFullYear(year + 1);
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
       targetDate = new Date();
       targetDate.setTime(targetDate.getTime() + (offsetDays * 24 * 60 * 60 * 1000));
     }
-    
+
     const countdownEl = card.querySelector(".countdown-text");
     events.push({
       title: title,
@@ -175,23 +175,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateCountdowns = () => {
     const now = new Date().getTime();
-    
+
     // Update main page event cards countdowns
     events.forEach(eventObj => {
       const distance = eventObj.target.getTime() - now;
-      
+
       if (distance < 0) {
         eventObj.element.textContent = "Event Started";
         return;
       }
-      
+
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
+
       const pad = (num) => String(num).padStart(2, "0");
-      
+
       if (days < 10) {
         eventObj.element.innerHTML = `Event Starts In: <span class="text-accent">${pad(days)}</span> Days <span class="text-accent">${pad(hours)}</span> Hours <span class="text-accent">${pad(minutes)}</span> Minutes <span class="text-accent">${pad(seconds)}</span> Seconds`;
       } else {
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       watchEl.style.display = "flex";
       const nearestEvent = futureEvents[0];
-      
+
       if (watchEventNameEl) {
         watchEventNameEl.textContent = nearestEvent.title;
       }
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
+
       const pad = (num) => String(num).padStart(2, "0");
 
       if (watchDaysEl) watchDaysEl.textContent = pad(days);
@@ -242,16 +242,16 @@ document.addEventListener("DOMContentLoaded", () => {
      ========================================================================== */
   const newsletterForm = document.getElementById("newsletterForm");
   const newsletterSuccess = document.getElementById("newsletterSuccess");
-  
+
   if (newsletterForm && newsletterSuccess) {
     newsletterForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      
+
       const nameInput = document.getElementById("newsletterName");
       const emailInput = document.getElementById("newsletterEmail");
-      
+
       let isValid = true;
-      
+
       // Validate Name
       if (nameInput.value.trim() === "") {
         nameInput.classList.add("is-invalid");
@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
         nameInput.classList.remove("is-invalid");
         nameInput.classList.add("is-valid");
       }
-      
+
       // Validate Email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(emailInput.value.trim())) {
@@ -270,18 +270,18 @@ document.addEventListener("DOMContentLoaded", () => {
         emailInput.classList.remove("is-invalid");
         emailInput.classList.add("is-valid");
       }
-      
+
       if (isValid) {
         // Clear form inputs
         nameInput.value = "";
         emailInput.value = "";
         nameInput.classList.remove("is-valid");
         emailInput.classList.remove("is-valid");
-        
+
         // Hide form & show notification
         newsletterForm.classList.add("d-none");
         newsletterSuccess.classList.remove("d-none");
-        
+
         // Reset back to show form after 6 seconds
         setTimeout(() => {
           newsletterSuccess.classList.add("d-none");
@@ -291,10 +291,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Remove invalid state classes on input change
-    document.getElementById("newsletterName").addEventListener("input", function() {
+    document.getElementById("newsletterName").addEventListener("input", function () {
       this.classList.remove("is-invalid");
     });
-    document.getElementById("newsletterEmail").addEventListener("input", function() {
+    document.getElementById("newsletterEmail").addEventListener("input", function () {
       this.classList.remove("is-invalid");
     });
   }
@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
      5. Scroll-to-Top Button
      ========================================================================== */
   const scrollToTopBtn = document.getElementById("scrollToTop");
-  
+
   window.addEventListener("scroll", () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
     if (scrollTop > 400) {
@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scrollToTopBtn.style.display = "none";
     }
   });
-  
+
   scrollToTopBtn.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
      6. Scroll Reveal Animations (Intersection Observer)
      ========================================================================== */
   const revealElements = document.querySelectorAll(".scroll-reveal");
-  
+
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
     threshold: 0.15, // trigger when 15% of element is in view
     rootMargin: "0px 0px -50px 0px"
   });
-  
+
   revealElements.forEach(el => {
     revealObserver.observe(el);
   });
@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let activeSectionId = "";
       const scrollPos = window.scrollY || document.documentElement.scrollTop;
       // Add navbar height and some buffer offset to activate early
-      const offset = 180; 
+      const offset = 180;
 
       scrollSpySections.forEach(section => {
         const top = section.offsetTop - offset;
@@ -364,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       scrollSpyLinks.forEach(link => {
         const targetId = link.getAttribute("href").substring(1);
-        
+
         // Remove all possible active classes
         link.classList.remove("active-preschool", "active-primary", "active-secondary");
 
@@ -456,7 +456,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Remove validation classes on input
     const formControls = contactForm.querySelectorAll(".form-control");
     formControls.forEach(control => {
-      control.addEventListener("input", function() {
+      control.addEventListener("input", function () {
         this.classList.remove("is-invalid");
       });
     });
@@ -467,7 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
      ========================================================================== */
   const reasonCards = document.querySelectorAll(".reason-card-inner");
   reasonCards.forEach(card => {
-    card.addEventListener("click", function(e) {
+    card.addEventListener("click", function (e) {
       this.classList.toggle("flipped");
     });
   });
@@ -477,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
      ========================================================================== */
   const milestoneCards = document.querySelectorAll(".milestone-card-inner");
   milestoneCards.forEach(card => {
-    card.addEventListener("click", function(e) {
+    card.addEventListener("click", function (e) {
       this.classList.toggle("flipped");
     });
   });
@@ -486,20 +486,20 @@ document.addEventListener("DOMContentLoaded", () => {
      11. Animated Counter Effect for Achievement Cards
      ========================================================================== */
   const counters = document.querySelectorAll(".counter-number");
-  
+
   const countUp = (counter) => {
     const target = +counter.getAttribute("data-target");
     const duration = 2000; // 2 seconds total animation time
     const frameRate = 1000 / 60; // 60 FPS
     const totalFrames = Math.round(duration / frameRate);
     let frame = 0;
-    
+
     const countAnimation = () => {
       frame++;
       const progress = frame / totalFrames;
       // Easing out quadratic
       const currentVal = Math.round(target * progress * (2 - progress));
-      
+
       if (frame < totalFrames) {
         counter.innerText = currentVal;
         requestAnimationFrame(countAnimation);
@@ -507,10 +507,10 @@ document.addEventListener("DOMContentLoaded", () => {
         counter.innerText = target;
       }
     };
-    
+
     countAnimation();
   };
-  
+
   const counterObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -519,8 +519,867 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, { threshold: 0.5 });
-  
+
   counters.forEach(counter => {
     counterObserver.observe(counter);
   });
+
+  /* ==========================================================================
+     12. Apply Online Page Form Actions (Age Calc, Valids, Steppers, Success overlay)
+     ========================================================================== */
+
+  // Firebase Upload State Maps & Utilities
+  const uploadedFiles = {};
+
+  // Helper: Convert File to Base64 (with optional compression for images)
+  const fileToBase64 = (file, maxDimension = 800, quality = 0.7) => {
+    return new Promise((resolve, reject) => {
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = new Image();
+          img.onload = function () {
+            const canvas = document.createElement("canvas");
+            let width = img.width;
+            let height = img.height;
+
+            if (width > maxDimension || height > maxDimension) {
+              if (width > height) {
+                height = Math.round((height * maxDimension) / width);
+                width = maxDimension;
+              } else {
+                width = Math.round((width * maxDimension) / height);
+                height = maxDimension;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const dataUrl = canvas.toDataURL("image/jpeg", quality);
+            resolve(dataUrl);
+          };
+          img.onerror = (err) => reject(err);
+          img.src = event.target.result;
+        };
+        reader.onerror = (err) => reject(err);
+        reader.readAsDataURL(file);
+      } else {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (err) => reject(err);
+        reader.readAsDataURL(file);
+      }
+    });
+  };
+
+  // Setup file uploads directly in Base64 (Bypassing Firebase Storage rules)
+  const setupDocumentUploadListeners = () => {
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach(input => {
+      input.addEventListener("change", async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const card = input.closest(".card");
+        let progressEl = card.querySelector(".upload-progress-text");
+        if (!progressEl) {
+          progressEl = document.createElement("div");
+          progressEl.className = "upload-progress-text text-accent small mt-2 fw-bold";
+          card.appendChild(progressEl);
+        }
+
+        try {
+          progressEl.textContent = "Processing file...";
+          progressEl.className = "upload-progress-text text-accent small mt-2 fw-bold";
+
+          // Read and compress the file to Base64
+          const base64Data = await fileToBase64(file);
+
+          uploadedFiles[input.id] = base64Data;
+          progressEl.textContent = "✔ Document Ready";
+          progressEl.className = "upload-progress-text text-success small mt-2 fw-bold";
+          input.classList.remove("is-invalid");
+          input.classList.add("is-valid");
+          card.style.backgroundColor = "#e6f4ea";
+
+          // Recalculate form progress
+          const form = input.closest("form");
+          updateFormProgress(form, form.id === "nurseryAdmissionForm" ? "nurseryFormProgress" : "highSchoolFormProgress", form.id === "nurseryAdmissionForm" ? "nurseryFormPct" : "highSchoolFormPct");
+
+        } catch (err) {
+          console.error("File processing failed:", err);
+          progressEl.textContent = "Processing failed. Try another file.";
+          progressEl.className = "upload-progress-text text-danger small mt-2 fw-bold";
+          input.classList.add("is-invalid");
+        }
+      });
+    });
+  };
+
+  // Run initial setup for file listeners
+  setupDocumentUploadListeners();
+
+  // Helper: Extract form fields into key-value map
+  const getFormData = (form) => {
+    const data = {};
+    const inputs = form.querySelectorAll("input, select, textarea");
+    inputs.forEach(input => {
+      if (input.type === "file") return;
+      if (input.type === "radio" || input.type === "checkbox") {
+        if (input.checked) {
+          data[input.name || input.id] = input.value;
+        }
+        return;
+      }
+      const key = input.name || input.id;
+      if (key) {
+        data[key] = input.value;
+      }
+    });
+    return data;
+  };
+
+  // Dynamic Age Calculation
+  const calculateAge = (dobString) => {
+    if (!dobString) return "";
+    const dob = new Date(dobString);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+      age--;
+    }
+    return age >= 0 ? age : 0;
+  };
+
+  const nurseryDob = document.getElementById("nurseryDob");
+  const nurseryAge = document.getElementById("nurseryAge");
+  if (nurseryDob && nurseryAge) {
+    ["change", "input"].forEach(evtType => {
+      nurseryDob.addEventListener(evtType, () => {
+        nurseryAge.value = calculateAge(nurseryDob.value);
+        const form = document.getElementById("nurseryAdmissionForm");
+        updateFormProgress(form, "nurseryFormProgress", "nurseryFormPct");
+      });
+    });
+  }
+
+  const highSchoolDob = document.getElementById("highSchoolDob");
+  const highSchoolAge = document.getElementById("highSchoolAge");
+  if (highSchoolDob && highSchoolAge) {
+    ["change", "input"].forEach(evtType => {
+      highSchoolDob.addEventListener(evtType, () => {
+        highSchoolAge.value = calculateAge(highSchoolDob.value);
+        const form = document.getElementById("highSchoolAdmissionForm");
+        updateFormProgress(form, "highSchoolFormProgress", "highSchoolFormPct");
+      });
+    });
+  }
+
+  // Conditional Visibility of "Special Aid Required"
+  const aidYes = document.getElementById("aidYes");
+  const aidNo = document.getElementById("aidNo");
+  const specialAidDetail = document.getElementById("nurserySpecialAidDetail");
+  const specialAidReq = document.getElementById("nurserySpecialAidReq");
+
+  if (aidYes && aidNo && specialAidDetail) {
+    const toggleAidDetail = () => {
+      if (aidYes.checked) {
+        specialAidDetail.classList.remove("d-none");
+        if (specialAidReq) specialAidReq.setAttribute("required", "required");
+      } else {
+        specialAidDetail.classList.add("d-none");
+        if (specialAidReq) {
+          specialAidReq.removeAttribute("required");
+          specialAidReq.value = "";
+          specialAidReq.classList.remove("is-valid", "is-invalid");
+        }
+      }
+      const form = document.getElementById("nurseryAdmissionForm");
+      updateFormProgress(form, "nurseryFormProgress", "nurseryFormPct");
+    };
+    aidYes.addEventListener("change", toggleAidDetail);
+    aidNo.addEventListener("change", toggleAidDetail);
+  }
+
+  // Steppers & Progress Bars Calculator
+  const updateFormProgress = (form, progressBarId, pctTextId) => {
+    if (!form) return;
+    const requiredFields = form.querySelectorAll("[required]");
+    if (requiredFields.length === 0) return;
+
+    // Group radio buttons by name to count them as 1 unique required item
+    const uniqueRequiredNames = new Set();
+    requiredFields.forEach(field => {
+      const name = field.getAttribute("name");
+      if (name && (field.type === "radio" || field.type === "checkbox")) {
+        uniqueRequiredNames.add(name);
+      }
+    });
+
+    let totalUniqueRequired = 0;
+    requiredFields.forEach(field => {
+      const name = field.getAttribute("name");
+      if (name && (field.type === "radio" || field.type === "checkbox")) {
+        // Handled as group
+      } else {
+        totalUniqueRequired++;
+      }
+    });
+    totalUniqueRequired += uniqueRequiredNames.size;
+
+    let filledUniqueRequired = 0;
+    requiredFields.forEach(field => {
+      const name = field.getAttribute("name");
+      if (name && (field.type === "radio" || field.type === "checkbox")) {
+        // Handled as group
+      } else if (field.value.trim() !== "" && !field.classList.contains("is-invalid")) {
+        filledUniqueRequired++;
+      }
+    });
+
+    uniqueRequiredNames.forEach(name => {
+      const checked = form.querySelector(`input[name="${name}"]:checked`);
+      if (checked) filledUniqueRequired++;
+    });
+
+    const pct = Math.round((filledUniqueRequired / totalUniqueRequired) * 100);
+    const progressBar = document.getElementById(progressBarId);
+    const pctText = document.getElementById(pctTextId);
+
+    if (progressBar) {
+      progressBar.style.width = pct + "%";
+      progressBar.setAttribute("aria-valuenow", pct);
+    }
+    if (pctText) {
+      pctText.textContent = pct + "% Filled";
+    }
+  };
+
+  // Section Tracking on Modal Body Scroll
+  const setupModalScrollTracking = (modalId, stepLabelId) => {
+    const modal = document.getElementById(modalId);
+    const stepLabel = document.getElementById(stepLabelId);
+    if (!modal || !stepLabel) return;
+
+    const modalBody = modal.querySelector(".modal-body");
+    if (!modalBody) return;
+
+    modalBody.addEventListener("scroll", () => {
+      const sections = modalBody.querySelectorAll(".form-section-header");
+      let activeSectionText = "";
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        const bodyRect = modalBody.getBoundingClientRect();
+
+        // Trigger if section header header is visible within body scroll
+        if (rect.top - bodyRect.top < 150) {
+          const badge = sec.querySelector(".badge");
+          const title = sec.querySelector("h4, h5");
+          if (title) {
+            activeSectionText = (badge ? badge.textContent + ": " : "") + title.textContent.trim();
+          }
+        }
+      });
+      if (activeSectionText) {
+        stepLabel.textContent = activeSectionText;
+      }
+    });
+  };
+
+  setupModalScrollTracking("nurseryModal", "nurseryFormStepLabel");
+  setupModalScrollTracking("highSchoolModal", "highSchoolFormStepLabel");
+
+  // Real-time field validation checking
+  const validateInput = (input) => {
+    let isValid = true;
+    if (input.hasAttribute("required")) {
+      if (input.type === "radio" || input.type === "checkbox") {
+        const name = input.getAttribute("name");
+        if (name) {
+          const form = input.closest("form");
+          const checked = form.querySelector(`input[name="${name}"]:checked`);
+          isValid = !!checked;
+        } else {
+          isValid = input.checked;
+        }
+      } else {
+        isValid = input.value.trim() !== "";
+      }
+    }
+
+    // Additional formats
+    if (isValid && input.value.trim() !== "") {
+      if (input.type === "email") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        isValid = emailRegex.test(input.value.trim());
+      } else if (input.type === "tel") {
+        isValid = input.value.replace(/\D/g, "").length >= 8;
+      }
+    }
+
+    if (isValid) {
+      input.classList.remove("is-invalid");
+      if (input.value.trim() !== "" || input.type === "checkbox" || input.type === "radio") {
+        input.classList.add("is-valid");
+      } else {
+        input.classList.remove("is-valid");
+      }
+    } else {
+      input.classList.remove("is-valid");
+      input.classList.add("is-invalid");
+    }
+
+    return isValid;
+  };
+
+  const setupFormValidation = (formId, progressBarId, pctTextId) => {
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    const inputs = form.querySelectorAll(".form-control, .form-select, .form-check-input");
+    inputs.forEach(input => {
+      const eventType = (input.type === "checkbox" || input.type === "radio" || input.tagName === "SELECT" || input.type === "date" || input.type === "file") ? "change" : "blur";
+
+      input.addEventListener(eventType, () => {
+        validateInput(input);
+        updateFormProgress(form, progressBarId, pctTextId);
+      });
+
+      input.addEventListener("input", () => {
+        input.classList.remove("is-invalid");
+        updateFormProgress(form, progressBarId, pctTextId);
+      });
+    });
+
+    const handleAdmissionSubmit = async (form, progressBarId, pctTextId) => {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnHTML = submitBtn.innerHTML;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Submitting Application...';
+
+      const formData = getFormData(form);
+      const formType = form.id === "nurseryAdmissionForm" ? "nursery" : "highschool";
+
+      if (formType === "nursery") {
+        formData["passportUrl"] = uploadedFiles["nurseryPassport"] || "";
+        formData["birthCertUrl"] = uploadedFiles["nurseryBirthCert"] || "";
+        formData["resultFileUrl"] = uploadedFiles["nurseryResultFile"] || "";
+        formData["testimonialUrl"] = uploadedFiles["nurseryTestimonial"] || "";
+      } else {
+        formData["passportUrl"] = uploadedFiles["highSchoolPassport"] || "";
+        formData["birthCertUrl"] = uploadedFiles["highSchoolBirthCert"] || "";
+        formData["resultFileUrl"] = uploadedFiles["highSchoolResultFile"] || "";
+        formData["testimonialUrl"] = uploadedFiles["highSchoolTestimonial"] || "";
+      }
+
+      formData["status"] = "pending";
+      formData["createdAt"] = new Date().toISOString();
+
+      let candidateName = "";
+      let collectionName = "";
+      if (formType === "nursery") {
+        candidateName = formData["nurseryChildName"] || "Nursery Candidate";
+        collectionName = "nursery_primary_registration";
+      } else {
+        candidateName = formData["highSchoolName"] || formData["highSchoolDeclName"] || "High School Candidate";
+        collectionName = "high_school_registration";
+      }
+
+      if (window.firebaseReady) {
+        try {
+          const db = firebase.firestore();
+          const editingId = form.getAttribute("data-editing-id");
+          if (editingId) {
+            await db.collection(collectionName).doc(editingId).update(formData);
+            console.log(`Updated application for ${candidateName} in Firestore.`);
+            form.removeAttribute("data-editing-id");
+          } else {
+            await db.collection(collectionName).add(formData);
+            console.log(`Saved application for ${candidateName} to Firestore.`);
+          }
+        } catch (err) {
+          console.error("Firestore database write failed:", err);
+          alert("Database submission failed: " + err.message);
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHTML;
+          return;
+        }
+      } else {
+        console.log("Offline mode: Simulated registration for", candidateName, formData);
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHTML;
+
+      const modalEl = form.closest(".modal");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) {
+        modal.hide();
+      } else {
+        const bsModal = new bootstrap.Modal(modalEl);
+        bsModal.hide();
+      }
+
+      showSuccessScreen();
+    };
+
+    // Form Interceptor
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let formIsValid = true;
+
+      inputs.forEach(input => {
+        const isInputValid = validateInput(input);
+        if (!isInputValid) {
+          formIsValid = false;
+        }
+      });
+
+      updateFormProgress(form, progressBarId, pctTextId);
+
+      if (formIsValid) {
+        handleAdmissionSubmit(form, progressBarId, pctTextId);
+      } else {
+        // Scroll to first invalid field
+        const firstInvalid = form.querySelector(".is-invalid");
+        if (firstInvalid) {
+          firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+          firstInvalid.focus();
+        }
+      }
+    });
+  };
+
+  setupFormValidation("nurseryAdmissionForm", "nurseryFormProgress", "nurseryFormPct");
+  setupFormValidation("highSchoolAdmissionForm", "highSchoolFormProgress", "highSchoolFormPct");
+
+  // Success Screen overlay handler
+  const successScreen = document.getElementById("successScreen");
+  const btnAnotherChild = document.getElementById("btnAnotherChild");
+
+  const showSuccessScreen = () => {
+    if (!successScreen) return;
+    successScreen.classList.remove("d-none");
+    document.body.style.overflow = "hidden"; // Lock page scrolling
+    startConfetti();
+  };
+
+  const hideSuccessScreen = () => {
+    if (!successScreen) return;
+    successScreen.classList.add("d-none");
+    document.body.style.overflow = ""; // Unlock scrolling
+    if (confettiContainer) confettiContainer.innerHTML = "";
+
+    // Clear forms completely
+    const nurseryForm = document.getElementById("nurseryAdmissionForm");
+    const highSchoolForm = document.getElementById("highSchoolAdmissionForm");
+
+    if (nurseryForm) {
+      nurseryForm.reset();
+      nurseryForm.querySelectorAll(".is-valid, .is-invalid").forEach(el => el.classList.remove("is-valid", "is-invalid"));
+      updateFormProgress(nurseryForm, "nurseryFormProgress", "nurseryFormPct");
+    }
+    if (highSchoolForm) {
+      highSchoolForm.reset();
+      highSchoolForm.querySelectorAll(".is-valid, .is-invalid").forEach(el => el.classList.remove("is-valid", "is-invalid"));
+      updateFormProgress(highSchoolForm, "highSchoolFormProgress", "highSchoolFormPct");
+    }
+  };
+
+  if (btnAnotherChild) {
+    btnAnotherChild.addEventListener("click", hideSuccessScreen);
+  }
+
+  // Generate confetti items dynamically
+  const startConfetti = () => {
+    if (!confettiContainer) return;
+    confettiContainer.innerHTML = "";
+    const colors = ["#D4AF37", "#0B2545", "#134074", "#FFFFFF", "#ffd700", "#c5a028"];
+
+    for (let i = 0; i < 80; i++) {
+      const piece = document.createElement("div");
+      piece.classList.add("confetti-piece");
+
+      const left = Math.random() * 100;
+      const width = Math.random() * 8 + 6;
+      const height = Math.random() * 10 + 6;
+      const delay = Math.random() * 3.5;
+      const duration = Math.random() * 3 + 2;
+      const colorIndex = Math.floor(Math.random() * colors.length);
+
+      piece.style.left = left + "%";
+      piece.style.width = width + "px";
+      piece.style.height = height + "px";
+      piece.style.backgroundColor = colors[colorIndex];
+      piece.style.animationDelay = delay + "s";
+      piece.style.animationDuration = duration + "s";
+
+      confettiContainer.appendChild(piece);
+    }
+  };
+
+  // Run progress bars init state on load
+  const initFormStates = () => {
+    const nurseryForm = document.getElementById("nurseryAdmissionForm");
+    const highSchoolForm = document.getElementById("highSchoolAdmissionForm");
+    if (nurseryForm) updateFormProgress(nurseryForm, "nurseryFormProgress", "nurseryFormPct");
+    if (highSchoolForm) updateFormProgress(highSchoolForm, "highSchoolFormProgress", "highSchoolFormPct");
+  };
+  initFormStates();
+
+  // Candidate list real-time filtering search engine
+  const searchInputs = document.querySelectorAll(".candidate-search");
+  searchInputs.forEach(input => {
+    input.addEventListener("input", function () {
+      const filter = this.value.toLowerCase().trim();
+      const tableId = this.getAttribute("data-target-table");
+      const table = document.getElementById(tableId);
+      if (!table) return;
+
+      const tbody = table.querySelector("tbody");
+      const rows = tbody.querySelectorAll("tr");
+      const modal = this.closest(".modal");
+      const emptyPlaceholder = modal ? modal.querySelector(".empty-search-placeholder") : null;
+
+      let visibleRowsCount = 0;
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if (text.indexOf(filter) > -1) {
+          row.style.display = "";
+          visibleRowsCount++;
+        } else {
+          row.style.display = "none";
+        }
+      });
+
+      if (emptyPlaceholder) {
+        if (visibleRowsCount === 0) {
+          emptyPlaceholder.classList.remove("d-none");
+          table.classList.add("d-none");
+        } else {
+          emptyPlaceholder.classList.add("d-none");
+          table.classList.remove("d-none");
+        }
+      }
+    });
+  });
+
+  // Action buttons: Download PDF alerts
+  const setupDownloadPDFAlert = (btnId) => {
+    const btn = document.getElementById(btnId);
+    if (btn) {
+      btn.addEventListener("click", () => {
+        alert("Downloading Admission list as PDF... (Feature placeholder)");
+      });
+    }
+  };
+  setupDownloadPDFAlert("btnDownloadNurseryPDF");
+  setupDownloadPDFAlert("btnDownloadHighPDF");
+
+  // Dynamic 3D tilt hover effect for management cards
+  const managementCards = document.querySelectorAll(".management-card-3d");
+  managementCards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left; // x coordinate within the element
+      const y = e.clientY - rect.top;  // y coordinate within the element
+
+      const width = rect.width;
+      const height = rect.height;
+
+      // Calculate rotation based on cursor offset from center (-10 to 10 degrees)
+      const rotateX = -10 * ((y - height / 2) / (height / 2));
+      const rotateY = 10 * ((x - width / 2) / (width / 2));
+
+      // Apply transforms
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.03)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      // Reset rotation smoothly
+      card.style.transform = "";
+    });
+  });
+
+  // ==========================================================================
+  // Gallery Page Engine Setup
+  // ==========================================================================
+  const GALLERY_IMAGES = [];
+
+  // Live Gallery Loader
+  const loadLiveGallery = async () => {
+    if (!galleryGrid) return;
+
+    // Display loading spinner
+    galleryGrid.innerHTML = `
+      <div class="col-12 text-center py-5 text-muted">
+        <span class="spinner-border spinner-border-lg text-accent mb-3" style="width: 3rem; height: 3rem;" role="status" aria-hidden="true"></span>
+        <p class="fs-5 fw-medium">Loading gallery images...</p>
+      </div>
+    `;
+
+    if (window.firebaseReady) {
+      try {
+        const db = firebase.firestore();
+        const snapshot = await db.collection("gallery").get();
+
+        GALLERY_IMAGES.length = 0; // Clear any existing items
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          GALLERY_IMAGES.push({
+            id: doc.id,
+            src: data.imageUrl || data.src || "",
+            title: data.caption || data.title || "Gallery Photo",
+            category: data.category || "school-life"
+          });
+        });
+        console.log(`Loaded ${GALLERY_IMAGES.length} gallery images from Firestore.`);
+      } catch (err) {
+        console.error("Firestore gallery query failed:", err);
+      }
+    } else {
+      console.log("Firebase is offline or uninitialized. No images to display.");
+      GALLERY_IMAGES.length = 0;
+    }
+
+    updateGalleryData();
+  };
+
+  let activeFilter = "all";
+  let searchQuery = "";
+  let visibleCount = 25;
+  let filteredImagesList = [];
+
+  const galleryGrid = document.getElementById("galleryGrid");
+  const galleryCounter = document.getElementById("galleryCounter");
+  const btnLoadMore = document.getElementById("btnLoadMore");
+  const galleryEndText = document.getElementById("galleryEndText");
+  const galleryNoMatchesText = document.getElementById("galleryNoMatchesText");
+  const activeCategoryTitle = document.getElementById("activeCategoryTitle");
+  const gallerySearchInput = document.getElementById("gallerySearchInput");
+  const filterBtnContainer = document.getElementById("filterBtnContainer");
+
+  // Check if grid exists (Confirming we are on gallery page)
+  if (galleryGrid) {
+    updateCategoryTitleDisplay();
+    loadLiveGallery();
+
+    // Filtering categories
+    if (filterBtnContainer) {
+      filterBtnContainer.addEventListener("click", (e) => {
+        if (e.target.classList.contains("filter-btn")) {
+          filterBtnContainer.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+          e.target.classList.add("active");
+          activeFilter = e.target.getAttribute("data-filter");
+          visibleCount = 25; // Reset display limit
+          updateCategoryTitleDisplay();
+          updateGalleryData();
+        }
+      });
+    }
+
+    // Searching titles
+    if (gallerySearchInput) {
+      gallerySearchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        visibleCount = 25; // Reset display limit
+        updateGalleryData();
+      });
+    }
+
+    // Pagination trigger
+    if (btnLoadMore) {
+      btnLoadMore.addEventListener("click", () => {
+        visibleCount += 25;
+        renderPhotos();
+      });
+    }
+  }
+
+  function updateCategoryTitleDisplay() {
+    if (!activeCategoryTitle) return;
+    const titles = {
+      all: "All Categories",
+      graduation: "Graduation Ceremony",
+      cultural: "Cultural Day",
+      sports: "Sports Day",
+      "school-life": "School Life"
+    };
+    activeCategoryTitle.textContent = titles[activeFilter] || "All Categories";
+  }
+
+  function updateGalleryData() {
+    filteredImagesList = GALLERY_IMAGES.filter(img => {
+      const matchesCategory = (activeFilter === "all" || img.category === activeFilter);
+      const matchesSearch = img.title.toLowerCase().includes(searchQuery);
+      return matchesCategory && matchesSearch;
+    });
+    renderPhotos();
+  }
+
+  function renderPhotos() {
+    if (!galleryGrid) return;
+    galleryGrid.innerHTML = "";
+
+    // Show message if no images found
+    if (filteredImagesList.length === 0) {
+      galleryNoMatchesText.classList.remove("d-none");
+      btnLoadMore.classList.add("d-none");
+      galleryEndText.classList.add("d-none");
+      galleryCounter.textContent = "Showing 0 of 0 Photos";
+      return;
+    } else {
+      galleryNoMatchesText.classList.add("d-none");
+    }
+
+    // Render batch selection
+    const visibleList = filteredImagesList.slice(0, visibleCount);
+    visibleList.forEach((img, index) => {
+      const col = document.createElement("div");
+      col.className = "col";
+      col.innerHTML = `
+        <div class="gallery-item-card" data-index="${index}">
+          <img src="${img.src}" alt="${img.title}" loading="lazy"
+            onerror="this.src='https://placehold.co/400x300/0b2545/d4af37?text=Engreg+Photo'">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-icon">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </div>
+            <p class="gallery-item-title">${img.title}</p>
+            <p class="gallery-item-category">${img.category.replace("-", " ")}</p>
+          </div>
+        </div>
+      `;
+
+      col.querySelector(".gallery-item-card").addEventListener("click", () => {
+        openLightbox(index);
+      });
+
+      galleryGrid.appendChild(col);
+    });
+
+    // Update displays counter
+    if (filteredImagesList.length <= 25) {
+      galleryCounter.textContent = `${filteredImagesList.length} Photos`;
+    } else {
+      galleryCounter.textContent = `Showing ${Math.min(visibleCount, filteredImagesList.length)} of ${filteredImagesList.length} Photos`;
+    }
+
+    // Render page buttons
+    if (visibleCount < filteredImagesList.length) {
+      btnLoadMore.classList.remove("d-none");
+      galleryEndText.classList.add("d-none");
+    } else {
+      btnLoadMore.classList.add("d-none");
+      if (filteredImagesList.length > 25) {
+        galleryEndText.classList.remove("d-none");
+      } else {
+        galleryEndText.classList.add("d-none");
+      }
+    }
+  }
+
+  // ==========================================================================
+  // Lightbox Modal Logic
+  // ==========================================================================
+  let currentLightboxIndex = -1;
+  const customLightbox = document.getElementById("customLightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const lightboxCaption = document.getElementById("lightboxCaption");
+  const lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
+  const lightboxPrevBtn = document.getElementById("lightboxPrevBtn");
+  const lightboxNextBtn = document.getElementById("lightboxNextBtn");
+
+  function openLightbox(index) {
+    if (!customLightbox) return;
+    currentLightboxIndex = index;
+    updateLightboxContent();
+    customLightbox.classList.remove("d-none");
+    document.body.style.overflow = "hidden"; // Lock scrolling
+  }
+
+  function closeLightbox() {
+    if (!customLightbox) return;
+    customLightbox.classList.add("d-none");
+    document.body.style.overflow = ""; // Restore scroll
+  }
+
+  function lightboxNext() {
+    if (filteredImagesList.length === 0) return;
+    const limit = Math.min(visibleCount, filteredImagesList.length);
+    currentLightboxIndex = (currentLightboxIndex + 1) % limit;
+    updateLightboxContent();
+  }
+
+  function lightboxPrev() {
+    if (filteredImagesList.length === 0) return;
+    const limit = Math.min(visibleCount, filteredImagesList.length);
+    currentLightboxIndex = (currentLightboxIndex - 1 + limit) % limit;
+    updateLightboxContent();
+  }
+
+  function updateLightboxContent() {
+    const visibleList = filteredImagesList.slice(0, visibleCount);
+    if (!visibleList[currentLightboxIndex]) return;
+
+    const imgData = visibleList[currentLightboxIndex];
+    lightboxImg.src = imgData.src;
+    lightboxImg.alt = imgData.title;
+
+    lightboxCaption.innerHTML = `
+      <h5>${imgData.title}</h5>
+      <p class="text-uppercase small fw-bold text-accent">${imgData.category.replace("-", " ")}</p>
+    `;
+  }
+
+  if (lightboxCloseBtn) lightboxCloseBtn.addEventListener("click", closeLightbox);
+  if (lightboxPrevBtn) lightboxPrevBtn.addEventListener("click", lightboxPrev);
+  if (lightboxNextBtn) lightboxNextBtn.addEventListener("click", lightboxNext);
+
+  if (customLightbox) {
+    customLightbox.addEventListener("click", (e) => {
+      if (e.target === customLightbox || e.target.classList.contains("lightbox-content")) {
+        closeLightbox();
+      }
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (customLightbox && !customLightbox.classList.contains("d-none")) {
+      if (e.key === "ArrowRight") lightboxNext();
+      if (e.key === "ArrowLeft") lightboxPrev();
+      if (e.key === "Escape") closeLightbox();
+    }
+  });
+
+  // Mobile Swipe gestures
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  if (customLightbox) {
+    customLightbox.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    customLightbox.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+  }
+
+  function handleSwipe() {
+    const threshold = 55;
+    if (touchEndX < touchStartX - threshold) {
+      lightboxNext(); // swipe left -> load next image
+    }
+    if (touchEndX > touchStartX + threshold) {
+      lightboxPrev(); // swipe right -> load previous image
+    }
+  }
 });

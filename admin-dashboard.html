@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Engreg Schools</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="img/logo.jpeg">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom Admin Stylesheet -->
+  <link rel="stylesheet" href="admin-style.css">
+  <!-- Public Theme stylesheet for registration modals -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-body">
+
+  <div class="admin-wrapper d-flex">
+    
+    <!-- Collapsible Sidebar -->
+    <nav id="sidebar" class="sidebar bg-primary-dark text-white p-3 transition-all">
+      <div class="sidebar-header d-flex align-items-center gap-3 mb-4 pb-3 border-bottom border-secondary-light">
+        <img src="img/logo.jpeg" alt="School Logo" class="sidebar-logo rounded" style="width: 40px; height: 40px; object-fit: cover;">
+        <div class="leading-none text-truncate">
+          <h5 class="fw-bold tracking-wide mb-0 text-truncate">ENGREG ADMIN</h5>
+          <span class="small text-accent text-truncate">Dashboard v1.0</span>
+        </div>
+      </div>
+
+      <ul class="list-unstyled sidebar-menu d-flex flex-column gap-2">
+        <li>
+          <a href="#" class="sidebar-link active" data-tab="dashboard-tab">
+            <i class="fa-solid fa-gauge me-3"></i><span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-link" data-tab="gallery-tab">
+            <i class="fa-solid fa-images me-3"></i><span>Gallery Management</span>
+          </a>
+        </li>
+        <li>
+          <a href="#admissionsSubmenu" class="sidebar-link dropdown-toggle-custom collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false">
+            <i class="fa-solid fa-user-graduate me-3"></i><span>Admissions</span>
+          </a>
+          <ul class="collapse list-unstyled ps-4 mt-2 mb-2 gap-1 d-flex flex-column" id="admissionsSubmenu">
+            <li>
+              <a href="#" class="sidebar-sublink" data-tab="nursery-tab">Nursery & Primary</a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-sublink" data-tab="high-tab">High School</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="sidebar-link" data-tab="successful-tab">
+            <i class="fa-solid fa-circle-check me-3"></i><span>Successful Candidates</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-link" data-tab="reports-tab">
+            <i class="fa-solid fa-chart-line me-3"></i><span>Reports & Export</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-link" data-tab="settings-tab">
+            <i class="fa-solid fa-gears me-3"></i><span>Portal Settings</span>
+          </a>
+        </li>
+        <li class="mt-3 px-2">
+          <button class="btn btn-apply-3d py-2 px-3 w-100 mb-2 small fw-bold" data-bs-toggle="modal" data-bs-target="#nurseryModal">Get Now (Nursery)</button>
+        </li>
+        <li class="px-2">
+          <button class="btn btn-apply-3d py-2 px-3 w-100 mb-2 small fw-bold" data-bs-toggle="modal" data-bs-target="#highSchoolModal">Get Now (High School)</button>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer mt-auto pt-3 border-top border-secondary-light">
+        <a href="#" id="adminLogoutBtn" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2 py-2">
+          <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+        </a>
+      </div>
+    </nav>
+    
+    <!-- Main Content Container -->
+    <div id="content" class="content-area w-100 transition-all">
+      
+      <!-- Top Navbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white border-bottom py-3 px-4 shadow-sm">
+        <div class="container-fluid p-0">
+          <button type="button" id="sidebarCollapse" class="btn btn-outline-nav-sm border-0 me-3">
+            <i class="fa-solid fa-bars fs-5"></i>
+          </button>
+          
+          <div class="ms-auto d-flex align-items-center gap-3">
+            <div class="text-end d-none d-sm-block">
+              <h6 class="fw-bold mb-0 text-primary-dark">Portal Administrator</h6>
+              <small class="text-muted" id="adminEmailHeader">admin@engreg.com</small>
+            </div>
+            <div class="avatar bg-accent text-primary-dark rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm">
+              AD
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sub-Tab Containers -->
+      <main class="dashboard-content p-4">
+        
+        <!-- ==================== TAB 1: MAIN DASHBOARD ==================== -->
+        <section id="dashboard-tab" class="tab-panel active">
+          <h2 class="fw-bold text-primary-dark mb-4">Performance Overview</h2>
+          
+          <!-- Statistics Cards Grid -->
+          <div class="row g-4 mb-5">
+            <!-- Nursery Candidates -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card stat-card shadow-sm border-0 bg-white p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="icon-shape bg-light-blue text-primary rounded-circle shadow-sm">
+                    <i class="fa-solid fa-children fs-4"></i>
+                  </div>
+                  <span class="badge bg-secondary-light text-muted">Nursery</span>
+                </div>
+                <h3 class="fw-bold text-primary-dark mb-1" id="statNurseryReg">0</h3>
+                <p class="text-muted small mb-0">Nursery & Primary Candidates</p>
+              </div>
+            </div>
+            
+            <!-- High School Candidates -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card stat-card shadow-sm border-0 bg-white p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="icon-shape bg-light-blue text-primary rounded-circle shadow-sm">
+                    <i class="fa-solid fa-graduation-cap fs-4"></i>
+                  </div>
+                  <span class="badge bg-secondary-light text-muted">High School</span>
+                </div>
+                <h3 class="fw-bold text-primary-dark mb-1" id="statHighReg">0</h3>
+                <p class="text-muted small mb-0">High School Candidates</p>
+              </div>
+            </div>
+
+            <!-- Gallery Upload Stats -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card stat-card shadow-sm border-0 bg-white p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="icon-shape bg-light-blue text-primary rounded-circle shadow-sm">
+                    <i class="fa-solid fa-images fs-4"></i>
+                  </div>
+                  <span class="badge bg-secondary-light text-muted">Gallery</span>
+                </div>
+                <h3 class="fw-bold text-primary-dark mb-1" id="statGalleryCount">0 / 100</h3>
+                <!-- Progress bar -->
+                <div class="progress mt-2 mb-1" style="height: 6px;">
+                  <div id="statGalleryProgress" class="progress-bar bg-accent" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="text-muted small mb-0">Total Uploaded Photos</p>
+              </div>
+            </div>
+
+            <!-- Successful Candidates Stats -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card stat-card shadow-sm border-0 bg-white p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="icon-shape bg-light-blue text-primary rounded-circle shadow-sm">
+                    <i class="fa-solid fa-circle-check fs-4"></i>
+                  </div>
+                  <span class="badge bg-success-light text-success">Successful</span>
+                </div>
+                <h3 class="fw-bold text-primary-dark mb-1" id="statSuccessful">0</h3>
+                <p class="text-muted small mb-0">Total Passed Admissions</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts and Logs Row -->
+          <div class="row g-4 mb-4">
+            <!-- Admission Analytics Chart -->
+            <div class="col-lg-7">
+              <div class="card shadow-sm border-0 bg-white p-4 h-100">
+                <h5 class="fw-bold text-primary-dark mb-4">Admissions Distribution Chart</h5>
+                <div class="chart-wrapper" style="position: relative; height: 350px;">
+                  <canvas id="admissionAnalyticsChart"></canvas>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Audit Activity Logs -->
+            <div class="col-lg-5">
+              <div class="card shadow-sm border-0 bg-white p-4 h-100">
+                <h5 class="fw-bold text-primary-dark mb-4">Recent Audit Activity Logs</h5>
+                <div class="table-responsive" style="max-height: 350px;">
+                  <table class="table table-hover align-middle small text-muted">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Action</th>
+                        <th>Details</th>
+                        <th>Time</th>
+                      </tr>
+                    </thead>
+                    <tbody id="logsTableBody">
+                      <!-- Rendered by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 2: GALLERY MANAGEMENT ==================== -->
+        <section id="gallery-tab" class="tab-panel">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary-dark mb-0">Gallery Assets Manager</h2>
+            <span class="badge bg-accent text-primary-dark py-2 px-3 fw-bold rounded-pill" id="galleryQuotaBadge">Quota: 0 / 100 Uploaded</span>
+          </div>
+
+          <div class="row g-4">
+            <!-- Upload Panel -->
+            <div class="col-lg-4">
+              <div class="card shadow-sm border-0 p-4 bg-white sticky-lg-top" style="top: 100px; z-index: 10;">
+                <h5 class="fw-bold text-primary-dark mb-3">Upload New Photo</h5>
+                <form id="galleryUploadForm">
+                  <div class="mb-3">
+                    <label for="uploadCategory" class="form-label small fw-bold text-primary-dark">Category *</label>
+                    <select class="form-select" id="uploadCategory" required>
+                      <option value="graduation">Graduation Ceremony</option>
+                      <option value="cultural">Cultural Day</option>
+                      <option value="sports">Sports Day</option>
+                      <option value="school-life">School Life</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="uploadCaption" class="form-label small fw-bold text-primary-dark">Caption *</label>
+                    <input type="text" class="form-control" id="uploadCaption" placeholder="Brief photo description..." required>
+                  </div>
+                  <!-- Drag and Drop Zone -->
+                  <div class="mb-4">
+                    <label class="form-label small fw-bold text-primary-dark">Select Image (Max 4MB) *</label>
+                    <div id="dropzone" class="dropzone p-4 text-center border border-2 border-dashed rounded-3 bg-light">
+                      <i class="fa-solid fa-cloud-arrow-up fs-2 text-muted mb-2"></i>
+                      <p class="small text-muted mb-2">Drag and drop file here or click to browse</p>
+                      <input type="file" id="galleryFileInput" class="d-none" accept="image/*" required>
+                      <span id="selectedFilename" class="badge bg-accent text-primary-dark p-2 d-none"></span>
+                    </div>
+                  </div>
+                  <!-- Progress Bar -->
+                  <div class="progress d-none mb-3" id="uploadProgressBarContainer" style="height: 8px;">
+                    <div id="uploadProgressBar" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                  </div>
+                  <!-- Error Display -->
+                  <div class="alert alert-danger d-none py-2 small" id="uploadFormError"></div>
+                  <!-- Submit Button -->
+                  <button type="submit" id="btnUploadImageSubmit" class="btn btn-apply-3d w-100 py-3 fw-bold">
+                    <i class="fa-solid fa-cloud-arrow-up me-2"></i>Upload File
+                  </button>
+                </form>
+              </div>
+            </div>
+            
+            <!-- Gallery Assets Grid -->
+            <div class="col-lg-8">
+              <div class="card shadow-sm border-0 p-4 bg-white">
+                <h5 class="fw-bold text-primary-dark mb-4">Active Gallery Database</h5>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3" id="adminGalleryGrid">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 3: NURSERY ADMISSIONS ==================== -->
+        <section id="nursery-tab" class="tab-panel">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary-dark mb-0">Nursery & Primary Registrations</h2>
+            <button class="btn btn-accent text-primary-dark fw-bold btn-premium py-2 px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#nurseryModal">
+              <i class="fa-solid fa-user-plus me-2"></i>Register New Pupil
+            </button>
+          </div>
+
+          <div class="card shadow-sm border-0 bg-white p-4">
+            <!-- Filter Bar -->
+            <div class="row g-3 align-items-center mb-4 pb-3 border-bottom">
+              <div class="col-md-4">
+                <label for="nurseryClassFilter" class="form-label small fw-bold text-primary-dark">Class Filter *</label>
+                <select class="form-select filter-trigger-select" id="nurseryClassFilter" data-school="nursery">
+                  <option value="all" selected>All Classes</option>
+                  <option value="Foundation 1">Foundation 1</option>
+                  <option value="Foundation 2">Foundation 2</option>
+                  <option value="Nursery 1">Nursery 1</option>
+                  <option value="Nursery 2">Nursery 2</option>
+                  <option value="Primary 1">Primary 1</option>
+                  <option value="Primary 2">Primary 2</option>
+                  <option value="Primary 3">Primary 3</option>
+                  <option value="Primary 4">Primary 4</option>
+                  <option value="Primary 5">Primary 5</option>
+                  <option value="Primary 6">Primary 6</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="nurseryGenderFilter" class="form-label small fw-bold text-primary-dark">Gender Filter</label>
+                <select class="form-select filter-trigger-select" id="nurseryGenderFilter" data-school="nursery">
+                  <option value="">All Genders</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <label for="nurserySearchInput" class="form-label small fw-bold text-primary-dark">Search Candidate</label>
+                <input type="text" class="form-control" id="nurserySearchInput" placeholder="Type candidate name or phone...">
+              </div>
+            </div>
+
+            <!-- Table Container -->
+            <div id="nurseryTableContainer">
+              <!-- Selection and Multi-action row -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="small text-muted" id="nurserySelectedCount">0 Candidates Selected</span>
+                <button id="nurseryBtnMoveSuccessful" class="btn btn-success fw-bold py-2 px-4 shadow-sm" disabled>
+                  <i class="fa-solid fa-circle-check me-2"></i>Move to Successful Candidates
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light text-primary-dark">
+                    <tr>
+                      <th width="40">
+                        <input class="form-check-input" type="checkbox" id="nurserySelectAll">
+                      </th>
+                      <th>Passport</th>
+                      <th>Candidate Name</th>
+                      <th>Gender</th>
+                      <th>Parent/Guardian</th>
+                      <th>Phone Number</th>
+                      <th>Documents</th>
+                      <th class="text-center">Entrance Exam Passed</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="nurseryTableBody">
+                    <!-- Rendered by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div id="nurseryPlaceholderText" class="text-center py-5 text-muted d-none">
+              <i class="fa-solid fa-table-list fs-2 text-accent mb-3"></i>
+              <p class="mb-0 fs-5 fw-medium">Please select a class from the dropdown to load the registrations table.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 4: HIGH SCHOOL ADMISSIONS ==================== -->
+        <section id="high-tab" class="tab-panel">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary-dark mb-0">High School Registrations</h2>
+            <button class="btn btn-accent text-primary-dark fw-bold btn-premium py-2 px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#highSchoolModal">
+              <i class="fa-solid fa-user-plus me-2"></i>Register New Student
+            </button>
+          </div>
+
+          <div class="card shadow-sm border-0 bg-white p-4">
+            <!-- Filter Bar -->
+            <div class="row g-3 align-items-center mb-4 pb-3 border-bottom">
+              <div class="col-md-4">
+                <label for="highClassFilter" class="form-label small fw-bold text-primary-dark">Class Filter *</label>
+                <select class="form-select filter-trigger-select" id="highClassFilter" data-school="high">
+                  <option value="all" selected>All Classes</option>
+                  <option value="JSS 1">JSS 1</option>
+                  <option value="JSS 2">JSS 2</option>
+                  <option value="JSS 3">JSS 3</option>
+                  <option value="SSS 1">SSS 1</option>
+                  <option value="SSS 2">SSS 2</option>
+                  <option value="SSS 3">SSS 3</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="highGenderFilter" class="form-label small fw-bold text-primary-dark">Gender Filter</label>
+                <select class="form-select filter-trigger-select" id="highGenderFilter" data-school="high">
+                  <option value="">All Genders</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <label for="highSearchInput" class="form-label small fw-bold text-primary-dark">Search Candidate</label>
+                <input type="text" class="form-control" id="highSearchInput" placeholder="Type candidate name or phone...">
+              </div>
+            </div>
+
+            <!-- Table Container -->
+            <div id="highTableContainer">
+              <!-- Selection and Multi-action row -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="small text-muted" id="highSelectedCount">0 Candidates Selected</span>
+                <button id="highBtnMoveSuccessful" class="btn btn-success fw-bold py-2 px-4 shadow-sm" disabled>
+                  <i class="fa-solid fa-circle-check me-2"></i>Move to Successful Candidates
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light text-primary-dark">
+                    <tr>
+                      <th width="40">
+                        <input class="form-check-input" type="checkbox" id="highSelectAll">
+                      </th>
+                      <th>Passport</th>
+                      <th>Candidate Name</th>
+                      <th>Gender</th>
+                      <th>Parent/Guardian</th>
+                      <th>Phone Number</th>
+                      <th>Documents</th>
+                      <th class="text-center">Entrance Exam Passed</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="highTableBody">
+                    <!-- Rendered by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div id="highPlaceholderText" class="text-center py-5 text-muted d-none">
+              <i class="fa-solid fa-table-list fs-2 text-accent mb-3"></i>
+              <p class="mb-0 fs-5 fw-medium">Please select a class from the dropdown to load the registrations table.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 5: SUCCESSFUL CANDIDATES ==================== -->
+        <section id="successful-tab" class="tab-panel">
+          <h2 class="fw-bold text-primary-dark mb-4">Successful Candidates</h2>
+          
+          <div class="row g-4">
+            <!-- Nursery & Primary Successful Column -->
+            <div class="col-lg-6">
+              <div class="card shadow-sm border-0 p-4 bg-white h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                  <h5 class="fw-bold text-primary-dark mb-0">Nursery & Primary Section</h5>
+                  <button id="nurseryBtnReturnReg" class="btn btn-outline-nav-sm py-1 px-3 small border" disabled>
+                    <i class="fa-solid fa-arrow-rotate-left me-1"></i>Return Selected
+                  </button>
+                </div>
+                
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle small text-muted">
+                    <thead class="table-light">
+                      <tr>
+                        <th width="40">
+                          <input class="form-check-input" type="checkbox" id="succNurserySelectAll">
+                        </th>
+                        <th>Candidate Name</th>
+                        <th>Parent Phone</th>
+                        <th class="text-end">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="succNurseryTableBody">
+                      <!-- Rendered by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- High School Successful Column -->
+            <div class="col-lg-6">
+              <div class="card shadow-sm border-0 p-4 bg-white h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                  <h5 class="fw-bold text-primary-dark mb-0">High School Section</h5>
+                  <button id="highBtnReturnReg" class="btn btn-outline-nav-sm py-1 px-3 small border" disabled>
+                    <i class="fa-solid fa-arrow-rotate-left me-1"></i>Return Selected
+                  </button>
+                </div>
+                
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle small text-muted">
+                    <thead class="table-light">
+                      <tr>
+                        <th width="40">
+                          <input class="form-check-input" type="checkbox" id="succHighSelectAll">
+                        </th>
+                        <th>Candidate Name</th>
+                        <th>Parent Phone</th>
+                        <th class="text-end">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="succHighTableBody">
+                      <!-- Rendered by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 6: REPORTS & EXPORT ==================== -->
+        <section id="reports-tab" class="tab-panel">
+          <h2 class="fw-bold text-primary-dark mb-4">Admissions Reports & Exports</h2>
+          
+          <div class="card shadow-sm border-0 bg-white p-4">
+            <h5 class="fw-bold text-primary-dark mb-4">Download Registry Archives</h5>
+            <div class="row g-4 text-center">
+              
+              <!-- Report Card 1 -->
+              <div class="col-md-4">
+                <div class="card p-4 border bg-light h-100 hover-zoom-effect">
+                  <i class="fa-solid fa-file-pdf fs-1 text-danger mb-3"></i>
+                  <h6 class="fw-bold text-primary-dark">Nursery Registrations</h6>
+                  <p class="text-muted small">Export full directory of Nursery & Primary registrants including contacts.</p>
+                  <button onclick="exportTable('nursery_registration', 'pdf')" class="btn btn-danger w-100 py-2 mt-2">Export PDF</button>
+                  <button onclick="exportTable('nursery_registration', 'excel')" class="btn btn-outline-success w-100 py-2 mt-2 small">Export Excel</button>
+                </div>
+              </div>
+
+              <!-- Report Card 2 -->
+              <div class="col-md-4">
+                <div class="card p-4 border bg-light h-100 hover-zoom-effect">
+                  <i class="fa-solid fa-file-excel fs-1 text-success mb-3"></i>
+                  <h6 class="fw-bold text-primary-dark">High School Registrations</h6>
+                  <p class="text-muted small">Export high school applicants sheet. Suitable for examination sorting.</p>
+                  <button onclick="exportTable('high_registration', 'pdf')" class="btn btn-danger w-100 py-2 mt-2">Export PDF</button>
+                  <button onclick="exportTable('high_registration', 'excel')" class="btn btn-success w-100 py-2 mt-2">Export Excel</button>
+                </div>
+              </div>
+
+              <!-- Report Card 3 -->
+              <div class="col-md-4">
+                <div class="card p-4 border bg-light h-100 hover-zoom-effect">
+                  <i class="fa-solid fa-print fs-1 text-primary-dark mb-3"></i>
+                  <h6 class="fw-bold text-primary-dark">Successful Candidates</h6>
+                  <p class="text-muted small">Print list of successfully admitted candidates for notice board posting.</p>
+                  <button onclick="printSuccessfulList()" class="btn btn-primary w-100 py-2 mt-2">Print Admission List</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 7: PORTAL SETTINGS ==================== -->
+        <section id="settings-tab" class="tab-panel">
+          <h2 class="fw-bold text-primary-dark mb-4">Global Portal Settings</h2>
+          
+          <div class="card shadow-sm border-0 bg-white p-4">
+            <div id="settingsAlert" class="alert alert-success d-none py-2 small" role="alert">Settings saved successfully.</div>
+            <form id="portalSettingsForm">
+              
+              <h5 class="fw-bold text-primary-dark border-bottom pb-2 mb-3">School Information</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">School Name</label>
+                  <input type="text" class="form-control" id="setSchoolName" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">Administrative Email</label>
+                  <input type="email" class="form-control" id="setSchoolEmail" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">Primary Phone</label>
+                  <input type="text" class="form-control" id="setSchoolPhone1" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">Secondary Phone</label>
+                  <input type="text" class="form-control" id="setSchoolPhone2">
+                </div>
+                <div class="col-12">
+                  <label class="form-label small fw-bold text-primary-dark">School Contact Address</label>
+                  <input type="text" class="form-control" id="setSchoolAddress" required>
+                </div>
+              </div>
+
+              <h5 class="fw-bold text-primary-dark border-bottom pb-2 mb-3">Admissions & Media Parameters</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Application Form Fee (₦)</label>
+                  <input type="number" class="form-control" id="setAdmissionFee" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Active Academic Session</label>
+                  <input type="text" class="form-control" id="setAcademicSession" placeholder="2026/2027" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Max Gallery Images Cap</label>
+                  <input type="number" class="form-control" id="setMaxGalleryImages" required>
+                </div>
+              </div>
+
+              <h5 class="fw-bold text-primary-dark border-bottom pb-2 mb-3">Social Media Handles</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Facebook Link</label>
+                  <input type="url" class="form-control" id="setFacebook">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Instagram Link</label>
+                  <input type="url" class="form-control" id="setInstagram">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Twitter Link</label>
+                  <input type="url" class="form-control" id="setTwitter">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">LinkedIn Link</label>
+                  <input type="url" class="form-control" id="setLinkedin">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">YouTube Link</label>
+                  <input type="url" class="form-control" id="setYoutube">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-apply-3d py-3 px-5 fw-bold">
+                <i class="fa-solid fa-floppy-disk me-2"></i>Save Configuration Settings
+              </button>
+
+            </form>
+          </div>
+        </section>
+
+      </main>
+      
+    </div>
+  </div>
+
+  <!-- Public Theme Admission Modals Injected -->
+  <div class="modal fade custom-form-modal" id="nurseryModal" tabindex="-1" aria-labelledby="nurseryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-90">
+      <div class="modal-content">
+        <!-- Progress bar at top -->
+        <div class="modal-progress-container sticky-top">
+          <div class="progress rounded-0" style="height: 6px;">
+            <div class="progress-bar bg-accent" role="progressbar" style="width: 0%;" id="nurseryFormProgress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="progress-stepper d-flex justify-content-between px-4 py-2 bg-primary-dark text-white text-uppercase font-bold tracking-wide small">
+            <span class="step-label text-accent fw-bold" id="nurseryFormStepLabel">Section A: Personal Information</span>
+            <span class="step-pct" id="nurseryFormPct">0% Filled</span>
+          </div>
+        </div>
+
+        <div class="modal-header bg-primary-dark text-white p-4">
+          <div class="d-flex align-items-center gap-3">
+            <i class="fa-solid fa-child-reaching text-accent h3 mb-0"></i>
+            <div>
+              <h5 class="modal-title fw-bold text-accent mb-0" id="nurseryModalLabel">Nursery & Primary School Admission Form</h5>
+              <small class="text-white-50">Please complete all fields carefully.</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4 p-md-5">
+          <form id="nurseryAdmissionForm" class="needs-validation" novalidate>
+            <!-- SECTION A -->
+            <div class="form-section-header mb-4">
+              <span class="badge bg-accent text-primary-dark py-2 px-3 fw-bold rounded-pill mb-2">SECTION A</span>
+              <h4 class="fw-bold text-primary-dark">Personal Information</h4>
+              <p class="text-muted small">Child's bio-data and primary school selection details.</p>
+            </div>
+
+            <div class="row g-3 mb-5">
+              <!-- Name of Child -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryChildName" placeholder=" " required>
+                  <label for="nurseryChildName"><i class="fa-solid fa-user me-2 text-primary-dark"></i>Name of Child *</label>
+                  <div class="invalid-feedback">Please enter the child's name.</div>
+                  <div class="valid-feedback">✔ Name is filled.</div>
+                </div>
+              </div>
+              <!-- Date of Birth -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="date" class="form-control" id="nurseryDob" placeholder=" " required>
+                  <label for="nurseryDob"><i class="fa-solid fa-calendar me-2 text-primary-dark"></i>Date of Birth *</label>
+                  <div class="invalid-feedback">Select child's date of birth.</div>
+                  <div class="valid-feedback">✔ Date is selected.</div>
+                </div>
+              </div>
+              <!-- Age (Auto calculated) -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control bg-light" id="nurseryAge" placeholder=" " readonly>
+                  <label for="nurseryAge"><i class="fa-solid fa-clock me-2 text-primary-dark"></i>Calculated Age</label>
+                </div>
+              </div>
+              <!-- Gender -->
+              <div class="col-md-6 col-lg-3">
+                <div class="form-floating">
+                  <select class="form-select custom-select-3d" id="nurseryGender" required>
+                    <option value="" disabled selected hidden>Select...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                  <label for="nurseryGender"><i class="fa-solid fa-venus-mars me-2 text-primary-dark"></i>Gender *</label>
+                  <div class="invalid-feedback">Select gender.</div>
+                  <div class="valid-feedback">✔ Gender chosen.</div>
+                </div>
+              </div>
+              <!-- Class Applied For -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <select class="form-select custom-select-3d" id="nurseryClass" name="class" required>
+                    <option value="" disabled selected hidden>Select...</option>
+                    <option value="Foundation 1">Foundation 1</option>
+                    <option value="Foundation 2">Foundation 2</option>
+                    <option value="Nursery 1">Nursery 1</option>
+                    <option value="Nursery 2">Nursery 2</option>
+                    <option value="Primary 1">Primary 1</option>
+                    <option value="Primary 2">Primary 2</option>
+                    <option value="Primary 3">Primary 3</option>
+                    <option value="Primary 4">Primary 4</option>
+                    <option value="Primary 5">Primary 5</option>
+                    <option value="Primary 6">Primary 6</option>
+                  </select>
+                  <label for="nurseryClass"><i class="fa-solid fa-graduation-cap me-2 text-primary-dark"></i>Class Applied For *</label>
+                  <div class="invalid-feedback">Select Class.</div>
+                  <div class="valid-feedback">✔ Class chosen.</div>
+                </div>
+              </div>
+              <!-- Nationality -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryNationality" placeholder=" " value="Nigerian" required>
+                  <label for="nurseryNationality"><i class="fa-solid fa-flag me-2 text-primary-dark"></i>Nationality *</label>
+                  <div class="invalid-feedback">Please enter nationality.</div>
+                </div>
+              </div>
+              <!-- State of origin -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryState" placeholder=" " required>
+                  <label for="nurseryState"><i class="fa-solid fa-map-pin me-2 text-primary-dark"></i>State of Origin *</label>
+                  <div class="invalid-feedback">Enter state of origin.</div>
+                </div>
+              </div>
+              <!-- LGA -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryLga" placeholder=" " required>
+                  <label for="nurseryLga"><i class="fa-solid fa-map-location me-2 text-primary-dark"></i>Local Government Area *</label>
+                  <div class="invalid-feedback">Enter LGA.</div>
+                </div>
+              </div>
+              <!-- Town -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryTown" placeholder=" " required>
+                  <label for="nurseryTown"><i class="fa-solid fa-city me-2 text-primary-dark"></i>Town *</label>
+                  <div class="invalid-feedback">Enter home town.</div>
+                </div>
+              </div>
+              <!-- Religion -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryReligion" placeholder=" " required>
+                  <label for="nurseryReligion"><i class="fa-solid fa-hands-praying me-2 text-primary-dark"></i>Religion *</label>
+                  <div class="invalid-feedback">Enter religion.</div>
+                </div>
+              </div>
+              <!-- Language Spoken -->
+              <div class="col-12 col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryLanguage" placeholder=" " required>
+                  <label for="nurseryLanguage"><i class="fa-solid fa-language me-2 text-primary-dark"></i>Language Spoken (Foreign/Local) *</label>
+                  <div class="invalid-feedback">Please specify language spoken.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- FATHER'S / GUARDIAN'S DETAILS -->
+            <div class="form-section-header mb-4">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-user-tie me-2 text-accent"></i>Father's / Guardian's Details</h5>
+            </div>
+            <div class="row g-3 mb-5">
+              <!-- Name -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryFatherName" placeholder=" " required>
+                  <label for="nurseryFatherName">Full Name *</label>
+                  <div class="invalid-feedback">Enter Father's full name.</div>
+                </div>
+              </div>
+              <!-- Occupation -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryFatherOcc" placeholder=" " required>
+                  <label for="nurseryFatherOcc">Occupation *</label>
+                  <div class="invalid-feedback">Enter occupation.</div>
+                </div>
+              </div>
+              <!-- Address -->
+              <div class="col-md-12 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryFatherAddress" placeholder=" " required>
+                  <label for="nurseryFatherAddress">Contact Address *</label>
+                  <div class="invalid-feedback">Enter contact address.</div>
+                </div>
+              </div>
+              <!-- Tel Office -->
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="nurseryFatherOfficeTel" placeholder=" ">
+                  <label for="nurseryFatherOfficeTel">Telephone (Office)</label>
+                </div>
+              </div>
+              <!-- Tel Home -->
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="nurseryFatherHomeTel" placeholder=" " required>
+                  <label for="nurseryFatherHomeTel">Telephone (Home / Mobile) *</label>
+                  <div class="invalid-feedback">Enter home or mobile number.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MOTHER'S / GUARDIAN'S DETAILS -->
+            <div class="form-section-header mb-4">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-user-astronaut me-2 text-accent"></i>Mother's / Guardian's Details</h5>
+            </div>
+            <div class="row g-3 mb-5">
+              <!-- Name -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryMotherName" placeholder=" " required>
+                  <label for="nurseryMotherName">Full Name *</label>
+                  <div class="invalid-feedback">Enter Mother's full name.</div>
+                </div>
+              </div>
+              <!-- Occupation -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryMotherOcc" placeholder=" " required>
+                  <label for="nurseryMotherOcc">Occupation *</label>
+                  <div class="invalid-feedback">Enter occupation.</div>
+                </div>
+              </div>
+              <!-- Address -->
+              <div class="col-md-12 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryMotherAddress" placeholder=" " required>
+                  <label for="nurseryMotherAddress">Contact Address *</label>
+                  <div class="invalid-feedback">Enter contact address.</div>
+                </div>
+              </div>
+              <!-- Tel Office -->
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="nurseryMotherOfficeTel" placeholder=" ">
+                  <label for="nurseryMotherOfficeTel">Telephone (Office)</label>
+                </div>
+              </div>
+              <!-- Tel Home -->
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="nurseryMotherHomeTel" placeholder=" " required>
+                  <label for="nurseryMotherHomeTel">Telephone (Home / Mobile) *</label>
+                  <div class="invalid-feedback">Enter home or mobile number.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- EDUCATIONAL BACKGROUND -->
+            <div class="form-section-header mb-4">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-school me-2 text-accent"></i>Educational Background</h5>
+            </div>
+            <div class="row g-3 mb-5">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryPrevSchool" placeholder=" ">
+                  <label for="nurseryPrevSchool">Previous / Present School</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryCurrentClass" placeholder=" ">
+                  <label for="nurseryCurrentClass">Current Class</label>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryEducationAttended" placeholder=" ">
+                  <label for="nurseryEducationAttended">Level of Education Attended</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAMILY INFORMATION -->
+            <div class="form-section-header mb-4">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-people-roof me-2 text-accent"></i>Family Information</h5>
+            </div>
+            <div class="row g-3 mb-5">
+              <div class="col-sm-6 col-md-3">
+                <div class="form-floating">
+                  <input type="number" class="form-control" id="nurseryWives" placeholder=" " min="0">
+                  <label for="nurseryWives">Father's Number of Wives</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryMotherPos" placeholder=" ">
+                  <label for="nurseryMotherPos">Mother's Position</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-floating">
+                  <input type="number" class="form-control" id="nurserySiblings" placeholder=" " min="0" required>
+                  <label for="nurserySiblings">Number of Siblings *</label>
+                  <div class="invalid-feedback">Enter siblings count.</div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-floating">
+                  <input type="number" class="form-control" id="nurseryChildFamilyPos" placeholder=" " min="1" required>
+                  <label for="nurseryChildFamilyPos">Child's Position in Family *</label>
+                  <div class="invalid-feedback">Enter family position index.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MARITAL STATUS -->
+            <div class="row mb-5 align-items-center">
+              <div class="col-md-3 text-start mb-2 mb-md-0">
+                <strong class="text-primary-dark font-medium d-block">Marital Status of Parents *</strong>
+              </div>
+              <div class="col-md-9">
+                <div class="d-flex flex-wrap gap-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurseryMaritalStatus" id="maritalMarried" value="Married" required>
+                    <label class="form-check-label text-dark" for="maritalMarried">Married</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurseryMaritalStatus" id="maritalDivorced" value="Divorced">
+                    <label class="form-check-label text-dark" for="maritalDivorced">Divorced</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurseryMaritalStatus" id="maritalSeparated" value="Separated">
+                    <label class="form-check-label text-dark" for="maritalSeparated">Separated</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurseryMaritalStatus" id="maritalLivingApart" value="Living Apart">
+                    <label class="form-check-label text-dark" for="maritalLivingApart">Living Apart</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PREVIOUS SCHOOL DETAIL -->
+            <div class="form-section-header mb-4">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-angles-right me-2 text-accent"></i>Previous School Details</h5>
+            </div>
+            <div class="row g-3 mb-5">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryLastSchool" placeholder=" ">
+                  <label for="nurseryLastSchool">Last School Attended</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryLeavingReason" placeholder=" ">
+                  <label for="nurseryLeavingReason">Reason for Leaving</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION B -->
+            <div class="form-section-header mb-4 mt-5">
+              <span class="badge bg-accent text-primary-dark py-2 px-3 fw-bold rounded-pill mb-2">SECTION B</span>
+              <h4 class="fw-bold text-primary-dark">Physical Information</h4>
+              <p class="text-muted small">Child's health and accessibility indicators.</p>
+            </div>
+
+            <!-- Speech Development -->
+            <div class="row align-items-center mb-4">
+              <div class="col-sm-4 mb-2 mb-sm-0">
+                <strong class="text-primary-dark font-medium d-block">Speech Development *</strong>
+              </div>
+              <div class="col-sm-8">
+                <div class="d-flex gap-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurserySpeech" id="speechAverage" value="Average" required>
+                    <label class="form-check-label text-dark" for="speechAverage">Average</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurserySpeech" id="speechSlow" value="Slow">
+                    <label class="form-check-label text-dark" for="speechSlow">Slow</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sight -->
+            <div class="row align-items-center mb-4">
+              <div class="col-sm-4 mb-2 mb-sm-0">
+                <strong class="text-primary-dark font-medium d-block">Sight *</strong>
+              </div>
+              <div class="col-sm-8">
+                <div class="d-flex gap-4 flex-wrap">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurserySight" id="sightClear" value="Clear Vision" required>
+                    <label class="form-check-label text-dark" for="sightClear">Clear Vision</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurserySight" id="sightBlind" value="Blind">
+                    <label class="form-check-label text-dark" for="sightBlind">Blind</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurserySight" id="sightPartial" value="Partial Blindness">
+                    <label class="form-check-label text-dark" for="sightPartial">Partial Blindness</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Special Aid -->
+            <div class="row align-items-center mb-4">
+              <div class="col-sm-4 mb-2 mb-sm-0">
+                <strong class="text-primary-dark font-medium d-block">Special Aid Required *</strong>
+              </div>
+              <div class="col-sm-8">
+                <div class="d-flex gap-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurserySpecialAid" id="aidNo" value="No" required>
+                    <label class="form-check-label text-dark" for="aidNo">No</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nurserySpecialAid" id="aidYes" value="Yes">
+                    <label class="form-check-label text-dark" for="aidYes">Yes</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Specify Assistance (Conditionally Visible) -->
+            <div class="row mb-4 d-none" id="nurserySpecialAidDetail">
+              <div class="col-12">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurserySpecialAidReq" placeholder=" ">
+                  <label for="nurserySpecialAidReq">Specify Assistance Required</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Other Disability -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <div class="form-floating">
+                  <textarea class="form-control" id="nurseryDisability" placeholder=" " style="height: 100px;"></textarea>
+                  <label for="nurseryDisability">Other Disability (If Any)</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION C -->
+            <div class="form-section-header mb-4 mt-5">
+              <span class="badge bg-accent text-primary-dark py-2 px-3 fw-bold rounded-pill mb-2">SECTION C</span>
+              <h4 class="fw-bold text-primary-dark">Required Document Uploads</h4>
+              <p class="text-muted small">All documents must be uploaded before submitting the form. Supported formats: JPG, PNG, PDF (Max 2MB per file).</p>
+            </div>
+
+            <div class="row g-3 mb-5">
+              <!-- Passport Upload -->
+              <div class="col-md-6 col-lg-3 text-center">
+                <div class="card p-3 border shadow-sm h-100 bg-light hover-zoom-effect">
+                  <div class="mb-2">
+                    <i class="fa-solid fa-address-card text-accent fs-3"></i>
+                  </div>
+                  <label for="nurseryPassport" class="form-label fw-bold text-primary-dark small d-block">Passport Photograph *</label>
+                  <input class="form-control form-control-sm" type="file" id="nurseryPassport" accept="image/*" required>
+                  <div class="invalid-feedback text-center mt-2">Required.</div>
+                </div>
+              </div>
+              <!-- Birth Certificate Upload -->
+              <div class="col-md-6 col-lg-3 text-center">
+                <div class="card p-3 border shadow-sm h-100 bg-light hover-zoom-effect">
+                  <div class="mb-2">
+                    <i class="fa-solid fa-cake-candles text-accent fs-3"></i>
+                  </div>
+                  <label for="nurseryBirthCert" class="form-label fw-bold text-primary-dark small d-block">Birth Certificate *</label>
+                  <input class="form-control form-control-sm" type="file" id="nurseryBirthCert" accept="image/*,application/pdf" required>
+                  <div class="invalid-feedback text-center mt-2">Required.</div>
+                </div>
+              </div>
+              <!-- Result Upload -->
+              <div class="col-md-6 col-lg-3 text-center">
+                <div class="card p-3 border shadow-sm h-100 bg-light hover-zoom-effect">
+                  <div class="mb-2">
+                    <i class="fa-solid fa-square-poll-vertical text-accent fs-3"></i>
+                  </div>
+                  <label for="nurseryResultFile" class="form-label fw-bold text-primary-dark small d-block">Recent Academic Result *</label>
+                  <input class="form-control form-control-sm" type="file" id="nurseryResultFile" accept="image/*,application/pdf" required>
+                  <div class="invalid-feedback text-center mt-2">Required.</div>
+                </div>
+              </div>
+              <!-- Testimonial Upload -->
+              <div class="col-md-6 col-lg-3 text-center">
+                <div class="card p-3 border shadow-sm h-100 bg-light hover-zoom-effect">
+                  <div class="mb-2">
+                    <i class="fa-solid fa-award text-accent fs-3"></i>
+                  </div>
+                  <label for="nurseryTestimonial" class="form-label fw-bold text-primary-dark small d-block">School Testimonial *</label>
+                  <input class="form-control form-control-sm" type="file" id="nurseryTestimonial" accept="image/*,application/pdf" required>
+                  <div class="invalid-feedback text-center mt-2">Required.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Family Doctor -->
+            <div class="form-section-header mb-4 mt-5">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-user-doctor me-2 text-accent"></i>Family Doctor</h5>
+            </div>
+            <div class="row g-3 mb-4">
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryDocName" placeholder=" ">
+                  <label for="nurseryDocName">Doctor's Name</label>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="nurseryDocAddress" placeholder=" ">
+                  <label for="nurseryDocAddress">Clinic/Hospital Address</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="nurseryDocPhone" placeholder=" ">
+                  <label for="nurseryDocPhone">Telephone Number</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="modal-footer px-0 mt-5 pt-3 border-top">
+              <button type="button" class="btn btn-secondary px-4 py-3 btn-premium" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-apply-3d py-3 px-5">Submit Form</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       7. MODAL 2: HIGH SCHOOL APPLICATION FORM
+       ========================================== -->
+  <div class="modal fade custom-form-modal" id="highSchoolModal" tabindex="-1" aria-labelledby="highSchoolModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-90">
+      <div class="modal-content">
+        <!-- Progress bar at top -->
+        <div class="modal-progress-container sticky-top">
+          <div class="progress rounded-0" style="height: 6px;">
+            <div class="progress-bar bg-accent" role="progressbar" style="width: 0%;" id="highSchoolFormProgress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="progress-stepper d-flex justify-content-between px-4 py-2 bg-primary-dark text-white text-uppercase font-bold tracking-wide small">
+            <span class="step-label text-accent fw-bold" id="highSchoolFormStepLabel">Section A: Candidate Bio</span>
+            <span class="step-pct" id="highSchoolFormPct">0% Filled</span>
+          </div>
+        </div>
+
+        <div class="modal-header bg-primary-dark text-white p-4">
+          <div class="d-flex align-items-center gap-3">
+            <i class="fa-solid fa-graduation-cap text-accent h3 mb-0"></i>
+            <div>
+              <h5 class="modal-title fw-bold text-accent mb-0" id="highSchoolModalLabel">High School Admission Form</h5>
+              <small class="text-white-50">Please complete all fields carefully.</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4 p-md-5">
+          <form id="highSchoolAdmissionForm" class="needs-validation" novalidate>
+            <!-- CANDIDATE INFORMATION -->
+            <div class="form-section-header mb-4">
+              <span class="badge bg-accent text-primary-dark py-2 px-3 fw-bold rounded-pill mb-2">SECTION A</span>
+              <h4 class="fw-bold text-primary-dark">Candidate Information</h4>
+              <p class="text-muted small">Academic background and student details.</p>
+            </div>
+
+            <div class="row g-3 mb-5">
+              <!-- Surname -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolSurname" placeholder=" " required>
+                  <label for="highSchoolSurname"><i class="fa-solid fa-user me-2 text-primary-dark"></i>Surname *</label>
+                  <div class="invalid-feedback">Please enter candidate's surname.</div>
+                </div>
+              </div>
+              <!-- Other Name -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolOtherNames" placeholder=" " required>
+                  <label for="highSchoolOtherNames"><i class="fa-solid fa-user me-2 text-primary-dark"></i>Other Names *</label>
+                  <div class="invalid-feedback">Please enter other names.</div>
+                </div>
+              </div>
+              <!-- Date of Birth -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="date" class="form-control" id="highSchoolDob" placeholder=" " required>
+                  <label for="highSchoolDob"><i class="fa-solid fa-calendar me-2 text-primary-dark"></i>Date of Birth *</label>
+                  <div class="invalid-feedback">Select Date of Birth.</div>
+                </div>
+              </div>
+              <!-- Age (Auto calculated) -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control bg-light" id="highSchoolAge" placeholder=" " readonly>
+                  <label for="highSchoolAge"><i class="fa-solid fa-clock me-2 text-primary-dark"></i>Calculated Age</label>
+                </div>
+              </div>
+              <!-- Gender -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <select class="form-select custom-select-3d" id="highSchoolGender" required>
+                    <option value="" disabled selected hidden>Select...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                  <label for="highSchoolGender"><i class="fa-solid fa-venus-mars me-2 text-primary-dark"></i>Gender *</label>
+                  <div class="invalid-feedback">Select gender.</div>
+                </div>
+              </div>
+              <!-- Class Applied For -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <select class="form-select custom-select-3d" id="highSchoolClass" name="class" required>
+                    <option value="" disabled selected hidden>Select...</option>
+                    <option value="JSS 1">JSS 1</option>
+                    <option value="JSS 2">JSS 2</option>
+                    <option value="JSS 3">JSS 3</option>
+                    <option value="SSS 1">SSS 1</option>
+                    <option value="SSS 2">SSS 2</option>
+                    <option value="SSS 3">SSS 3</option>
+                  </select>
+                  <label for="highSchoolClass"><i class="fa-solid fa-graduation-cap me-2 text-primary-dark"></i>Class Applied For *</label>
+                  <div class="invalid-feedback">Select Class.</div>
+                  <div class="valid-feedback">✔ Class chosen.</div>
+                </div>
+              </div>
+              <!-- School Last Attended -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolLastSchool" placeholder=" " required>
+                  <label for="highSchoolLastSchool"><i class="fa-solid fa-school me-2 text-primary-dark"></i>School Last Attended *</label>
+                  <div class="invalid-feedback">Provide previous school name.</div>
+                </div>
+              </div>
+              <!-- Class Completed -->
+              <div class="col-12 col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolClassCompleted" placeholder=" " required>
+                  <label for="highSchoolClassCompleted"><i class="fa-solid fa-check-double me-2 text-primary-dark"></i>Class Completed *</label>
+                  <div class="invalid-feedback">Specify the class completed.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PARENT / GUARDIAN DETAILS -->
+            <div class="form-section-header mb-4">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-user-shield me-2 text-accent"></i>Parent / Guardian Details</h5>
+            </div>
+            <div class="row g-3 mb-5">
+              <!-- Name -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolParentName" placeholder=" " required>
+                  <label for="highSchoolParentName">Full Name *</label>
+                  <div class="invalid-feedback">Enter parent's full name.</div>
+                </div>
+              </div>
+              <!-- Occupation -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolParentOcc" placeholder=" " required>
+                  <label for="highSchoolParentOcc">Occupation *</label>
+                  <div class="invalid-feedback">Enter occupation.</div>
+                </div>
+              </div>
+              <!-- Residential Address -->
+              <div class="col-md-12 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolParentResAddress" placeholder=" " required>
+                  <label for="highSchoolParentResAddress">Residential Address *</label>
+                  <div class="invalid-feedback">Enter residential address.</div>
+                </div>
+              </div>
+              <!-- Office Address -->
+              <div class="col-md-12">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolParentOffAddress" placeholder=" ">
+                  <label for="highSchoolParentOffAddress">Office / Business Address</label>
+                </div>
+              </div>
+              <!-- Tel Office -->
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="highSchoolParentOffTel" placeholder=" ">
+                  <label for="highSchoolParentOffTel">Telephone (Office)</label>
+                </div>
+              </div>
+              <!-- Tel Home -->
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="highSchoolParentHomeTel" placeholder=" " required>
+                  <label for="highSchoolParentHomeTel">Telephone (Home / Mobile) *</label>
+                  <div class="invalid-feedback">Enter home or mobile number.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- LOCAL GUARDIAN DETAILS -->
+            <div class="form-section-header mb-4">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-hands-holding-child me-2 text-accent"></i>Local Guardian Details (Optional)</h5>
+            </div>
+            <div class="row g-3 mb-5">
+              <!-- Name -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolLocalName" placeholder=" ">
+                  <label for="highSchoolLocalName">Guardian's Name</label>
+                </div>
+              </div>
+              <!-- Relationship -->
+              <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolLocalRelation" placeholder=" ">
+                  <label for="highSchoolLocalRelation">Relationship to Candidate</label>
+                </div>
+              </div>
+              <!-- Address -->
+              <div class="col-md-12 col-lg-4">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolLocalAddress" placeholder=" ">
+                  <label for="highSchoolLocalAddress">Contact Address</label>
+                </div>
+              </div>
+              <!-- Tel Office -->
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="highSchoolLocalOffTel" placeholder=" ">
+                  <label for="highSchoolLocalOffTel">Telephone (Office)</label>
+                </div>
+              </div>
+              <!-- Tel Home -->
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="highSchoolLocalHomeTel" placeholder=" ">
+                  <label for="highSchoolLocalHomeTel">Telephone (Home / Mobile)</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- PREVIOUS SCHOOL REFERENCE -->
+            <div class="form-section-header mb-4">
+              <h5 class="fw-bold text-primary-dark"><i class="fa-solid fa-file-signature me-2 text-accent"></i>Previous School Reference</h5>
+            </div>
+            <div class="row g-3 mb-5">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolRefName" placeholder=" " required>
+                  <label for="highSchoolRefName">Headmaster / Headmistress Name *</label>
+                  <div class="invalid-feedback">Provide the Headteacher's name.</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="highSchoolRefAddress" placeholder=" " required>
+                  <label for="highSchoolRefAddress">School Address *</label>
+                  <div class="invalid-feedback">Provide the school address.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- UNDERTAKING SECTION -->
+            <div class="form-section-header mb-4">
+              <span class="badge bg-accent text-primary-dark py-2 px-3 fw-bold rounded-pill mb-2">SECTION B</span>
+              <h4 class="fw-bold text-primary-dark">Undertaking & Authorization</h4>
+            </div>
+
+            <div class="card bg-light border-start-accent p-4 mb-4">
+              <div class="d-flex gap-3">
+                <i class="fa-solid fa-hand-holding-medical text-accent h3 mb-0"></i>
+                <p class="mb-0 text-dark fw-medium lh-base text-justify">
+                  "If my child/ward should be ill or injured while he/she is in the school, I agree that he/she should receive medical treatment from the nearest approved medical centre at my own expense."
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="date" class="form-control" id="highSchoolUndertakingDate" placeholder=" " required>
+                  <label for="highSchoolUndertakingDate">Date *</label>
+                  <div class="invalid-feedback">Select today's date.</div>
+                </div>
+              </div>
+              <div class="col-md-6 d-flex align-items-center">
+                <div class="form-check p-3 bg-light rounded w-100 border border-secondary-light">
+                  <input class="form-check-input ms-0 me-3" type="checkbox" id="highSchoolAgree" required>
+                  <label class="form-check-label text-dark fw-bold" for="highSchoolAgree">
+                    I Agree to the Medical Undertaking *
+                  </label>
+                  <div class="invalid-feedback ms-0 mt-2">You must agree before submitting.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card p-4 border border-secondary-light bg-white shadow-sm mb-4">
+              <h6 class="fw-bold text-primary-dark border-bottom pb-2 mb-3">Declaration</h6>
+              <p class="small text-muted mb-4">"I hereby certify that the information given above is true and correct."</p>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="highSchoolDeclName" placeholder=" " required>
+                    <label for="highSchoolDeclName">Declarant Name *</label>
+                    <div class="invalid-feedback">Enter declarant's name.</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="highSchoolDeclAddress" placeholder=" " required>
+                    <label for="highSchoolDeclAddress">Declarant Contact Address *</label>
+                    <div class="invalid-feedback">Enter declarant's address.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION C -->
+            <div class="form-section-header mb-4 mt-5">
+              <span class="badge bg-accent text-primary-dark py-2 px-3 fw-bold rounded-pill mb-2">SECTION C</span>
+              <h4 class="fw-bold text-primary-dark">Required Document Uploads</h4>
+              <p class="text-muted small">All documents must be uploaded before submitting the form. Supported formats: JPG, PNG, PDF (Max 2MB per file).</p>
+            </div>
+
+            <div class="row g-3 mb-5">
+              <!-- Passport Upload -->
+              <div class="col-md-6 col-lg-3 text-center">
+                <div class="card p-3 border shadow-sm h-100 bg-light hover-zoom-effect">
+                  <div class="mb-2">
+                    <i class="fa-solid fa-address-card text-accent fs-3"></i>
+                  </div>
+                  <label for="highSchoolPassport" class="form-label fw-bold text-primary-dark small d-block">Passport Photograph *</label>
+                  <input class="form-control form-control-sm" type="file" id="highSchoolPassport" accept="image/*" required>
+                  <div class="invalid-feedback text-center mt-2">Required.</div>
+                </div>
+              </div>
+              <!-- Birth Certificate Upload -->
+              <div class="col-md-6 col-lg-3 text-center">
+                <div class="card p-3 border shadow-sm h-100 bg-light hover-zoom-effect">
+                  <div class="mb-2">
+                    <i class="fa-solid fa-cake-candles text-accent fs-3"></i>
+                  </div>
+                  <label for="highSchoolBirthCert" class="form-label fw-bold text-primary-dark small d-block">Birth Certificate *</label>
+                  <input class="form-control form-control-sm" type="file" id="highSchoolBirthCert" accept="image/*,application/pdf" required>
+                  <div class="invalid-feedback text-center mt-2">Required.</div>
+                </div>
+              </div>
+              <!-- Result Upload -->
+              <div class="col-md-6 col-lg-3 text-center">
+                <div class="card p-3 border shadow-sm h-100 bg-light hover-zoom-effect">
+                  <div class="mb-2">
+                    <i class="fa-solid fa-square-poll-vertical text-accent fs-3"></i>
+                  </div>
+                  <label for="highSchoolResultFile" class="form-label fw-bold text-primary-dark small d-block">Recent Academic Result *</label>
+                  <input class="form-control form-control-sm" type="file" id="highSchoolResultFile" accept="image/*,application/pdf" required>
+                  <div class="invalid-feedback text-center mt-2">Required.</div>
+                </div>
+              </div>
+              <!-- Testimonial Upload -->
+              <div class="col-md-6 col-lg-3 text-center">
+                <div class="card p-3 border shadow-sm h-100 bg-light hover-zoom-effect">
+                  <div class="mb-2">
+                    <i class="fa-solid fa-award text-accent fs-3"></i>
+                  </div>
+                  <label for="highSchoolTestimonial" class="form-label fw-bold text-primary-dark small d-block">School Testimonial *</label>
+                  <input class="form-control form-control-sm" type="file" id="highSchoolTestimonial" accept="image/*,application/pdf" required>
+                  <div class="invalid-feedback text-center mt-2">Required.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="modal-footer px-0 mt-5 pt-3 border-top">
+              <button type="button" class="btn btn-secondary px-4 py-3 btn-premium" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-apply-3d py-3 px-5">Submit Form</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       8. SUCCESS SCREEN OVERLAY
+       ========================================== -->
+  <div class="success-screen-overlay d-none" id="successScreen">
+    <div class="success-confetti-container" id="confettiContainer"></div>
+    <div class="success-card text-center p-5 animate-scale-up">
+      <div class="success-ring mb-4">
+        <div class="success-circle-check">✔</div>
+      </div>
+      <h1 class="display-5 fw-bold text-accent mb-4">Application Submitted Successfully!</h1>
+      <p class="lead text-white mb-2">Thank you for choosing Engreg Schools.</p>
+      <p class="text-light-80 mb-5 max-w-600 mx-auto small-lh">
+        Your application has been received successfully. Our Admissions Office will contact you after reviewing your application details.
+      </p>
+      <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+        <a href="index.html#home" class="btn btn-cta-apply py-3 px-4 fw-bold">Return Home</a>
+        <button class="btn btn-outline-light py-3 px-4 rounded-pill fw-bold" id="btnAnotherChild">Apply for Another Child</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 9. Contact Banner (CTA) -->
+  <section class="curriculum-cta py-5 text-white scroll-reveal">
+    <div class="container py-4 text-center">
+      <h2 class="display-5 fw-bold mb-3">Ready to Join Engreg Schools?</h2>
+      <p class="lead text-white-80 mb-4">Application forms for the 2026/2027 academic session are now available.</p>
+      <a href="admission-process.html" class="btn btn-cta-apply shadow-lg">Apply Now</a>
+    </div>
+  </section>
+
+  <!-- 10. Footer Section -->
+  <footer id="contact" class="main-footer bg-primary-darkest text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4 mb-5">
+        <!-- Column 1: About -->
+        <div class="col-lg-3 col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <img src="img/logo.jpeg" alt="Engreg Schools Logo" style="width: 40px; height: 40px;"
+              onerror="this.src='https://placehold.co/40x40/0b2545/d4af37?text=ES'">
+            <h5 class="fw-bold text-accent mb-0">ENGREG SCHOOLS</h5>
+          </div>
+          <p class="small text-white-50 lh-base mb-4">Engreg Schools is a prestigious learning community dedicated to
+            shaping outstanding students with ethical values, stellar academics, and modern technological readiness.</p>
+          <div class="social-icons d-flex gap-2">
+            <a href="https://facebook.com" class="social-icon" aria-label="Facebook"><i
+                class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" class="social-icon" aria-label="Instagram"><i
+                class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" class="social-icon" aria-label="Twitter"><i
+                class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://linkedin.com" class="social-icon" aria-label="LinkedIn"><i
+                class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://youtube.com" class="social-icon" aria-label="YouTube"><i
+                class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Our School -->
+        <div class="col-lg-2 col-md-6">
+          <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Our School</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="nursery-primary-school.html" class="text-white-50 text-decoration-none">Nursery &
+                Primary School</a>
+            </li>
+            <li class="mb-2"><a href="high-school.html" class="text-white-50 text-decoration-none">High School</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Quick Links -->
+        <div class="col-lg-2 col-md-6">
+          <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Quick Links</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="index.html#home" class="text-white-50 text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="welcome-address.html" class="text-white-50 text-decoration-none">About</a></li>
+            <li class="mb-2"><a href="index.html#schools" class="text-white-50 text-decoration-none">Schools</a></li>
+            <li class="mb-2"><a href="admission-process.html" class="text-white-50 text-decoration-none">Admission</a></li>
+            <li class="mb-2"><a href="gallery.html" class="text-white-50 text-decoration-none">Gallery</a></li>
+            <li class="mb-2"><a href="contact.html" class="text-white-50 text-decoration-none">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact Details -->
+        <div class="col-lg-2 col-md-6">
+          <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Contact Details</h5>
+          <ul class="list-unstyled footer-contacts small text-white-50">
+            <li class="mb-3 d-flex align-items-start gap-2">
+              <i class="fa-solid fa-location-dot text-accent mt-1"></i>
+              <span>24 Bankole St, Somolu, Lagos 102216, Lagos, Nigeria</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center gap-2">
+              <i class="fa-solid fa-phone text-accent"></i>
+              <span>+2347061359270</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center gap-2">
+              <i class="fa-solid fa-envelope text-accent"></i>
+              <a href="mailto:info@engregschool.com"
+                class="text-white-50 text-decoration-none">info@engregschool.com</a>
+            </li>
+            <li class="mb-2 d-flex align-items-start gap-2">
+              <i class="fa-solid fa-clock text-accent mt-1"></i>
+              <span>Mon - Fri: 7:30 AM - 4:00 PM</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 5: Location Map -->
+        <div class="col-lg-3 col-md-12">
+          <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Location Map</h5>
+          <div class="map-wrapper rounded overflow-hidden shadow-sm">
+            <iframe
+              src="https://maps.google.com/maps?q=24+Bankole+St,+Somolu,+Lagos,+Nigeria&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright Section -->
+      <div class="border-top border-secondary-dark pt-3 mt-4 text-center text-white-50 small">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-md-start mb-2 mb-md-0">
+            <p class="mb-0">&copy; 2026 Engreg Schools. All Rights Reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0">Designed and Developed by <a href="https://hltsltd.com"
+                class="text-accent text-decoration-none fw-semibold">HLTS Limited</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+<!-- Toast notifications container -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+    <div id="liveToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMessage"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js and Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Firebase App, Auth, Firestore, and Storage compatibility SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCZGyG1fZ9tVV5ga33vam5kWJqAd16VMaA",
+      authDomain: "engreg-school.firebaseapp.com",
+      projectId: "engreg-school",
+      storageBucket: "engreg-school.firebasestorage.app",
+      messagingSenderId: "641331000293",
+      appId: "1:641331000293:web:c5941f6e7af285d7cff50c",
+      measurementId: "G-LWCVS1413Z"
+    };
+    let firebaseReady = false;
+    try {
+      if (firebaseConfig.apiKey) {
+        firebase.initializeApp(firebaseConfig);
+        firebaseReady = true;
+        window.firebaseReady = true;
+        console.log("Firebase initialized successfully on Dashboard.");
+      }
+    } catch (e) {
+      console.error("Firebase initialization failed:", e);
+    }
+  </script>
+
+  <!-- Dashboard Controller scripts -->
+  <script src="admin-dashboard.js"></script>
+  <script src="script.js?v=7"></script>
+
+  <!-- Foolproof Inline Age Calculation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const calculateAge = (dobString) => {
+        if (!dobString) return "";
+        const dob = new Date(dobString);
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+          age--;
+        }
+        return age >= 0 ? age : 0;
+      };
+
+      const bindAgeCalc = (dobId, ageId) => {
+        const dobEl = document.getElementById(dobId);
+        const ageEl = document.getElementById(ageId);
+        if (dobEl && ageEl) {
+          const handler = () => {
+            ageEl.value = calculateAge(dobEl.value);
+          };
+          dobEl.addEventListener("change", handler);
+          dobEl.addEventListener("input", handler);
+        }
+      };
+
+      bindAgeCalc("nurseryDob", "nurseryAge");
+      bindAgeCalc("highSchoolDob", "highSchoolAge");
+    });
+  </script>
+</body>
+
+</html>

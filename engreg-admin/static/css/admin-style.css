@@ -1,0 +1,570 @@
+/* ==========================================================================
+   Admin Portal Branding Stylesheet
+   ========================================================================== */
+
+:root {
+  --primary-dark: #0b2545;
+  --primary-darkest: #040f1e;
+  --accent: #d4af37;
+  --accent-hover: #b89222;
+  --light-blue: rgba(11, 37, 69, 0.05);
+  --white-80: rgba(255, 255, 255, 0.8);
+  --white-70: rgba(255, 255, 255, 0.7);
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f7f6;
+  color: #333333;
+}
+
+/* ==========================================================================
+   Admin Login Page Styles
+   ========================================================================== */
+.login-body {
+  background-color: var(--primary-darkest);
+}
+
+.login-left-banner {
+  background: linear-gradient(135deg, var(--primary-darkest) 0%, var(--primary-dark) 100%);
+}
+
+/* Background animated particle blobs */
+.banner-particles span {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.04);
+  animation: floatBlobs 12s infinite ease-in-out;
+}
+
+.banner-particles .bp1 { width: 300px; height: 300px; top: -50px; left: -50px; }
+.banner-particles .bp2 { width: 400px; height: 400px; bottom: -100px; right: -50px; animation-delay: 2s; }
+.banner-particles .bp3 { width: 250px; height: 250px; top: 40%; left: 30%; animation-delay: 5s; }
+
+@keyframes floatBlobs {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+.z-index-2 {
+  z-index: 2;
+}
+
+.text-white-80 { color: var(--white-80); }
+.text-white-70 { color: var(--white-70); }
+.text-accent { color: var(--accent) !important; }
+.bg-light-blue { background: rgba(255, 255, 255, 0.06); }
+
+.glass-login-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+}
+
+.login-input-group {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.login-input-group .form-control {
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+}
+
+.login-input-group .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.login-input-group .form-control:focus {
+  box-shadow: none !important;
+}
+
+.login-input-group:focus-within {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.15);
+}
+
+.btn-login-outline {
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  transition: var(--transition-smooth);
+}
+
+.btn-login-outline:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: white !important;
+}
+
+/* ==========================================================================
+   Admin Dashboard Layout
+   ========================================================================== */
+.admin-wrapper {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  width: 270px;
+  min-width: 270px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 4px 0 15px rgba(11, 37, 69, 0.15);
+}
+
+.sidebar.collapsed {
+  margin-left: -270px;
+}
+
+.sidebar-logo {
+  border: 2px solid var(--accent);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.sidebar-link:hover, .sidebar-sublink:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-link.active, .sidebar-sublink.active {
+  color: var(--primary-dark) !important;
+  background: var(--accent) !important;
+  font-weight: 600;
+}
+
+.sidebar-sublink {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.content-area {
+  min-width: 0;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  font-size: 0.95rem;
+  border: 2px solid var(--accent);
+}
+
+/* ==========================================================================
+   Dashboard Elements & Tabs
+   ========================================================================== */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.stat-card {
+  border-radius: 16px !important;
+  transition: var(--transition-smooth);
+  border: 1px solid rgba(11, 37, 69, 0.05) !important;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(11, 37, 69, 0.1) !important;
+}
+
+.icon-shape {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-light-blue {
+  background: rgba(11, 37, 69, 0.05) !important;
+  color: var(--primary-dark) !important;
+}
+
+.bg-success-light {
+  background: rgba(40, 167, 69, 0.08) !important;
+}
+
+.btn-outline-nav-sm {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #495057;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: var(--transition-smooth);
+}
+
+.btn-outline-nav-sm:hover {
+  background: #e9ecef;
+  color: var(--primary-dark);
+}
+
+/* ==========================================================================
+   Dropzone File Upload Styles
+   ========================================================================== */
+.dropzone {
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.dropzone:hover, .dropzone.dragover {
+  border-color: var(--accent) !important;
+  background: rgba(212, 175, 55, 0.05) !important;
+}
+
+.dropzone i {
+  transition: transform 0.3s ease;
+}
+
+.dropzone:hover i {
+  transform: translateY(-5px);
+}
+
+/* ==========================================================================
+   Gallery Items in Admin Dashboard
+   ========================================================================== */
+.admin-gallery-card {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  height: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.admin-gallery-card:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-card-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+
+.gallery-card-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(11, 37, 69, 0.85);
+  color: var(--accent);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Custom Dropdown Submenus and Animations
+   ========================================================================== */
+.sidebar-link.dropdown-toggle-custom::after {
+  content: '\f107';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-link.dropdown-toggle-custom:not(.collapsed)::after {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Responsive Utilities
+   ========================================================================== */
+@media (max-width: 991px) {
+  .sidebar {
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+  }
+  .sidebar:not(.collapsed) {
+    box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ==========================================================================
+   Admin Dashboard Light Theme Override (White background & dark text)
+   ========================================================================== */
+.dashboard-body {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+.dashboard-body .content-area {
+  background-color: #ffffff !important;
+}
+
+.dashboard-body .navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.dashboard-body h1,
+.dashboard-body h2,
+.dashboard-body h3,
+.dashboard-body h4,
+.dashboard-body h5,
+.dashboard-body h6,
+.dashboard-body p,
+.dashboard-body span,
+.dashboard-body label,
+.dashboard-body td,
+.dashboard-body th,
+.dashboard-body small {
+  color: #1a1a1a !important;
+}
+
+/* Maintain active accents / highlights */
+.dashboard-body .text-accent {
+  color: var(--accent) !important;
+}
+
+/* Card formatting overrides on white body background */
+.dashboard-body .card {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Form input adjustments for visibility */
+.dashboard-body .form-control,
+.dashboard-body .form-select {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #1a1a1a !important;
+}
+
+.dashboard-body .form-control:focus,
+.dashboard-body .form-select:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15) !important;
+}
+
+/* Action button controls text overrides */
+.dashboard-body .btn-apply-3d,
+.dashboard-body .btn-apply-3d span,
+.dashboard-body .btn-apply-3d i {
+  color: #ffffff !important;
+}
+
+/* Table styles overrides */
+.dashboard-body .table-light th {
+  background-color: #f8fafc !important;
+  color: #334155 !important;
+  font-weight: 600;
+}
+
+.dashboard-body .table-hover tbody tr:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Keep Sidebar dark themes intact */
+.dashboard-body .sidebar {
+  background-color: var(--primary-dark) !important;
+}
+
+.dashboard-body .sidebar-header h5,
+.dashboard-body .sidebar-header span,
+.dashboard-body .sidebar-link span,
+.dashboard-body .sidebar-link i,
+.dashboard-body .sidebar-sublink,
+.dashboard-body .sidebar-footer span,
+.dashboard-body .sidebar-footer i {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dashboard-body .sidebar-link:hover span,
+.dashboard-body .sidebar-link:hover i,
+.dashboard-body .sidebar-sublink:hover {
+  color: #ffffff !important;
+}
+
+.dashboard-body .sidebar-link.active,
+.dashboard-body .sidebar-link.active span,
+.dashboard-body .sidebar-link.active i,
+.dashboard-body .sidebar-sublink.active {
+  color: var(--primary-dark) !important;
+  background-color: var(--accent) !important;
+}
+
+/* Success Screen overlay */
+.success-screen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-darkest) 100%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.success-confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.success-card {
+  max-width: 650px;
+  width: 90%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 2;
+  padding: 3rem;
+}
+
+.success-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid var(--accent);
+  background-color: rgba(212, 175, 55, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  animation: successPulse 2s infinite;
+}
+
+.success-circle-check {
+  font-size: 3.5rem;
+  color: var(--accent);
+  animation: successBounce 1s ease-out;
+}
+
+.small-lh {
+  line-height: 1.8;
+}
+
+.btn-cta-apply {
+  background-color: var(--accent);
+  color: var(--primary-dark) !important;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-cta-apply:hover {
+  background-color: #c49c2d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+@keyframes successPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(212, 175, 55, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes successBounce {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ffd700;
+  opacity: 0.85;
+  animation: confettiFall 4s ease-out infinite;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+

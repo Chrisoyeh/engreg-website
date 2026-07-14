@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper: Check if user is authenticated admin
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    // Settings & Gallery: public read, admin write
+    match /settings/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /gallery/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Registrations: public create, admin read/write
+    match /nursery_primary_registration/{document} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+    match /high_school_registration/{document} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Successful notice lists: admin only read/write
+    match /nursery_primary_successful/{document} {
+      allow read, write: if isAdmin();
+    }
+    match /high_school_successful/{document} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

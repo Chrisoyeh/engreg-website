@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Engreg Schools</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='images/logo.jpeg') }}">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom Admin Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+  <!-- Public Theme stylesheet for buttons and modals styling -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+  <div class="admin-wrapper d-flex">
+    
+    <!-- Collapsible Sidebar -->
+    <nav id="sidebar" class="sidebar bg-primary-dark text-white p-3 transition-all">
+      <div class="sidebar-header d-flex align-items-center gap-3 mb-4 pb-3 border-bottom border-secondary-light">
+        <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="School Logo" class="sidebar-logo rounded">
+        <div class="leading-none text-truncate">
+          <h5 class="fw-bold tracking-wide mb-0 text-truncate">ENGREG ADMIN</h5>
+          <span class="small text-accent text-truncate">Dashboard v1.0</span>
+        </div>
+      </div>
+
+      <ul class="list-unstyled sidebar-menu d-flex flex-column gap-2">
+        <li>
+          <a href="#" class="sidebar-link active" data-tab="dashboard-tab">
+            <i class="fa-solid fa-gauge me-3"></i><span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-link" data-tab="gallery-tab">
+            <i class="fa-solid fa-images me-3"></i><span>Gallery Management</span>
+          </a>
+        </li>
+        <li>
+          <a href="#admissionsSubmenu" class="sidebar-link dropdown-toggle-custom collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false">
+            <i class="fa-solid fa-user-graduate me-3"></i><span>Admissions</span>
+          </a>
+          <ul class="collapse list-unstyled ps-4 mt-2 mb-2 gap-1 d-flex flex-column" id="admissionsSubmenu">
+            <li>
+              <a href="#" class="sidebar-sublink" data-tab="nursery-tab">Nursery & Primary</a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-sublink" data-tab="high-tab">High School</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="sidebar-link" data-tab="successful-tab">
+            <i class="fa-solid fa-circle-check me-3"></i><span>Successful Candidates</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-link" data-tab="reports-tab">
+            <i class="fa-solid fa-chart-line me-3"></i><span>Reports & Export</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-link" data-tab="settings-tab">
+            <i class="fa-solid fa-gears me-3"></i><span>Portal Settings</span>
+          </a>
+        </li>
+        <li class="mt-3 px-2">
+          <button class="btn btn-apply-3d py-2 px-3 w-100 mb-2 small fw-bold" onclick="openAddCandidateModal('nursery')">Get Now (Nursery)</button>
+        </li>
+        <li class="px-2">
+          <button class="btn btn-apply-3d py-2 px-3 w-100 mb-2 small fw-bold" onclick="openAddCandidateModal('high')">Get Now (High School)</button>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer mt-auto pt-3 border-top border-secondary-light">
+        <a href="/logout" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2 py-2">
+          <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+        </a>
+      </div>
+    </nav>
+    
+    <!-- Main Content Container -->
+    <div id="content" class="content-area w-100 transition-all">
+      
+      <!-- Top Navbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white border-bottom py-3 px-4 shadow-sm">
+        <div class="container-fluid p-0">
+          <button type="button" id="sidebarCollapse" class="btn btn-outline-nav-sm border-0 me-3">
+            <i class="fa-solid fa-bars fs-5"></i>
+          </button>
+          
+          <div class="ms-auto d-flex align-items-center gap-3">
+            <div class="text-end d-none d-sm-block">
+              <h6 class="fw-bold mb-0 text-primary-dark">Portal Administrator</h6>
+              <small class="text-muted">{{ email or "admin@engreg.com" }}</small>
+            </div>
+            <div class="avatar bg-accent text-primary-dark rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm">
+              AD
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sub-Tab Containers -->
+      <main class="dashboard-content p-4">
+        
+        <!-- ==================== TAB 1: MAIN DASHBOARD ==================== -->
+        <section id="dashboard-tab" class="tab-panel active">
+          <h2 class="fw-bold text-primary-dark mb-4">Performance Overview</h2>
+          
+          <!-- Statistics Cards Grid -->
+          <div class="row g-4 mb-5">
+            <!-- Nursery Candidates -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card stat-card shadow-sm border-0 bg-white p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="icon-shape bg-light-blue text-primary rounded-circle shadow-sm">
+                    <i class="fa-solid fa-children fs-4"></i>
+                  </div>
+                  <span class="badge bg-secondary-light text-muted">Nursery</span>
+                </div>
+                <h3 class="fw-bold text-primary-dark mb-1" id="statNurseryReg">0</h3>
+                <p class="text-muted small mb-0">Nursery & Primary Candidates</p>
+              </div>
+            </div>
+            
+            <!-- High School Candidates -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card stat-card shadow-sm border-0 bg-white p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="icon-shape bg-light-blue text-primary rounded-circle shadow-sm">
+                    <i class="fa-solid fa-graduation-cap fs-4"></i>
+                  </div>
+                  <span class="badge bg-secondary-light text-muted">High School</span>
+                </div>
+                <h3 class="fw-bold text-primary-dark mb-1" id="statHighReg">0</h3>
+                <p class="text-muted small mb-0">High School Candidates</p>
+              </div>
+            </div>
+
+            <!-- Gallery Upload Stats -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card stat-card shadow-sm border-0 bg-white p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="icon-shape bg-light-blue text-primary rounded-circle shadow-sm">
+                    <i class="fa-solid fa-images fs-4"></i>
+                  </div>
+                  <span class="badge bg-secondary-light text-muted">Gallery</span>
+                </div>
+                <h3 class="fw-bold text-primary-dark mb-1" id="statGalleryCount">0 / 100</h3>
+                <!-- Progress bar -->
+                <div class="progress mt-2 mb-1" style="height: 6px;">
+                  <div id="statGalleryProgress" class="progress-bar bg-accent" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="text-muted small mb-0">Total Uploaded Photos</p>
+              </div>
+            </div>
+
+            <!-- Successful Candidates Stats -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card stat-card shadow-sm border-0 bg-white p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="icon-shape bg-light-blue text-primary rounded-circle shadow-sm">
+                    <i class="fa-solid fa-circle-check fs-4"></i>
+                  </div>
+                  <span class="badge bg-success-light text-success">Successful</span>
+                </div>
+                <h3 class="fw-bold text-primary-dark mb-1" id="statSuccessful">0</h3>
+                <p class="text-muted small mb-0">Total Passed Admissions</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts and Logs Row -->
+          <div class="row g-4 mb-4">
+            <!-- Admission Analytics Chart -->
+            <div class="col-lg-7">
+              <div class="card shadow-sm border-0 bg-white p-4 h-100">
+                <h5 class="fw-bold text-primary-dark mb-4">Admissions Distribution Chart</h5>
+                <div class="chart-wrapper" style="position: relative; height: 350px;">
+                  <canvas id="admissionAnalyticsChart"></canvas>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Audit Activity Logs -->
+            <div class="col-lg-5">
+              <div class="card shadow-sm border-0 bg-white p-4 h-100">
+                <h5 class="fw-bold text-primary-dark mb-4">Recent Audit Activity Logs</h5>
+                <div class="table-responsive" style="max-height: 350px;">
+                  <table class="table table-hover align-middle small text-muted">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Action</th>
+                        <th>Details</th>
+                        <th>Time</th>
+                      </tr>
+                    </thead>
+                    <tbody id="logsTableBody">
+                      <!-- Rendered by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 2: GALLERY MANAGEMENT ==================== -->
+        <section id="gallery-tab" class="tab-panel">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary-dark mb-0">Gallery Assets Manager</h2>
+            <span class="badge bg-accent text-primary-dark py-2 px-3 fw-bold rounded-pill" id="galleryQuotaBadge">Quota: 0 / 100 Uploaded</span>
+          </div>
+
+          <div class="row g-4">
+            <!-- Upload Panel -->
+            <div class="col-lg-4">
+              <div class="card shadow-sm border-0 p-4 bg-white sticky-lg-top" style="top: 100px; z-index: 10;">
+                <h5 class="fw-bold text-primary-dark mb-3">Upload New Photo</h5>
+                <form id="galleryUploadForm">
+                  <div class="mb-3">
+                    <label for="uploadCategory" class="form-label small fw-bold text-primary-dark">Category *</label>
+                    <select class="form-select" id="uploadCategory" required>
+                      <option value="graduation">Graduation Ceremony</option>
+                      <option value="cultural">Cultural Day</option>
+                      <option value="sports">Sports Day</option>
+                      <option value="school-life">School Life</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="uploadCaption" class="form-label small fw-bold text-primary-dark">Caption *</label>
+                    <input type="text" class="form-control" id="uploadCaption" placeholder="Brief photo description..." required>
+                  </div>
+                  <!-- Drag and Drop Zone -->
+                  <div class="mb-4">
+                    <label class="form-label small fw-bold text-primary-dark">Select Image (Max 4MB) *</label>
+                    <div id="dropzone" class="dropzone p-4 text-center border border-2 border-dashed rounded-3 bg-light">
+                      <i class="fa-solid fa-cloud-arrow-up fs-2 text-muted mb-2"></i>
+                      <p class="small text-muted mb-2">Drag and drop file here or click to browse</p>
+                      <input type="file" id="galleryFileInput" class="d-none" accept="image/*" required>
+                      <span id="selectedFilename" class="badge bg-accent text-primary-dark p-2 d-none"></span>
+                    </div>
+                  </div>
+                  <!-- Progress Bar -->
+                  <div class="progress d-none mb-3" id="uploadProgressBarContainer" style="height: 8px;">
+                    <div id="uploadProgressBar" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                  </div>
+                  <!-- Error Display -->
+                  <div class="alert alert-danger d-none py-2 small" id="uploadFormError"></div>
+                  <!-- Submit Button -->
+                  <button type="submit" id="btnUploadImageSubmit" class="btn btn-apply-3d w-100 py-3 fw-bold">
+                    <i class="fa-solid fa-cloud-arrow-up me-2"></i>Upload File
+                  </button>
+                </form>
+              </div>
+            </div>
+            
+            <!-- Gallery Assets Grid -->
+            <div class="col-lg-8">
+              <div class="card shadow-sm border-0 p-4 bg-white">
+                <h5 class="fw-bold text-primary-dark mb-4">Active Gallery Database</h5>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3" id="adminGalleryGrid">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 3: NURSERY ADMISSIONS ==================== -->
+        <section id="nursery-tab" class="tab-panel">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary-dark mb-0">Nursery & Primary Registrations</h2>
+            <button class="btn btn-accent text-primary-dark fw-bold btn-premium py-2 px-4 shadow-sm" onclick="openAddCandidateModal('nursery')">
+              <i class="fa-solid fa-user-plus me-2"></i>Register New Pupil
+            </button>
+          </div>
+
+          <div class="card shadow-sm border-0 bg-white p-4">
+            <!-- Filter Bar -->
+            <div class="row g-3 align-items-center mb-4 pb-3 border-bottom">
+              <div class="col-md-4">
+                <label for="nurseryClassFilter" class="form-label small fw-bold text-primary-dark">Class Filter *</label>
+                <select class="form-select filter-trigger-select" id="nurseryClassFilter" data-school="nursery">
+                  <option value="" disabled selected>-- Select Class to view table --</option>
+                  <option value="Foundation 1">Foundation 1</option>
+                  <option value="Foundation 2">Foundation 2</option>
+                  <option value="Nursery 1">Nursery 1</option>
+                  <option value="Nursery 2">Nursery 2</option>
+                  <option value="Primary 1">Primary 1</option>
+                  <option value="Primary 2">Primary 2</option>
+                  <option value="Primary 3">Primary 3</option>
+                  <option value="Primary 4">Primary 4</option>
+                  <option value="Primary 5">Primary 5</option>
+                  <option value="Primary 6">Primary 6</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="nurseryGenderFilter" class="form-label small fw-bold text-primary-dark">Gender Filter</label>
+                <select class="form-select filter-trigger-select" id="nurseryGenderFilter" data-school="nursery">
+                  <option value="">All Genders</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <label for="nurserySearchInput" class="form-label small fw-bold text-primary-dark">Search Candidate</label>
+                <input type="text" class="form-control" id="nurserySearchInput" placeholder="Type candidate name or phone...">
+              </div>
+            </div>
+
+            <!-- Table Container (Initially hidden until Class is chosen) -->
+            <div id="nurseryTableContainer" class="d-none">
+              <!-- Selection and Multi-action row -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="small text-muted" id="nurserySelectedCount">0 Candidates Selected</span>
+                <button id="nurseryBtnMoveSuccessful" class="btn btn-success fw-bold py-2 px-4 shadow-sm" disabled>
+                  <i class="fa-solid fa-circle-check me-2"></i>Move to Successful Candidates
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light text-primary-dark">
+                    <tr>
+                      <th width="40">
+                        <input class="form-check-input" type="checkbox" id="nurserySelectAll">
+                      </th>
+                      <th>Passport</th>
+                      <th>Candidate Name</th>
+                      <th>Gender</th>
+                      <th>Parent/Guardian</th>
+                      <th>Phone Number</th>
+                      <th>Documents</th>
+                      <th class="text-center">Entrance Exam Passed</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="nurseryTableBody">
+                    <!-- Rendered by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div id="nurseryPlaceholderText" class="text-center py-5 text-muted">
+              <i class="fa-solid fa-table-list fs-2 text-accent mb-3"></i>
+              <p class="mb-0 fs-5 fw-medium">Please select a class from the dropdown to load the registrations table.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 4: HIGH SCHOOL ADMISSIONS ==================== -->
+        <section id="high-tab" class="tab-panel">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary-dark mb-0">High School Registrations</h2>
+            <button class="btn btn-accent text-primary-dark fw-bold btn-premium py-2 px-4 shadow-sm" onclick="openAddCandidateModal('high')">
+              <i class="fa-solid fa-user-plus me-2"></i>Register New Student
+            </button>
+          </div>
+
+          <div class="card shadow-sm border-0 bg-white p-4">
+            <!-- Filter Bar -->
+            <div class="row g-3 align-items-center mb-4 pb-3 border-bottom">
+              <div class="col-md-4">
+                <label for="highClassFilter" class="form-label small fw-bold text-primary-dark">Class Filter *</label>
+                <select class="form-select filter-trigger-select" id="highClassFilter" data-school="high">
+                  <option value="" disabled selected>-- Select Class to view table --</option>
+                  <option value="JSS 1">JSS 1</option>
+                  <option value="JSS 2">JSS 2</option>
+                  <option value="JSS 3">JSS 3</option>
+                  <option value="SSS 1">SSS 1</option>
+                  <option value="SSS 2">SSS 2</option>
+                  <option value="SSS 3">SSS 3</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="highGenderFilter" class="form-label small fw-bold text-primary-dark">Gender Filter</label>
+                <select class="form-select filter-trigger-select" id="highGenderFilter" data-school="high">
+                  <option value="">All Genders</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <label for="highSearchInput" class="form-label small fw-bold text-primary-dark">Search Candidate</label>
+                <input type="text" class="form-control" id="highSearchInput" placeholder="Type candidate name or phone...">
+              </div>
+            </div>
+
+            <!-- Table Container -->
+            <div id="highTableContainer" class="d-none">
+              <!-- Selection and Multi-action row -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="small text-muted" id="highSelectedCount">0 Candidates Selected</span>
+                <button id="highBtnMoveSuccessful" class="btn btn-success fw-bold py-2 px-4 shadow-sm" disabled>
+                  <i class="fa-solid fa-circle-check me-2"></i>Move to Successful Candidates
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light text-primary-dark">
+                    <tr>
+                      <th width="40">
+                        <input class="form-check-input" type="checkbox" id="highSelectAll">
+                      </th>
+                      <th>Passport</th>
+                      <th>Candidate Name</th>
+                      <th>Gender</th>
+                      <th>Parent/Guardian</th>
+                      <th>Phone Number</th>
+                      <th>Documents</th>
+                      <th class="text-center">Entrance Exam Passed</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="highTableBody">
+                    <!-- Rendered by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div id="highPlaceholderText" class="text-center py-5 text-muted">
+              <i class="fa-solid fa-table-list fs-2 text-accent mb-3"></i>
+              <p class="mb-0 fs-5 fw-medium">Please select a class from the dropdown to load the registrations table.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 5: SUCCESSFUL CANDIDATES ==================== -->
+        <section id="successful-tab" class="tab-panel">
+          <h2 class="fw-bold text-primary-dark mb-4">Successful Candidates</h2>
+          
+          <div class="row g-4">
+            <!-- Nursery & Primary Successful Column -->
+            <div class="col-lg-6">
+              <div class="card shadow-sm border-0 p-4 bg-white h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                  <h5 class="fw-bold text-primary-dark mb-0">Nursery & Primary Section</h5>
+                  <button id="nurseryBtnReturnReg" class="btn btn-outline-nav-sm py-1 px-3 small border" disabled>
+                    <i class="fa-solid fa-arrow-rotate-left me-1"></i>Return Selected
+                  </button>
+                </div>
+                
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle small text-muted">
+                    <thead class="table-light">
+                      <tr>
+                        <th width="40">
+                          <input class="form-check-input" type="checkbox" id="succNurserySelectAll">
+                        </th>
+                        <th>Candidate Name</th>
+                        <th>Parent Phone</th>
+                        <th class="text-end">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="succNurseryTableBody">
+                      <!-- Rendered by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- High School Successful Column -->
+            <div class="col-lg-6">
+              <div class="card shadow-sm border-0 p-4 bg-white h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                  <h5 class="fw-bold text-primary-dark mb-0">High School Section</h5>
+                  <button id="highBtnReturnReg" class="btn btn-outline-nav-sm py-1 px-3 small border" disabled>
+                    <i class="fa-solid fa-arrow-rotate-left me-1"></i>Return Selected
+                  </button>
+                </div>
+                
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle small text-muted">
+                    <thead class="table-light">
+                      <tr>
+                        <th width="40">
+                          <input class="form-check-input" type="checkbox" id="succHighSelectAll">
+                        </th>
+                        <th>Candidate Name</th>
+                        <th>Parent Phone</th>
+                        <th class="text-end">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="succHighTableBody">
+                      <!-- Rendered by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 6: REPORTS & EXPORT ==================== -->
+        <section id="reports-tab" class="tab-panel">
+          <h2 class="fw-bold text-primary-dark mb-4">Admissions Reports & Exports</h2>
+          
+          <div class="card shadow-sm border-0 bg-white p-4">
+            <h5 class="fw-bold text-primary-dark mb-4">Download Registry Archives</h5>
+            <div class="row g-4 text-center">
+              
+              <!-- Report Card 1 -->
+              <div class="col-md-4">
+                <div class="card p-4 border bg-light h-100 hover-zoom-effect">
+                  <i class="fa-solid fa-file-pdf fs-1 text-danger mb-3"></i>
+                  <h6 class="fw-bold text-primary-dark">Nursery Registrations</h6>
+                  <p class="text-muted small">Export full directory of Nursery & Primary registrants including contacts.</p>
+                  <button onclick="exportTable('nursery_registration', 'pdf')" class="btn btn-danger w-100 py-2 mt-2">Export PDF</button>
+                  <button onclick="exportTable('nursery_registration', 'excel')" class="btn btn-outline-success w-100 py-2 mt-2 small">Export Excel</button>
+                </div>
+              </div>
+
+              <!-- Report Card 2 -->
+              <div class="col-md-4">
+                <div class="card p-4 border bg-light h-100 hover-zoom-effect">
+                  <i class="fa-solid fa-file-excel fs-1 text-success mb-3"></i>
+                  <h6 class="fw-bold text-primary-dark">High School Registrations</h6>
+                  <p class="text-muted small">Export high school applicants sheet. Suitable for examination sorting.</p>
+                  <button onclick="exportTable('high_registration', 'pdf')" class="btn btn-danger w-100 py-2 mt-2">Export PDF</button>
+                  <button onclick="exportTable('high_registration', 'excel')" class="btn btn-success w-100 py-2 mt-2">Export Excel</button>
+                </div>
+              </div>
+
+              <!-- Report Card 3 -->
+              <div class="col-md-4">
+                <div class="card p-4 border bg-light h-100 hover-zoom-effect">
+                  <i class="fa-solid fa-print fs-1 text-primary-dark mb-3"></i>
+                  <h6 class="fw-bold text-primary-dark">Successful Candidates</h6>
+                  <p class="text-muted small">Print list of successfully admitted candidates for notice board posting.</p>
+                  <button onclick="printSuccessfulList()" class="btn btn-primary w-100 py-2 mt-2">Print Admission List</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 7: PORTAL SETTINGS ==================== -->
+        <section id="settings-tab" class="tab-panel">
+          <h2 class="fw-bold text-primary-dark mb-4">Global Portal Settings</h2>
+          
+          <div class="card shadow-sm border-0 bg-white p-4">
+            <div id="settingsAlert" class="alert alert-success d-none py-2 small" role="alert">Settings saved successfully.</div>
+            <form id="portalSettingsForm">
+              
+              <h5 class="fw-bold text-primary-dark border-bottom pb-2 mb-3">School Information</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">School Name</label>
+                  <input type="text" class="form-control" id="setSchoolName" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">Administrative Email</label>
+                  <input type="email" class="form-control" id="setSchoolEmail" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">Primary Phone</label>
+                  <input type="text" class="form-control" id="setSchoolPhone1" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">Secondary Phone</label>
+                  <input type="text" class="form-control" id="setSchoolPhone2">
+                </div>
+                <div class="col-12">
+                  <label class="form-label small fw-bold text-primary-dark">School Contact Address</label>
+                  <input type="text" class="form-control" id="setSchoolAddress" required>
+                </div>
+              </div>
+
+              <h5 class="fw-bold text-primary-dark border-bottom pb-2 mb-3">Admissions & Media Parameters</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Application Form Fee (₦)</label>
+                  <input type="number" class="form-control" id="setAdmissionFee" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Active Academic Session</label>
+                  <input type="text" class="form-control" id="setAcademicSession" placeholder="2026/2027" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Max Gallery Images Cap</label>
+                  <input type="number" class="form-control" id="setMaxGalleryImages" required>
+                </div>
+              </div>
+
+              <h5 class="fw-bold text-primary-dark border-bottom pb-2 mb-3">Social Media Handles</h5>
+              <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Facebook Link</label>
+                  <input type="url" class="form-control" id="setFacebook">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Instagram Link</label>
+                  <input type="url" class="form-control" id="setInstagram">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-bold text-primary-dark">Twitter Link</label>
+                  <input type="url" class="form-control" id="setTwitter">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">LinkedIn Link</label>
+                  <input type="url" class="form-control" id="setLinkedin">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-primary-dark">YouTube Link</label>
+                  <input type="url" class="form-control" id="setYoutube">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-apply-3d py-3 px-5 fw-bold">
+                <i class="fa-solid fa-floppy-disk me-2"></i>Save Configuration Settings
+              </button>
+
+            </form>
+          </div>
+        </section>
+
+      </main>
+      
+    </div>
+  </div>
+
+  <!-- Register Candidate Modal -->
+  <div class="modal fade" id="addCandidateModal" tabindex="-1" aria-labelledby="addCandidateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content text-dark">
+        <div class="modal-header bg-primary-dark text-white">
+          <h5 class="modal-title fw-bold text-accent" id="addCandidateModalLabel">Register New Pupil</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <p class="small text-muted">Register candidate manually. Firebase authentication does not require public client payments for this manual override form.</p>
+          <div class="alert alert-danger d-none py-2 small" id="addCandidateModalError"></div>
+          <form id="addCandidateForm">
+            <input type="hidden" id="addCandSchoolType">
+            
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Candidate Full Name *</label>
+                <input type="text" class="form-control" id="addCandName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Gender *</label>
+                <select class="form-select" id="addCandGender" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Target Class *</label>
+                <select class="form-select" id="addCandClass" required>
+                  <!-- Populated dynamically by JS -->
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Parent/Guardian Name *</label>
+                <input type="text" class="form-control" id="addCandParentName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Parent Phone Number *</label>
+                <input type="text" class="form-control" id="addCandPhone" required>
+              </div>
+            </div>
+
+            <!-- Documents section -->
+            <h6 class="fw-bold border-bottom pb-2 mt-4 mb-3">Documents Upload (Optional for manual registers)</h6>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small">Passport Photograph (Max 4MB)</label>
+                <input type="file" class="form-control" id="addCandPassportFile" accept="image/*">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">Birth Certificate (Max 4MB)</label>
+                <input type="file" class="form-control" id="addCandBirthFile" accept="image/*,application/pdf">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">Academic Result (Max 4MB)</label>
+                <input type="file" class="form-control" id="addCandResultFile" accept="image/*,application/pdf">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">School Testimonial (Max 4MB)</label>
+                <input type="file" class="form-control" id="addCandTestimonialFile" accept="image/*,application/pdf">
+              </div>
+            </div>
+            
+            <div class="modal-footer px-0 pb-0 mt-4 border-top pt-3">
+              <button type="button" class="btn btn-secondary px-4 py-2" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-apply-3d px-5 py-2">Add Candidate</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Screen Overlay -->
+  <div class="success-screen-overlay d-none" id="successScreen">
+    <div class="success-confetti-container" id="confettiContainer"></div>
+    <div class="success-card text-center p-5 animate-scale-up">
+      <div class="success-ring mb-4">
+        <div class="success-circle-check">✔</div>
+      </div>
+      <h1 class="display-5 fw-bold text-accent mb-4">Candidate Registered Successfully!</h1>
+      <p class="lead text-white mb-2">New candidate has been successfully added to the system.</p>
+      <p class="text-light-80 mb-5 max-w-600 mx-auto small-lh">
+        The database tables have been updated with the candidate information.
+      </p>
+      <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+        <button class="btn btn-cta-apply py-3 px-5 rounded-pill fw-bold" id="btnAnotherChild">Close & Refresh</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications container -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+    <div id="liveToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMessage"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js and Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Dashboard Controller scripts -->
+  <script src="{{ url_for('static', filename='js/admin-dashboard.js') }}"></script>
+</body>
+
+</html>

@@ -1,13 +1,14 @@
 {
+  "firestore": {
+    "rules": "firestore.rules"
+  },
   "hosting": {
     "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "firebase-debug.log"
-    ],
-    "cleanUrls": true,
-    "trailingSlash": false
+      "engreg-admin/**"
+    ]
   }
 }
