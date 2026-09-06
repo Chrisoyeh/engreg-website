@@ -27,6 +27,9 @@
 
   <div class="admin-wrapper d-flex">
     
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div id="sidebarBackdrop" class="sidebar-backdrop d-lg-none"></div>
+    
     <!-- Collapsible Sidebar -->
     <nav id="sidebar" class="sidebar bg-primary-dark text-white p-3 transition-all">
       <div class="sidebar-header d-flex align-items-center gap-3 mb-4 pb-3 border-bottom border-secondary-light">
@@ -35,6 +38,9 @@
           <h5 class="fw-bold tracking-wide mb-0 text-truncate">ENGREG ADMIN</h5>
           <span class="small text-accent text-truncate">Dashboard v1.0</span>
         </div>
+        <button type="button" class="btn btn-sm text-white-50 ms-auto d-lg-none p-1 border-0" id="sidebarCloseBtn" aria-label="Close menu">
+          <i class="fa-solid fa-xmark fs-5"></i>
+        </button>
       </div>
 
       <ul class="list-unstyled sidebar-menu d-flex flex-column gap-2">
@@ -75,12 +81,6 @@
           <a href="#" class="sidebar-link" data-tab="settings-tab">
             <i class="fa-solid fa-gears me-3"></i><span>Portal Settings</span>
           </a>
-        </li>
-        <li class="mt-3 px-2">
-          <button class="btn btn-apply-3d py-2 px-3 w-100 mb-2 small fw-bold" data-bs-toggle="modal" data-bs-target="#nurseryModal">Get Now (Nursery)</button>
-        </li>
-        <li class="px-2">
-          <button class="btn btn-apply-3d py-2 px-3 w-100 mb-2 small fw-bold" data-bs-toggle="modal" data-bs-target="#highSchoolModal">Get Now (High School)</button>
         </li>
       </ul>
 
@@ -448,7 +448,7 @@
           
           <div class="row g-4">
             <!-- Nursery & Primary Successful Column -->
-            <div class="col-lg-6">
+            <div class="col-12 col-xl-6">
               <div class="card shadow-sm border-0 p-4 bg-white h-100">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
                   <h5 class="fw-bold text-primary-dark mb-0">Nursery & Primary Section</h5>
@@ -459,13 +459,16 @@
                 
                 <div class="table-responsive">
                   <table class="table table-hover align-middle small text-muted">
-                    <thead class="table-light">
+                    <thead class="table-light text-primary-dark">
                       <tr>
                         <th width="40">
                           <input class="form-check-input" type="checkbox" id="succNurserySelectAll">
                         </th>
+                        <th>Passport</th>
                         <th>Candidate Name</th>
-                        <th>Parent Phone</th>
+                        <th>Class</th>
+                        <th>Parent & Phone</th>
+                        <th>Documents</th>
                         <th class="text-end">Actions</th>
                       </tr>
                     </thead>
@@ -478,7 +481,7 @@
             </div>
 
             <!-- High School Successful Column -->
-            <div class="col-lg-6">
+            <div class="col-12 col-xl-6">
               <div class="card shadow-sm border-0 p-4 bg-white h-100">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
                   <h5 class="fw-bold text-primary-dark mb-0">High School Section</h5>
@@ -489,13 +492,16 @@
                 
                 <div class="table-responsive">
                   <table class="table table-hover align-middle small text-muted">
-                    <thead class="table-light">
+                    <thead class="table-light text-primary-dark">
                       <tr>
                         <th width="40">
                           <input class="form-check-input" type="checkbox" id="succHighSelectAll">
                         </th>
+                        <th>Passport</th>
                         <th>Candidate Name</th>
-                        <th>Parent Phone</th>
+                        <th>Class</th>
+                        <th>Parent & Phone</th>
+                        <th>Documents</th>
                         <th class="text-end">Actions</th>
                       </tr>
                     </thead>
@@ -1532,14 +1538,7 @@
   </div>
 
 
-  <!-- 9. Contact Banner (CTA) -->
-  <section class="curriculum-cta py-5 text-white scroll-reveal">
-    <div class="container py-4 text-center">
-      <h2 class="display-5 fw-bold mb-3">Ready to Join Engreg Schools?</h2>
-      <p class="lead text-white-80 mb-4">Application forms for the 2026/2027 academic session are now available.</p>
-      <a href="admission-process.html" class="btn btn-cta-apply shadow-lg">Apply Now</a>
-    </div>
-  </section>
+
 
   <!-- 10. Footer Section -->
   <footer id="contact" class="main-footer bg-primary-darkest text-white pt-5 pb-3">
@@ -1645,7 +1644,121 @@
   </footer>
 
 
-<!-- Toast notifications container -->
+  <!-- Register Candidate Modal -->
+  <div class="modal fade" id="addCandidateModal" tabindex="-1" aria-labelledby="addCandidateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content text-dark">
+        <div class="modal-header bg-primary-dark text-white">
+          <h5 class="modal-title fw-bold text-accent" id="addCandidateModalLabel">Register New Pupil</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <p class="small text-muted">Register candidate manually. Firebase authentication does not require public client payments for this manual override form.</p>
+          <div class="alert alert-danger d-none py-2 small" id="addCandidateModalError"></div>
+          <form id="addCandidateForm">
+            <input type="hidden" id="addCandSchoolType">
+            
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Candidate Full Name *</label>
+                <input type="text" class="form-control" id="addCandName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Gender *</label>
+                <select class="form-select" id="addCandGender" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Target Class *</label>
+                <select class="form-select" id="addCandClass" required>
+                  <!-- Populated dynamically by JS -->
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Parent/Guardian Name *</label>
+                <input type="text" class="form-control" id="addCandParentName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Parent Phone Number *</label>
+                <input type="text" class="form-control" id="addCandPhone" required>
+              </div>
+            </div>
+
+            <!-- Documents section -->
+            <h6 class="fw-bold border-bottom pb-2 mt-4 mb-3">Documents Upload (Optional for manual registers)</h6>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small">Passport Photograph (Max 4MB)</label>
+                <input type="file" class="form-control" id="addCandPassportFile" accept="image/*">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">Birth Certificate (Max 4MB)</label>
+                <input type="file" class="form-control" id="addCandBirthFile" accept="image/*,application/pdf">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">Academic Result (Max 4MB)</label>
+                <input type="file" class="form-control" id="addCandResultFile" accept="image/*,application/pdf">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">School Testimonial (Max 4MB)</label>
+                <input type="file" class="form-control" id="addCandTestimonialFile" accept="image/*,application/pdf">
+              </div>
+            </div>
+            
+            <div class="modal-footer px-0 pb-0 mt-4 border-top pt-3">
+              <button type="button" class="btn btn-secondary px-4 py-2" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-apply-3d px-5 py-2">Add Candidate</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable Application Form Modal -->
+  <div class="modal fade" id="printApplicationModal" tabindex="-1" aria-labelledby="printApplicationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header bg-primary-dark text-white p-3 no-print">
+          <div class="d-flex align-items-center gap-2">
+            <i class="fa-solid fa-file-invoice text-accent fs-5"></i>
+            <h5 class="modal-title fw-bold text-accent mb-0" id="printApplicationModalLabel">Candidate Admission Application</h5>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-accent btn-sm fw-bold px-3" onclick="window.print()">
+              <i class="fa-solid fa-print me-1"></i> Print / Save as PDF
+            </button>
+            <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-body p-0">
+          <!-- Printable Sheet Area -->
+          <div id="printableFormArea" class="printable-form-container">
+            <!-- Dynamically populated by JS -->
+          </div>
+        </div>
+
+        <div class="modal-footer bg-light no-print d-flex justify-content-between p-3">
+          <div id="printModalDocButtons" class="d-flex gap-2">
+            <!-- Dynamic Document Download buttons -->
+          </div>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary px-4 fw-bold" onclick="window.print()">
+              <i class="fa-solid fa-print me-2"></i>Print Form
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications container -->
   <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
     <div id="liveToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">

@@ -26,11 +26,18 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
-    // Successful notice lists: admin only read/write
+    // Successful notice lists: public read, admin write
     match /nursery_primary_successful/{document} {
-      allow read, write: if isAdmin();
+      allow read: if true;
+      allow write: if isAdmin();
     }
     match /high_school_successful/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Audit logs: admin read and write
+    match /audit_logs/{document} {
       allow read, write: if isAdmin();
     }
   }
