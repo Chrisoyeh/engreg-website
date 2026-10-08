@@ -1,15 +1,16 @@
 /* ============================================================
-   ENGREG MODERN VISUAL LAYER — V3
+   MODERN VISUAL LAYER — V3
    Stronger "pop" version
    Independent from the original style.css
    ============================================================ */
 
 :root {
-    --engreg-blue: #2f73b9;
-    --engreg-blue-bright: #70b7ee;
-    --engreg-blue-deep: #1b4f8a;
-    --engreg-gold: #d4af37;
-    --engreg-indigo: #4d63b8;
+    /* Glow colours for the aurora layer — keep in step with style.css :root */
+    --glow-mid-rgb: 105, 94, 137;      /* violet  (#695E89) */
+    --glow-soft-rgb: 196, 184, 224;    /* lilac   (#C4B8E0) */
+    --glow-deep-rgb: 74, 65, 99;       /* plum    (#4A4163) */
+    --glow-accent-rgb: 225, 160, 164;  /* rose    (#E1A0A4) */
+    --glow-alt-rgb: 133, 119, 166;     /* lavender(#8577A6) */
 }
 
 /* ============================================================
@@ -17,25 +18,25 @@
    ============================================================ */
 
 html {
-    background: #edf3f9;
+    background: #F3EFF6;
 }
 
 body {
     background:
         linear-gradient(
             180deg,
-            #f8fbfe 0%,
-            #edf4fa 45%,
-            #f9fbfd 100%
+            #FCFAFD 0%,
+            #F4F0F7 45%,
+            #FBF9FC 100%
         ) !important;
 }
 
 /* ============================================================
    STRONGER FULL-PAGE AURORA
-   Uses the independent grid element created by engreg-modern.js
+   Uses the independent grid element created by modern-layer.js
    ============================================================ */
 
-.engreg-modern-grid {
+.site-ambient-grid {
     position: fixed;
     inset: -12%;
     z-index: 1;
@@ -46,26 +47,26 @@ body {
     background:
         radial-gradient(
             ellipse 38% 32% at 8% 18%,
-            rgba(47, 115, 185, 0.25) 0%,
-            rgba(47, 115, 185, 0.14) 34%,
+            rgba(var(--glow-mid-rgb), 0.25) 0%,
+            rgba(var(--glow-mid-rgb), 0.14) 34%,
             transparent 72%
         ),
         radial-gradient(
             ellipse 34% 28% at 92% 22%,
-            rgba(212, 175, 55, 0.18) 0%,
-            rgba(212, 175, 55, 0.08) 35%,
+            rgba(var(--glow-accent-rgb), 0.18) 0%,
+            rgba(var(--glow-accent-rgb), 0.08) 35%,
             transparent 72%
         ),
         radial-gradient(
             ellipse 45% 30% at 25% 82%,
-            rgba(77, 99, 184, 0.20) 0%,
-            rgba(77, 99, 184, 0.08) 36%,
+            rgba(var(--glow-alt-rgb), 0.20) 0%,
+            rgba(var(--glow-alt-rgb), 0.08) 36%,
             transparent 74%
         ),
         radial-gradient(
             ellipse 40% 28% at 82% 76%,
-            rgba(112, 183, 238, 0.17) 0%,
-            rgba(112, 183, 238, 0.06) 38%,
+            rgba(var(--glow-soft-rgb), 0.17) 0%,
+            rgba(var(--glow-soft-rgb), 0.06) 38%,
             transparent 74%
         );
 
@@ -77,11 +78,11 @@ body {
         155% 155%,
         150% 150%;
 
-    animation: engregModernAurora 20s ease-in-out infinite alternate;
+    animation: siteModernAurora 20s ease-in-out infinite alternate;
 }
 
 /* A fine luminous wash above the aurora */
-.engreg-modern-grid::after {
+.site-ambient-grid::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -118,9 +119,9 @@ body {
     background:
         linear-gradient(
             120deg,
-            rgba(225, 238, 250, 0.94) 0%,
+            rgba(240, 233, 246, 0.94) 0%,
             rgba(255, 255, 255, 0.83) 42%,
-            rgba(241, 247, 252, 0.92) 100%
+            rgba(248, 244, 251, 0.92) 100%
         ) !important;
 }
 
@@ -139,15 +140,15 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(47,115,185,0.24) 0%,
-            rgba(47,115,185,0.11) 34%,
+            rgba(var(--glow-mid-rgb),0.24) 0%,
+            rgba(var(--glow-mid-rgb),0.11) 34%,
             transparent 72%
         );
 
     filter: blur(40px);
 
     animation:
-        engregWelcomeAura
+        siteWelcomeAura
         15s
         ease-in-out
         infinite
@@ -167,7 +168,7 @@ body {
         linear-gradient(
             135deg,
             rgba(255,255,255,0.96) 0%,
-            rgba(235,244,251,0.88) 50%,
+            rgba(245, 239, 248,0.88) 50%,
             rgba(255,255,255,0.95) 100%
         ) !important;
 }
@@ -187,15 +188,15 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(47,115,185,0.25) 0%,
-            rgba(47,115,185,0.10) 35%,
+            rgba(var(--glow-mid-rgb),0.25) 0%,
+            rgba(var(--glow-mid-rgb),0.10) 35%,
             transparent 72%
         );
 
     filter: blur(50px);
 
     animation:
-        engregSchoolAura
+        siteSchoolAura
         18s
         ease-in-out
         infinite
@@ -220,8 +221,8 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(212,175,55,0.18) 0%,
-            rgba(212,175,55,0.07) 36%,
+            rgba(var(--glow-accent-rgb),0.18) 0%,
+            rgba(var(--glow-accent-rgb),0.07) 36%,
             transparent 73%
         );
 
@@ -240,9 +241,9 @@ body {
     background:
         linear-gradient(
             115deg,
-            rgba(229,239,248,0.93) 0%,
+            rgba(242, 235, 247,0.93) 0%,
             rgba(255,255,255,0.84) 48%,
-            rgba(238,245,251,0.92) 100%
+            rgba(246, 241, 249,0.92) 100%
         ) !important;
 }
 
@@ -263,16 +264,16 @@ body {
     background:
         radial-gradient(
             ellipse,
-            rgba(77,99,184,0.19) 0%,
-            rgba(112,183,238,0.08) 38%,
-            rgba(212,175,55,0.06) 55%,
+            rgba(var(--glow-alt-rgb),0.19) 0%,
+            rgba(var(--glow-soft-rgb),0.08) 38%,
+            rgba(var(--glow-accent-rgb),0.06) 55%,
             transparent 74%
         );
 
     filter: blur(48px);
 
     animation:
-        engregEventsAura
+        siteEventsAura
         17s
         ease-in-out
         infinite
@@ -310,7 +311,7 @@ body {
     background:
         radial-gradient(
             ellipse,
-            rgba(47,115,185,0.16),
+            rgba(var(--glow-mid-rgb),0.16),
             transparent 72%
         );
 
@@ -352,7 +353,7 @@ body {
 .our-schools-section h2,
 .upcoming-events-section h2,
 .welcome-anthem-section h2 {
-    text-shadow: 0 1px 16px rgba(29,95,167,0.08);
+    text-shadow: 0 1px 16px rgba(var(--glow-deep-rgb),0.08);
 }
 
 
@@ -360,7 +361,7 @@ body {
    SCROLL PROGRESS
    ============================================================ */
 
-.engreg-scroll-progress {
+.site-scroll-progress {
     position: fixed;
 
     left: 0;
@@ -375,13 +376,13 @@ body {
     background:
         linear-gradient(
             90deg,
-            var(--engreg-blue),
-            var(--engreg-indigo),
-            var(--engreg-gold)
+            rgb(var(--glow-mid-rgb)),
+            rgb(var(--glow-alt-rgb)),
+            rgb(var(--glow-accent-rgb))
         );
 
     box-shadow:
-        0 0 18px rgba(47,115,185,0.35);
+        0 0 18px rgba(var(--glow-mid-rgb),0.35);
 
     z-index: 9999;
     pointer-events: none;
@@ -392,7 +393,7 @@ body {
    ANIMATIONS
    ============================================================ */
 
-@keyframes engregModernAurora {
+@keyframes siteModernAurora {
 
     0% {
         transform:
@@ -425,7 +426,7 @@ body {
     }
 }
 
-@keyframes engregWelcomeAura {
+@keyframes siteWelcomeAura {
 
     0% {
         transform:
@@ -440,7 +441,7 @@ body {
     }
 }
 
-@keyframes engregSchoolAura {
+@keyframes siteSchoolAura {
 
     0% {
         transform:
@@ -455,7 +456,7 @@ body {
     }
 }
 
-@keyframes engregEventsAura {
+@keyframes siteEventsAura {
 
     0% {
         transform:
@@ -481,13 +482,13 @@ body {
         background:
             linear-gradient(
                 180deg,
-                #f9fbfd,
-                #eef4f9,
-                #fafcff
+                #FBF9FC,
+                #F4F0F7,
+                #FDFBFE
             ) !important;
     }
 
-    .engreg-modern-grid {
+    .site-ambient-grid {
         inset: -24%;
     }
 
@@ -516,7 +517,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
 
-    .engreg-modern-grid,
+    .site-ambient-grid,
     .welcome-anthem-section::before,
     .our-schools-section::before,
     .upcoming-events-section::before {

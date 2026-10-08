@@ -1,5 +1,5 @@
 /* ============================================================
-   ENGREG MODERN VISUAL LAYER
+   MODERN VISUAL LAYER
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const grid = document.createElement("div");
 
-    grid.className = "engreg-modern-grid";
+    grid.className = "site-ambient-grid";
     grid.setAttribute("aria-hidden", "true");
 
     document.body.appendChild(grid);
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const progress = document.createElement("div");
 
-    progress.className = "engreg-scroll-progress";
+    progress.className = "site-scroll-progress";
     progress.setAttribute("aria-hidden", "true");
 
     document.body.appendChild(progress);

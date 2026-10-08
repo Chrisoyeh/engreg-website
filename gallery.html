@@ -4,16 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery | Engreg Schools</title>
+  <title>Gallery | Nazareth Schools</title>
   <!-- Meta Descriptions for SEO -->
   <meta name="description"
-    content="Explore memorable moments and exciting activities at Engreg Schools. View graduation, cultural, sports, and school life photo galleries.">
+    content="Explore memorable moments and exciting activities at Nazareth Schools. View graduation, cultural, sports, and school life photo galleries.">
   <meta name="keywords"
-    content="Engreg Schools, Photo Gallery, Graduation Ceremony, Cultural Day, Sports Day, School Life Somolu Lagos">
+    content="Nazareth Schools, Photo Gallery, Graduation Ceremony, Cultural Day, Sports Day, School Life Somolu Lagos">
   <meta name="author" content="HLTS Limited">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/jpeg" href="img/logo.jpeg">
+  <link rel="icon" type="image/png" href="img/favicon.png">
 
   <!-- Google Fonts: Playfair Display & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,11 +75,11 @@
     <div class="container">
       <!-- School Logo & Name -->
       <a class="navbar-brand d-flex align-items-center gap-3" href="index.html#home">
-        <img src="img/logo.jpeg" alt="Engreg Schools Logo" class="brand-logo"
-          onerror="this.src='https://placehold.co/50x50/0b2545/d4af37?text=ES'">
+        <img src="img/logo.png" alt="Nazareth Schools Logo" class="brand-logo"
+          onerror="this.src='https://placehold.co/50x50/4a4163/e1a0a4?text=NS'">
         <div class="brand-text d-flex flex-column leading-none">
-          <span class="brand-name h4 mb-0 fw-bold tracking-wide">ENGREG SCHOOLS</span>
-          <span class="brand-tagline small text-accent">Nurturing Future Leaders</span>
+          <span class="brand-name h4 mb-0 fw-bold tracking-wide">NAZARETH SCHOOLS</span>
+          <span class="brand-tagline small text-accent">Empowering Minds, Shaping Futures</span>
         </div>
       </a>
 
@@ -113,8 +113,8 @@
               Schools
             </a>
             <ul class="dropdown-menu" aria-labelledby="schoolsDropdown">
-              <li><a class="dropdown-item" href="nursery-primary-school.html">Nursery & Primary School</a></li>
-              <li><a class="dropdown-item" href="high-school.html">High School</a></li>
+              <li><a class="dropdown-item" href="nursery-primary-school.html">School A</a></li>
+              <li><a class="dropdown-item" href="high-school.html">School B</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -270,9 +270,9 @@
         <!-- Column 1: About -->
         <div class="col-lg-3 col-md-6">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <img src="img/logo.jpeg" alt="Engreg Schools Logo" style="width: 40px; height: 40px;"
-              onerror="this.src='https://placehold.co/40x40/0b2545/d4af37?text=ES'">
-            <h5 class="fw-bold text-accent mb-0">ENGREG SCHOOLS</h5>
+            <img src="img/logo.png" alt="Nazareth Schools Logo" style="width: 40px; height: 40px;"
+              onerror="this.src='https://placehold.co/40x40/4a4163/e1a0a4?text=NS'">
+            <h5 class="fw-bold text-accent mb-0">NAZARETH SCHOOLS</h5>
           </div>
           <p class="small text-white-50 lh-base mb-4">Engreg Schools is a prestigious learning community dedicated to
             shaping outstanding students with ethical values, stellar academics, and modern technological readiness.</p>
@@ -294,10 +294,9 @@
         <div class="col-lg-2 col-md-6">
           <h5 class="fw-bold text-accent mb-4 border-bottom-accent pb-2">Our School</h5>
           <ul class="list-unstyled footer-links">
-            <li class="mb-2"><a href="nursery-primary-school.html" class="text-white-50 text-decoration-none">Nursery &
-                Primary School</a>
+            <li class="mb-2"><a href="nursery-primary-school.html" class="text-white-50 text-decoration-none">School A</a>
             </li>
-            <li class="mb-2"><a href="high-school.html" class="text-white-50 text-decoration-none">High School</a></li>
+            <li class="mb-2"><a href="high-school.html" class="text-white-50 text-decoration-none">School B</a></li>
           </ul>
         </div>
 
@@ -394,16 +393,9 @@
   <!-- Firebase App & Firestore SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCZGyG1fZ9tVV5ga33vam5kWJqAd16VMaA",
-      authDomain: "engreg-school.firebaseapp.com",
-      projectId: "engreg-school",
-      storageBucket: "engreg-school.firebasestorage.app",
-      messagingSenderId: "641331000293",
-      appId: "1:641331000293:web:c5941f6e7af285d7cff50c",
-      measurementId: "G-LWCVS1413Z"
-    };
+    const firebaseConfig = window.FIREBASE_CONFIG || {};
     let firebaseReady = false;
     try {
       if (firebaseConfig.apiKey) {

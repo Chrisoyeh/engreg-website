@@ -898,7 +898,7 @@ document.addEventListener("DOMContentLoaded", () => {
         candidateName = formData["nurseryChildName"] || "Nursery Candidate";
         collectionName = "nursery_primary_registration";
       } else {
-        candidateName = formData["highSchoolName"] || formData["highSchoolDeclName"] || "High School Candidate";
+        candidateName = formData["highSchoolName"] || formData["highSchoolDeclName"] || "School B Candidate";
         collectionName = "high_school_registration";
       }
 
@@ -1012,7 +1012,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const startConfetti = () => {
     if (!confettiContainer) return;
     confettiContainer.innerHTML = "";
-    const colors = ["#D4AF37", "#0B2545", "#134074", "#FFFFFF", "#ffd700", "#c5a028"];
+    const colors = ["#E1A0A4", "#4A4163", "#695E89", "#FFFFFF", "#8577A6", "#D4868B"];
 
     for (let i = 0; i < 80; i++) {
       const piece = document.createElement("div");
@@ -1258,7 +1258,7 @@ document.addEventListener("DOMContentLoaded", () => {
       col.innerHTML = `
         <div class="gallery-item-card" data-index="${index}">
           <img src="${img.src}" alt="${img.title}" loading="lazy"
-            onerror="this.src='https://placehold.co/400x300/0b2545/d4af37?text=Engreg+Photo'">
+            onerror="this.src='https://placehold.co/400x300/4a4163/e1a0a4?text=Nazareth+Photo'">
           <div class="gallery-item-overlay">
             <div class="gallery-item-icon">
               <i class="fa-solid fa-magnifying-glass-plus"></i>
