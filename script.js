@@ -1,5 +1,5 @@
 /**
- * Engreg Schools Landing Page Scripts
+ * Nazareth School Website Scripts
  * Includes: Sticky Nav, Mobile Menu Collapse, Anthem Video controls, Event countdowns, Form validations, Scroll Reveal, Back-to-Top
  */
 
@@ -1124,6 +1124,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================================
   const GALLERY_IMAGES = [];
 
+  // Bundled photos shown when Firestore is unavailable or has no gallery images yet
+  const STARTER_GALLERY = [
+    { id: "starter-01", src: "img/nazareth/cultural-day-01.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-02", src: "img/nazareth/cultural-day-02.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-03", src: "img/nazareth/cultural-day-03.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-04", src: "img/nazareth/cultural-day-04.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-05", src: "img/nazareth/cultural-day-05.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-07", src: "img/nazareth/cultural-day-07.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-08", src: "img/nazareth/cultural-day-08.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-09", src: "img/nazareth/cultural-day-09.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-10", src: "img/nazareth/cultural-day-10.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-11", src: "img/nazareth/cultural-day-11.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-12", src: "img/nazareth/cultural-day-12.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-13", src: "img/nazareth/cultural-day-13.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-14", src: "img/nazareth/cultural-day-14.jpg", title: "Cultural Day", category: "cultural" },
+    { id: "starter-15", src: "img/nazareth/cultural-day-15.jpg", title: "Cultural Day", category: "cultural" }
+  ];
+
   // Live Gallery Loader
   const loadLiveGallery = async () => {
     if (!galleryGrid) return;
@@ -1156,8 +1174,12 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Firestore gallery query failed:", err);
       }
     } else {
-      console.log("Firebase is offline or uninitialized. No images to display.");
+      console.log("Firebase is offline or uninitialized. Showing bundled gallery photos.");
       GALLERY_IMAGES.length = 0;
+    }
+
+    if (GALLERY_IMAGES.length === 0) {
+      GALLERY_IMAGES.push(...STARTER_GALLERY);
     }
 
     updateGalleryData();
